@@ -1,0 +1,62 @@
+/* src/index.css — dominante vert : brand (chrome), CTA (vert vif), beige & blanc cassé */
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Fonds */
+  --color-page: #f8f6f1;
+  --color-beige: #ebe7df;
+  --color-beige-deep: #d6cfc2;
+
+  /* Chrome : nav & footer — vert bleuté profond */
+  --color-brand: #0f3d3a;
+  --color-brand-mid: #165a54;
+  --color-brand-dark: #0a2c2a;
+
+  /* Surfaces vertes très douces */
+  --color-muted-green: #e3f0ed;
+
+  /* Actions : vert pétant (contraste sur le reste) */
+  --color-cta: #4ade80;
+  --color-cta-hover: #22c55e;
+  --color-on-cta: #0a1f1c;
+
+  /* Chaleur : beige / marron doux */
+  --color-accent: #a68b6a;
+
+  --color-ink: #0f2523;
+  --color-body: #3d4a48;
+
+  --shadow-soft: 0 24px 60px -24px rgb(15 61 58 / 0.22);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply m-0 min-h-svh bg-[var(--color-page)] font-sans text-[var(--color-body)] antialiased;
+  }
+}
+
+/* témoignages-page.tsx — banderole d’avis */
+@keyframes reviews-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.reviews-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: reviews-marquee 55s linear infinite;
+}
+
+.reviews-marquee-track:hover {
+  animation-play-state: paused;
+}
