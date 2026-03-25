@@ -2,12 +2,11 @@
 interface PageIllustrationProps {
   src: string
   alt: string
-  caption?: string
   /** Hauteur visuelle max du bandeau (ratio large) */
   priority?: boolean
 }
 
-export function PageIllustration({ src, alt, caption, priority = false }: PageIllustrationProps) {
+export function PageIllustration({ src, alt, priority = false }: PageIllustrationProps) {
   return (
     <figure className="mb-10 overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-beige)] shadow-sm">
       <div className="aspect-[2/1] max-h-56 w-full sm:aspect-[2.2/1] sm:max-h-72">
@@ -22,11 +21,6 @@ export function PageIllustration({ src, alt, caption, priority = false }: PageIl
           {...(priority ? { fetchPriority: 'high' as const } : {})}
         />
       </div>
-      {caption ? (
-        <figcaption className="border-t border-[var(--color-brand)]/10 bg-[var(--color-page)] px-4 py-3 text-xs leading-relaxed text-[var(--color-body)]/90">
-          {caption}
-        </figcaption>
-      ) : null}
     </figure>
   )
 }

@@ -1,10 +1,10 @@
 // src/pages/home-page.tsx
-import { BenefitsStrip } from '../components/home/benefits-strip'
 import { CtaBanner } from '../components/home/cta-banner'
 import { HeroSection } from '../components/home/hero-section'
-import { HormoneEffects } from '../components/home/hormone-effects'
-import { MethodSteps } from '../components/home/method-steps'
-import { ProblemGrid } from '../components/home/problem-grid'
+import { HomeCabinetTeaserSection } from '../components/home/home-cabinet-teaser-section'
+import { HomeDetoxSolutionSection } from '../components/home/home-detox-solution-section'
+import { HomeHookSection } from '../components/home/home-hook-section'
+import { HomeRemoteBriefSection } from '../components/home/home-remote-brief-section'
 import { TestimonialsSection } from '../components/home/testimonials-section'
 import { usePageTitle } from '../hooks/use-page-title'
 
@@ -13,11 +13,11 @@ export function HomePage() {
   return (
     <>
       <HeroSection />
-      <ProblemGrid />
-      <MethodSteps />
-      <HormoneEffects />
-      <BenefitsStrip />
+      <HomeHookSection />
+      <HomeDetoxSolutionSection />
+      <HomeRemoteBriefSection />
       <TestimonialsSection />
+      <HomeCabinetTeaserSection />
       <CtaBanner />
     </>
   )

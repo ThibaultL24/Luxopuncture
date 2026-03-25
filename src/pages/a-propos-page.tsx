@@ -1,4 +1,5 @@
 // src/pages/a-propos-page.tsx
+import { MessageCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { aboutPagePhoto } from '../data/media'
 import { aboutPractitioner } from '../data/site-content'
@@ -8,6 +9,9 @@ import { usePageTitle } from '../hooks/use-page-title'
 
 export function AProposPage() {
   usePageTitle('À propos')
+
+  const bioMain = aboutPractitioner.bio.slice(0, -1)
+  const bioCarouselIntro = aboutPractitioner.bio[aboutPractitioner.bio.length - 1]
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
@@ -30,7 +34,7 @@ export function AProposPage() {
           <div>
             <h2 className="font-display text-xl font-semibold text-[var(--color-ink)]">Réseaux</h2>
             <p className="mt-3 text-sm text-[var(--color-body)]/85">
-              Témoignages vidéo et actualités sur Instagram, LinkedIn et Facebook.
+              Actualités sur Instagram, LinkedIn et Facebook.
             </p>
             <SocialLinks className="mt-4" />
           </div>
@@ -52,10 +56,33 @@ export function AProposPage() {
           </Link>
         </div>
 
-        <div className="min-w-0 flex-1 space-y-6 text-base leading-relaxed text-[var(--color-body)]/95">
-          {aboutPractitioner.bio.map((p, i) => (
+        <div className="min-w-0 flex-1 space-y-8 text-base leading-relaxed text-[var(--color-body)]/95">
+          {bioMain.map((p, i) => (
             <p key={i}>{p}</p>
           ))}
+
+          <div className="rounded-2xl border border-dashed border-[var(--color-brand)]/25 bg-[var(--color-beige)]/35 p-6">
+            <p className="font-medium text-[var(--color-ink)]">{bioCarouselIntro}</p>
+            <p className="mt-4 text-sm italic text-[var(--color-body)]/85">
+              Carrousel d’exemples et de résultats — à intégrer (visuels fournis ultérieurement).
+            </p>
+          </div>
+
+          <div>
+            <h2 className="font-display text-xl font-semibold text-[var(--color-ink)]">Témoignages et avis</h2>
+            <p className="mt-3 text-sm">
+              <Link
+                to="/temoignages"
+                className="font-semibold text-[var(--color-cta-hover)] underline-offset-4 hover:underline"
+              >
+                Voir la page témoignages et vidéos
+              </Link>
+            </p>
+            <p className="mt-4 flex items-start gap-2 text-sm text-[var(--color-body)]/90">
+              <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <span>D’autres témoignages sont disponibles sur mes réseaux.</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>

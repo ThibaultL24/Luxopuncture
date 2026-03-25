@@ -10,17 +10,17 @@
   --color-beige: #ebe7df;
   --color-beige-deep: #d6cfc2;
 
-  /* Chrome : nav & footer — vert bleuté profond */
-  --color-brand: #0f3d3a;
-  --color-brand-mid: #165a54;
-  --color-brand-dark: #0a2c2a;
+  /* Chrome : nav & footer — aligné sur le fond du bandeau plumes (#23413b) */
+  --color-brand: #23413b;
+  --color-brand-mid: #2f5a52;
+  --color-brand-dark: #1a322e;
 
   /* Surfaces vertes très douces */
   --color-muted-green: #e3f0ed;
 
-  /* Actions : vert pétant (contraste sur le reste) */
-  --color-cta: #4ade80;
-  --color-cta-hover: #22c55e;
+  /* Actions : vert organique (moins « startup » que le vert néon classique) */
+  --color-cta: #3ddc84;
+  --color-cta-hover: #2aa86a;
   --color-on-cta: #0a1f1c;
 
   /* Chaleur : beige / marron doux */
@@ -29,15 +29,44 @@
   --color-ink: #0f2523;
   --color-body: #3d4a48;
 
-  --shadow-soft: 0 24px 60px -24px rgb(15 61 58 / 0.22);
+  /* Ombre plus diffuse + chaude (moins « UI générique ») */
+  --shadow-soft:
+    0 22px 48px -18px rgb(35 65 59 / 0.12),
+    0 8px 24px -10px rgb(0 0 0 / 0.06);
+
+  /* Rayons & rythme vertical (industrialisation progressive) */
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --spacing-section: 5rem;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
+
   body {
     @apply m-0 min-h-svh bg-[var(--color-page)] font-sans text-[var(--color-body)] antialiased;
+  }
+
+  :where(a, button, input, textarea, select):focus {
+    outline: none;
+  }
+
+  :where(a, button, input, textarea, select):focus-visible {
+    outline: 2px solid var(--color-brand-mid);
+    outline-offset: 2px;
+  }
+
+  button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  header :where(a, button):focus-visible {
+    outline-color: var(--color-cta);
   }
 }
 
@@ -59,4 +88,12 @@
 
 .reviews-marquee-track:hover {
   animation-play-state: paused;
+}
+
+/*
+ * Curseur plume React (`FeatherCursor`) : masque le curseur natif sur le site public.
+ */
+html[data-feather-cursor],
+html[data-feather-cursor] * {
+  cursor: none !important;
 }

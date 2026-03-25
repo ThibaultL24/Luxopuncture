@@ -1,6 +1,6 @@
 // src/pages/publications-page.tsx
-import { Link } from 'react-router-dom'
 import { ArrowRight, BookOpen } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useSiteData } from '../contexts/admin-context'
 import { formatPublicationDate, listPublicationsNewestFirst } from '../data/publications'
 import { SectionHeading } from '../components/ui/section-heading'
@@ -15,7 +15,7 @@ export function PublicationsPage() {
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
       <SectionHeading
         title="Publications"
-        subtitle="Articles et notes — actualités du cabinet et éclairages sur la luxopuncture et le bien-être."
+        subtitle="Articles et notes — actualités et éclairages sur la luxopuncture et le bien-être."
       />
 
       <div className="mt-12 grid gap-6 md:grid-cols-2">
@@ -34,8 +34,9 @@ export function PublicationsPage() {
                 />
               </div>
             ) : (
-              <div className="flex aspect-[16/10] items-center justify-center bg-[var(--color-muted-green)]/35 text-[var(--color-brand)]/50">
-                <BookOpen className="h-14 w-14" aria-hidden />
+              <div className="flex aspect-[16/10] flex-col items-center justify-center gap-2 border-b border-[var(--color-brand)]/10 bg-[var(--color-beige)] text-[var(--color-body)]/50">
+                <BookOpen className="h-10 w-10 shrink-0" aria-hidden />
+                <span className="text-xs font-medium uppercase tracking-wide">Image à venir</span>
               </div>
             )}
             <div className="flex flex-1 flex-col p-8">
@@ -49,7 +50,7 @@ export function PublicationsPage() {
               <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--color-body)]/90">{p.excerpt}</p>
               <Link
                 to={`/publications/${p.slug}`}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-cta-hover)]"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-cta-hover)] underline-offset-4 hover:underline"
               >
                 Lire l’article
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden />

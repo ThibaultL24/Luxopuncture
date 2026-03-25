@@ -6,18 +6,19 @@ import { useSiteData } from '../../contexts/admin-context'
 
 const navLinks = [
   { to: '/', label: 'Accueil' },
-  { to: '/luxopuncture', label: 'Luxopuncture' },
-  { to: '/programme', label: 'Programmes' },
-  { to: '/publications', label: 'Publications' },
+  { to: '/programme', label: 'À distance' },
+  { to: '/cabinet', label: 'Cabinet' },
   { to: '/tarifs', label: 'Tarifs' },
   { to: '/temoignages', label: 'Témoignages' },
   { to: '/a-propos', label: 'À propos' },
+  { to: '/partenariat', label: 'Partenariat' },
   { to: '/contact', label: 'Contact' },
+  { to: '/publications', label: 'Blog' },
 ]
 
 function linkClassName(isActive: boolean) {
   return [
-    'rounded-full px-2.5 py-1.5 text-sm font-medium transition-colors lg:px-3',
+    'shrink-0 whitespace-nowrap rounded-full px-1.5 py-1 text-[0.7rem] font-medium transition-colors sm:px-2 sm:text-xs md:text-sm lg:px-2 xl:px-2.5',
     isActive
       ? 'bg-[var(--color-cta)] text-[var(--color-on-cta)] shadow-sm'
       : 'text-white/90 hover:bg-white/10 hover:text-white',
@@ -30,15 +31,27 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[var(--color-brand)] shadow-[var(--shadow-soft)]">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+      <div className="mx-auto flex w-full min-w-0 items-center gap-2 px-3 py-3 sm:px-4 sm:py-3.5 lg:gap-3 lg:px-4 lg:py-4">
         <Link
           to="/"
-          className="font-display text-xl font-semibold tracking-tight text-white sm:text-2xl"
+          className="flex min-w-0 shrink-0 items-center gap-2 text-left font-display text-base font-semibold tracking-tight text-white sm:gap-2.5 sm:text-lg lg:text-xl xl:text-2xl"
         >
-          {site.name}
+          <span className="whitespace-nowrap">{site.name}</span>
+          <img
+            src="/images/plumes-navbar.png"
+            alt=""
+            width={200}
+            height={56}
+            className="h-9 w-auto max-w-[min(10.5rem,42vw)] shrink-0 object-contain object-right mix-blend-screen sm:h-10 sm:max-w-[12rem] lg:h-11 lg:max-w-[13.5rem]"
+            decoding="async"
+            fetchPriority="high"
+          />
         </Link>
 
-        <nav className="hidden items-center gap-0.5 lg:flex xl:gap-1" aria-label="Navigation principale">
+        <nav
+          className="hidden min-w-0 flex-1 flex-wrap items-center justify-center gap-x-0.5 gap-y-1 px-1 lg:flex"
+          aria-label="Navigation principale"
+        >
           {navLinks.map((l) => (
             <NavLink key={l.to} to={l.to} className={({ isActive }) => linkClassName(isActive)}>
               {l.label}
@@ -46,25 +59,24 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="ml-auto flex shrink-0 items-center gap-2">
           <Link
             to="/contact"
-            className="inline-flex rounded-full bg-[var(--color-cta)] px-5 py-2.5 text-sm font-bold text-[var(--color-on-cta)] shadow-md transition hover:bg-[var(--color-cta-hover)] hover:text-white"
+            className="hidden rounded-full bg-[var(--color-cta)] px-4 py-2 text-xs font-bold text-[var(--color-on-cta)] shadow-md transition hover:bg-[var(--color-cta-hover)] hover:text-white sm:px-5 sm:py-2.5 sm:text-sm lg:inline-flex"
           >
             Réserver
           </Link>
+          <button
+            type="button"
+            className="inline-flex rounded-full border border-white/25 p-2 text-white lg:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="sr-only">Menu</span>
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-
-        <button
-          type="button"
-          className="inline-flex rounded-full border border-white/25 p-2 text-white lg:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="sr-only">Menu</span>
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
       </div>
 
       {open ? (

@@ -7,29 +7,29 @@ export function Footer() {
   const { contactInfo, site } = useSiteData()
   return (
     <footer className="border-t border-white/10 bg-[var(--color-brand)] text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-3 lg:gap-8">
         <div>
-          <p className="font-display text-2xl font-semibold text-white">{site.name}</p>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/80">
-            Cabinet de luxopuncture — accompagnement personnalisé pour votre équilibre.
+          <p className="font-display text-lg font-semibold text-white sm:text-xl">{site.name}</p>
+          <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/80">
+            Accompagnement en luxopuncture, personnalisé pour votre équilibre.
           </p>
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-[var(--color-beige)]">Liens</p>
-          <ul className="mt-4 space-y-2 text-sm">
+          <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-beige)]">Liens</p>
+          <ul className="mt-3 space-y-1.5 text-sm">
             <li>
-              <Link className="text-white/85 transition hover:text-[var(--color-cta)]" to="/luxopuncture">
-                La luxopuncture
+              <Link className="text-white/85 transition hover:text-[var(--color-cta)]" to="/programme">
+                À distance
               </Link>
             </li>
             <li>
-              <Link className="text-white/85 transition hover:text-[var(--color-cta)]" to="/programme">
-                Programmes
+              <Link className="text-white/85 transition hover:text-[var(--color-cta)]" to="/cabinet">
+                Cabinet & la luxopuncture
               </Link>
             </li>
             <li>
               <Link className="text-white/85 transition hover:text-[var(--color-cta)]" to="/publications">
-                Publications
+                Blog
               </Link>
             </li>
             <li>
@@ -48,6 +48,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link className="text-white/85 transition hover:text-[var(--color-cta)]" to="/partenariat">
+                Partenariat
+              </Link>
+            </li>
+            <li>
               <Link className="text-white/85 transition hover:text-[var(--color-cta)]" to="/contact">
                 Contact
               </Link>
@@ -55,8 +60,8 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-[var(--color-beige)]">Coordonnées</p>
-          <ul className="mt-4 space-y-2 text-sm">
+          <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-beige)]">Coordonnées</p>
+          <ul className="mt-3 space-y-1.5 text-sm">
             <li>
               <a
                 className="text-white/85 transition hover:text-[var(--color-cta)]"
@@ -79,7 +84,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 py-6 text-center text-xs text-white/50">
+      <div className="border-t border-white/10 py-3 text-center text-xs text-white/50">
         © {year} {site.name} · {site.domain}
       </div>
     </footer>

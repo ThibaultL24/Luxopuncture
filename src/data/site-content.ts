@@ -56,25 +56,16 @@ export const pageIllustrations = {
   tarifs: {
     src: media.tarifs,
     alt: 'Séance découverte et accompagnement',
-    caption: 'Des formules claires pour avancer sereinement.',
   },
 } as const
 
 export const heroCopy = {
-  title: 'Retrouvez votre équilibre naturellement',
+  eyebrow: 'Programme à distance',
+  title: 'Détox 21 jours',
   subtitle:
-    'Une méthode douce, sans aiguilles, pour réguler votre corps et retrouver un bien-être durable.',
+    'Retrouvez un corps plus léger, moins de fringales et plus d’énergie en 21 jours\n\nUn programme détox à distance pour rééquilibrer votre corps en douceur.',
   ctaPrimary: 'Prendre rendez-vous',
-  ctaSecondary: 'Découvrir la luxopuncture',
-} as const
-
-export const luxopunctureDefinition = {
-  title: 'La luxopuncture, c’est quoi ?',
-  paragraphs: [
-    'La luxopuncture est une technique de stimulation des points réflexes à l’aide de lumière infrarouge. Elle s’appuie sur les principes de l’acupuncture, mais sans recours aux aiguilles, ce qui la rend accessible à ceux qui souhaitent éviter toute pénétration de la peau. Contrairement à l’acupuncture classique, la luxopuncture utilise un faisceau lumineux pour agir sur les points énergétiques identifiés par la médecine traditionnelle chinoise.',
-    'La définition de la luxopuncture repose sur cette approche douce : encourager le bien-être général en favorisant la gestion des émotions et l’équilibre énergétique. Chaque point est choisi en fonction des besoins spécifiques de la personne, dans un cadre non invasif et sans dangers liés aux aiguilles.',
-    'Cette pratique attire particulièrement les personnes sensibles aux méthodes plus classiques ou recherchant une alternative confortable pour explorer leur mieux-être.',
-  ],
+  ctaSecondary: '👉 Découvrir le programme à distance',
 } as const
 
 export const problems: ProblemItem[] = [
@@ -141,26 +132,8 @@ export const hormoneEffects: HormoneEffect[] = [
   },
 ]
 
-export const testimonials: Testimonial[] = [
-  {
-    name: 'Claire M.',
-    rating: 5,
-    content:
-      'Accueil très humain, explications claires. J’ai retrouvé un sommeil plus stable après quelques séances.',
-  },
-  {
-    name: 'Thomas L.',
-    rating: 5,
-    content:
-      'Approche douce et structurée. Le suivi m’a aidé à tenir mes objectifs sans culpabiliser.',
-  },
-  {
-    name: 'Sophie R.',
-    rating: 5,
-    content:
-      'Je recommande pour la qualité d’écoute et la sensation de lâcher-prise après la séance.',
-  },
-]
+/** Conservé pour l’admin / import JSON ; l’affichage public utilise les images `public/images/avis_site/`. */
+export const testimonials: Testimonial[] = []
 
 export const services: Service[] = [
   {
@@ -201,7 +174,7 @@ export const services: Service[] = [
   },
   {
     slug: 'stress',
-    title: 'Stress & anxiété',
+    title: 'Relaxation & gestion du stress',
     goal: 'Aider le corps à retrouver un état de calme et de régulation du système nerveux.',
     intro:
       'Utile en période de surcharge, d’hyper-réactivité ou de tensions persistantes.',
@@ -240,26 +213,81 @@ export const services: Service[] = [
 ]
 
 export const pricingRows = [
-  { label: 'Séance en présentiel', price: '55 €', note: 'Au cabinet' },
-  { label: 'Séance à distance', price: '45 €', note: 'À distance' },
-  { label: 'Cure détox 21 jours', price: '190 €', note: 'Programme sur 21 jours' },
+  {
+    label: 'À distance',
+    price: '190 €',
+    note: 'Bilan initial en visio, 3 séances de suivi, accompagnement tout au long du programme, conseils et contenus personnalisés',
+  },
+  {
+    label: 'Séance de suivi à distance',
+    price: '45 €',
+    note: 'Réservée aux personnes ayant déjà réalisé le programme détox ou dans un accompagnement en cours — prolonge et consolide les résultats',
+  },
+  { label: 'Luxopuncture (cabinet)', price: '55 €', note: 'La séance — souvent en programme selon l’objectif' },
+  { label: 'Hypnose (cabinet)', price: '70 €', note: 'La séance' },
+  { label: 'Luxopuncture + hypnose', price: '80 €', note: 'La séance — approche complémentaire corps et profondeur' },
 ] as const
+
+/** Page Tarifs — structure détaillée (spec Camille). */
+export const tarifsPageSpec = {
+  distanceTitle: 'Programme à distance',
+  detox: {
+    label: 'À distance',
+    price: '190 €',
+    includes: [
+      'un bilan initial en visio',
+      '3 séances de suivi',
+      'un accompagnement tout au long du programme',
+      'des conseils et contenus personnalisés',
+    ],
+  },
+  suivi: {
+    label: 'Séance de suivi à distance',
+    price: '45 €',
+    conditions: [
+      'réservée aux personnes ayant déjà réalisé le programme détox',
+      'ou dans le cadre d’un accompagnement en cours',
+    ],
+    note: 'Elle permet de prolonger et consolider les résultats.',
+  },
+  cabinetTitle: 'Séances au cabinet',
+  cabinetRows: [
+    {
+      label: 'Luxopuncture',
+      price: '55 € la séance',
+      note:
+        'Les accompagnements se font généralement sous forme de programme, avec un nombre de séances adapté selon l’objectif (perte de poids, arrêt du tabac, relaxation, ménopause…).',
+    },
+    { label: 'Hypnose', price: '70 € la séance', note: '' },
+    {
+      label: 'Luxopuncture + hypnose',
+      price: '80 €',
+      note: 'Une approche complémentaire permettant de travailler à la fois sur le corps et sur les mécanismes plus profonds.',
+    },
+  ],
+  infosTitle: 'Informations complémentaires',
+  infosLines: [
+    'Les accompagnements sont personnalisés',
+    'Le nombre de séances est défini en fonction de votre objectif',
+    'Pour toute question, possibilité de contacter directement',
+  ],
+} as const
 
 export const aboutPractitioner = {
   title: 'Votre praticienne',
-  name: 'Camille Rombière',
+  name: 'Camille Laplace',
   bio: [
-    'Perte de poids durable, arrêt du tabac, gestion du stress, transit, sommeil, ménopause, ou encore stress chez les enfants dès 7 ans : nombreux sont les parcours qui patinent lorsque les approches sont trop agressives, peu efficaces, ou lorsqu’elles ne prennent pas en compte l’équilibre global du corps et des émotions.',
-    'Vous visez des résultats mesurables et durables : un corps moins gonflé, un esprit plus apaisé, une humeur plus stable, moins de compulsions et d’inflammations, plus d’énergie. Vous souhaitez être accompagné·e sans jugement, avec douceur, par une praticienne qui comprend votre rythme et reste présente entre les séances — une approche sérieuse, à votre rythme, sans pression inutile.',
-    'Luxothérapeute et hypnothérapeute depuis 2019, j’ai accompagné plusieurs centaines de personnes. À titre d’exemples : perte de poids notable en quelques mois (souvent 10–12 kg chez les femmes, 12–15 kg chez les hommes selon les profils), environ 95 % d’arrêt du tabac en 3 jours, 90,5 % de satisfaction en ménopause, ainsi qu’un meilleur sommeil, une meilleure digestion, moins de stress et moins de compulsions.',
-    'J’utilise la luxothérapie (non invasive), l’hypnose en option, un rééquilibrage alimentaire et métabolique, des conseils adaptés et un suivi humain et continu — y compris à distance pour certains programmes, dont le programme détox à distance.',
-    'Des témoignages vidéo sont disponibles sur Instagram, LinkedIn et Facebook. La luxothérapie n’est pas indiquée en cas de grossesse ni d’épilepsie ; un accompagnement à distance peut toutefois être envisagé selon votre situation.',
-    'Pour échanger, vous pouvez me contacter sur LinkedIn, Instagram, Facebook, WhatsApp ou via ce site. La prise de rendez-vous se fait uniquement par téléphone, pour un entretien clair et personnalisé. Je vous reçois en cabinet à Avignon pour l’ensemble de mes accompagnements ; le programme détox se déroule aussi entièrement à distance.',
+    'Praticienne depuis 2019, formée à la luxothérapie, j’accompagne depuis plusieurs années des personnes vers un mieux-être durable.',
+    'C’est dans cette démarche que je me suis formée à l’accompagnement autour de l’alimentation et du rééquilibrage, afin d’avoir une approche plus complète.',
+    'Au fil de mon parcours, j’ai ressenti le besoin d’aller encore plus loin dans ma pratique, pour mieux comprendre ce qui se joue derrière certaines difficultés. C’est ainsi que l’hypnose est venue naturellement dans un second temps.',
+    'Elle me permet aujourd’hui d’accompagner plus en profondeur certains blocages, comportements ou mécanismes émotionnels.',
+    'Je continue aujourd’hui à me former régulièrement, avec toujours cette même intention : vous proposer un accompagnement juste, adapté, et qui respecte votre rythme.',
+    'Pour vous donner un aperçu concret de mon accompagnement, voici quelques exemples et résultats :',
   ],
   credentials: [
     'Luxothérapeute et hypnothérapeute (depuis 2019)',
-    'Luxothérapie non invasive, hypnose en option, rééquilibrage alimentaire et métabolique',
-    'Suivi en présentiel à Avignon et accompagnement à distance selon les programmes',
+    'Luxothérapie, hypnose, accompagnement alimentaire et rééquilibrage',
+    'Cabinet à Avignon — programme détox à distance possible',
   ],
 } as const
 
@@ -278,8 +306,260 @@ export const socialLinks = {
 } as const
 
 export const bookingCta = {
-  text: 'Prêt·e à franchir le pas ? Réservez votre créneau dès maintenant.',
-  button: 'Contacter le cabinet',
+  text: 'Prêt·e à franchir le pas ? Réservez votre bilan offert (1h en visio).',
+  button: 'Réserver votre bilan offert',
+} as const
+
+/** Accueil — textes Camille (notes site). */
+export const homeCopy = {
+  hook: {
+    lead: 'Vous avez l’impression de faire attention…',
+    question: 'mais votre corps ne suit plus ?',
+    symptoms: 'Fatigue, ventre gonflé, envies de sucre…',
+    closing: 'Parfois, le corps a simplement besoin d’être rééquilibré.',
+  },
+  detoxSolution: {
+    intro: 'C’est là qu’intervient la détox.',
+    subtitle: 'Un programme simple et progressif pour :',
+    bullets: [
+      'retrouver plus de légèreté',
+      'diminuer les fringales',
+      'retrouver de l’énergie',
+      'apaiser le terrain inflammatoire',
+    ],
+  },
+  remoteBrief: {
+    title: 'Un accompagnement à distance sur 21 jours, adapté à votre rythme.',
+    withLabel: 'Avec :',
+    bullets: [
+      'un accompagnement personnalisé tout au long du programme',
+      'des conseils et contenus pour vous aider au quotidien',
+    ],
+    footnote: 'Sans détailler davantage ici — tout le détail est sur la page « À distance ».',
+  },
+  cabinetTeaser: {
+    title: 'Je propose également des accompagnements au cabinet :',
+    lines: [
+      'Vidéo de présentation',
+      'Luxopuncture (méthode de réflexothérapie par infrarouge)',
+      'Hypnose',
+    ],
+    cta: 'En savoir plus',
+  },
+  testimonials: {
+    eyebrow: 'Témoignages',
+    title: 'Avis écrits',
+    intro:
+      'Avis écrits et vidéo de présentation — la page dédiée regroupe les retours et les vidéos.',
+  },
+} as const
+
+/** Cartes cabinet (liens vers fiches programme). */
+export const cabinetServiceTeasers: readonly {
+  slug: string
+  title: string
+  description: string
+}[] = [
+  {
+    slug: 'poids',
+    title: 'Perte de poids',
+    description:
+      'Un accompagnement pour retrouver un équilibre durable, diminuer les fringales et faciliter une perte de poids progressive.',
+  },
+  {
+    slug: 'stress',
+    title: 'Relaxation & gestion du stress',
+    description: 'Apaiser les tensions, retrouver un état de calme et améliorer la qualité du sommeil.',
+  },
+  {
+    slug: 'menopause',
+    title: 'Inconforts de la ménopause',
+    description:
+      'Un accompagnement pour mieux vivre les déséquilibres et retrouver un confort au quotidien.',
+  },
+  {
+    slug: 'tabac',
+    title: 'Arrêt du tabac',
+    description:
+      'Accompagnement en luxopuncture, avec possibilité d’intégrer l’hypnose en complément selon vos besoins.',
+  },
+] as const
+
+export const detoxProgramCopy = {
+  title: 'À distance',
+  subtitle:
+    'Retrouvez un corps plus léger, un ventre plus confortable et plus d’énergie, sans contrainte.',
+  introLead: 'Vous avez l’impression de faire attention… mais votre corps ne suit plus ?',
+  introSymptoms: 'Ballonnements, fatigue, envies de sucre…',
+  introQuestion: 'Et si votre corps avait simplement besoin d’être rééquilibré ?',
+  distanceSection: {
+    title: 'Un accompagnement à distance, simple et personnalisé',
+    p1: 'Ce programme de détox à distance vous accompagne sur 3 semaines pour aider votre corps à retrouver un équilibre, en douceur et sans frustration.',
+    highlight: 'Je vous guide pas à pas, en m’adaptant à votre rythme et à votre fonctionnement.',
+  },
+  benefits: {
+    title: 'Ce que ce programme peut vous apporter',
+    items: [
+      'retrouver un ventre plus confortable',
+      'diminuer les fringales',
+      'retrouver de l’énergie',
+      'apaiser votre relation à l’alimentation',
+      'apaiser le terrain inflammatoire et certaines inflammations liées à l’alimentation',
+    ],
+    closing: 'Et préparer une perte de poids plus naturelle ensuite.',
+  },
+  howItWorks: {
+    title: 'Comment ça se passe',
+    intro:
+      'Je vous accompagne sur 3 semaines, avec un suivi régulier et un cadre adapté à vous. Concrètement :',
+    bullets: [
+      'un bilan en début de programme pour faire le point ensemble',
+      '3 rendez-vous en visio pour vous suivre et ajuster si besoin',
+      'des conseils personnalisés et des contenus concrets pour vous guider au quotidien',
+      'ma présence tout au long du programme pour répondre à vos questions et vous accompagner',
+    ],
+    highlight1: 'Vous êtes suivie à chaque étape, avec un accompagnement qui s’adapte à vous.',
+    highlight2:
+      'À l’issue du programme, une suite est possible si vous en ressentez le besoin, notamment pour poursuivre vers un rééquilibrage ou une perte de poids durable.',
+  },
+  approach: {
+    title: 'Mon approche',
+    intro: 'Je ne travaille ni dans la restriction, ni dans la culpabilisation.',
+    goalsLabel: 'Mon objectif est de :',
+    goals: ['travailler avec votre corps', 'respecter votre rythme', 'vous accompagner avec bienveillance'],
+  },
+  forWho: {
+    title: 'Pour qui ?',
+    intro: 'Ce programme est fait pour vous si :',
+    items: [
+      'vous vous sentez fatiguée ou en surcharge',
+      'vous avez des inconforts digestifs',
+      'vous avez des envies de sucre ou des compulsions',
+      'vous souhaitez retrouver un équilibre',
+      'vous ressentez des tensions, un terrain inflammatoire ou un inconfort général',
+      'ou préparer une perte de poids durable',
+    ],
+  },
+  modalities: {
+    title: 'Modalités',
+    intro: 'Le programme se déroule sur 3 semaines avec un accompagnement personnalisé comprenant :',
+    items: ['1 bilan initial en visio', '3 séances de suivi', 'un accompagnement tout au long du programme'],
+    tarifsHint: 'Les tarifs sont disponibles sur la page dédiée.',
+  },
+} as const
+
+export const detoxFaq: readonly { question: string; answer: string[] }[] = [
+  {
+    question: 'Est-ce que ce programme est fait pour moi ?',
+    answer: [
+      'Si vous vous reconnaissez dans certaines situations (fatigue, inconfort digestif, envies de sucre, difficulté à perdre du poids…), alors oui, ce programme peut vous correspondre.',
+      'Mon rôle est justement d’adapter l’accompagnement à vous, à votre rythme et à votre fonctionnement.',
+    ],
+  },
+  {
+    question: 'Est-ce que c’est difficile à suivre ?',
+    answer: [
+      'Non.',
+      'Je ne propose pas quelque chose de strict ou de frustrant. Au contraire, le programme est progressif et s’adapte à vous.',
+      'L’objectif est que vous puissiez tenir dans le temps, sans vous mettre en difficulté.',
+    ],
+  },
+  {
+    question: 'Et si je n’y arrive pas ?',
+    answer: [
+      'Vous n’êtes pas seule. Je suis là pour vous accompagner tout au long du programme. On ajuste ensemble, on échange, et on avance à votre rythme.',
+      'Il n’y a pas d’échec, seulement des ajustements.',
+    ],
+  },
+  {
+    question: 'Est-ce que je vais devoir me priver ?',
+    answer: [
+      'Non.',
+      'Je ne travaille pas avec la privation ou la culpabilisation. On vient rééquilibrer progressivement, sans brusquer votre corps.',
+      'Le but est que cela devienne naturel, pas contraignant.',
+    ],
+  },
+  {
+    question: 'Est-ce que c’est uniquement pour perdre du poids ?',
+    answer: [
+      'Non.',
+      'La détox permet d’abord de remettre votre corps à l’équilibre : digestion, énergie, sommeil, apaisement du terrain inflammatoire…',
+      'Et ensuite, la perte de poids devient plus simple et plus naturelle.',
+    ],
+  },
+  {
+    question: 'Est-ce que le suivi à distance est vraiment efficace ?',
+    answer: [
+      'Oui. J’ai construit cet accompagnement pour qu’il fonctionne pleinement à distance, tout en restant très présente.',
+      'Les retours sont très positifs : les personnes se sentent accompagnées, soutenues et guidées tout au long du programme.',
+      'Entre les séances, je reste disponible pour répondre à vos questions, ajuster si nécessaire et vous accompagner à chaque étape.',
+      'Vous n’êtes jamais seule dans le processus.',
+    ],
+  },
+]
+
+export const cabinetLuxoHypnoCopy = {
+  luxopunctureTitle: 'La luxopuncture',
+  luxopunctureIntro:
+    'La luxopuncture est une méthode douce, inspirée de l’acupuncture, qui utilise un rayonnement infrarouge pour stimuler des points réflexes du corps.',
+  luxopuncturePoints: [
+    'Elle agit notamment sur l’équilibre du système hormonal, digestif et lymphatique.',
+    'À l’aide d’un appareil médical certifié (CE), les points sont stimulés sans aiguilles, grâce à un stylet diffusant un faisceau infrarouge.',
+  ],
+  forWhatTitle: 'Pour quelles problématiques ?',
+  forWhatIntro: 'La luxopuncture peut accompagner différentes situations :',
+  forWhatList: [
+    'perte de poids',
+    'inconforts liés à la pré, péri ou post-ménopause',
+    'stress et tensions',
+    'arrêt du tabac',
+    'troubles du sommeil',
+    'difficultés de concentration ou surmenage',
+  ],
+  vsAcupunctureTitle: 'Quelle différence avec l’acupuncture ?',
+  vsAcupuncture: [
+    'Comme l’acupuncture, la luxopuncture s’appuie sur les principes de la médecine traditionnelle chinoise.',
+    'La différence principale réside dans la méthode utilisée : la luxopuncture se pratique sans aiguilles, avec un stylet infrarouge.',
+    'Une approche douce et non invasive.',
+  ],
+  contraTitle: 'Contre-indications',
+  contraList: ['troubles épileptiques', 'grossesse', 'traitement pour une maladie grave'],
+  contraFoot: 'En cas de doute, un avis médical est recommandé.',
+  painTitle: 'Est-ce douloureux ?',
+  painAnswer: 'Non. Cette méthode est indolore et sans effets indésirables.',
+  hypnoComplementTitle: 'Et pour aller plus loin…',
+  hypnoComplement: [
+    'Selon les besoins, l’accompagnement peut être complété par l’hypnose.',
+    'Elle permet de travailler plus en profondeur sur les comportements, les habitudes et les mécanismes émotionnels.',
+    'En complément de la luxopuncture, elle vient soutenir les changements et les ancrer dans la durée.',
+  ],
+  hypnoTitle: 'L’hypnose',
+  hypnoIntro:
+    'L’hypnose est un outil qui permet de travailler en profondeur sur certains comportements, habitudes ou mécanismes émotionnels.',
+  hypnoHighlight: 'Elle agit là où la volonté seule ne suffit pas toujours.',
+  hypnoCasesTitle: 'Dans quels cas ?',
+  hypnoCases: [
+    'l’arrêt du tabac',
+    'les comportements alimentaires',
+    'la gestion des émotions',
+    'les phobies',
+    'le manque de confiance ou d’estime de soi',
+    'certains blocages ou automatismes',
+  ],
+  hypnoHowTitle: 'Comment cela se passe ?',
+  hypnoHow: [
+    'L’hypnose est un état naturel, que vous expérimentez déjà au quotidien (lorsque vous êtes absorbée dans vos pensées, par exemple).',
+    'Vous restez consciente tout au long de la séance.',
+    'L’objectif est de vous aider à accéder à vos propres ressources, pour faciliter le changement.',
+  ],
+  hypnoComplement2Title: 'En complément de l’accompagnement',
+  hypnoComplement2: [
+    'L’hypnose peut venir compléter la luxopuncture, notamment dans certaines situations comme l’arrêt du tabac ou les comportements alimentaires.',
+    'Elle permet de renforcer les changements et de les ancrer dans la durée.',
+  ],
+  hypnoAdaptTitle: 'Un accompagnement adapté',
+  hypnoAdapt:
+    'Chaque séance est adaptée à vous, à votre rythme et à vos besoins. L’objectif est de vous accompagner de manière simple, progressive et respectueuse.',
 } as const
 
 export function getServiceBySlug(slug: string, list: Service[]): Service | undefined {

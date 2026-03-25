@@ -1,61 +1,255 @@
 // src/pages/programme-page.tsx
+import {
+  ArrowRight,
+  Calendar,
+  CheckCircle,
+  ClipboardList,
+  Heart,
+  HelpCircle,
+  Laptop,
+  MessageSquare,
+  Sparkles,
+  UserRound,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
-import { useSiteData } from '../contexts/admin-context'
-import { media } from '../data/media'
-import { SectionHeading } from '../components/ui/section-heading'
+import { detoxFaq, detoxProgramCopy } from '../data/site-content'
+import { aboutPagePhoto, media } from '../data/media'
 import { usePageTitle } from '../hooks/use-page-title'
 
-export function ProgrammePage() {
-  usePageTitle('Programmes')
-  const { services } = useSiteData()
+function IconList({ items }: { items: readonly string[] }) {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
-      <div className="mb-12 overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-beige)] shadow-[var(--shadow-soft)]">
-        <img
-          src={media.programmeLuxoHypnoHeader}
-          alt="Luxothérapeute et hypnothérapeute"
-          width={1600}
-          height={640}
-          className="h-auto w-full max-h-[min(28rem,70vh)] object-cover object-center"
-          loading="eager"
-          decoding="async"
-        />
-      </div>
+    <ul className="mt-6 space-y-2.5">
+      {items.map((item) => (
+        <li key={item} className="flex gap-2.5 text-[var(--color-body)]/95">
+          <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" aria-hidden />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
 
-      <SectionHeading
-        title="Programmes"
-        subtitle="Chaque objectif fait l’objet d’un protocole personnalisé après un bilan."
-      />
+export function ProgrammePage() {
+  usePageTitle('À distance')
+  const c = detoxProgramCopy
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {services.map((s) => (
-          <article
-            key={s.slug}
-            className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
+  return (
+    <div className="bg-[var(--color-page)]">
+      <header className="border-b border-[var(--color-brand)]/10 bg-[var(--color-beige)]">
+        <div className="mx-auto max-w-4xl overflow-hidden px-4 pt-10 sm:px-6 sm:pt-14">
+          <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-page)] shadow-sm">
+            <img
+              src={media.detoxProgramHero}
+              alt="Camille — présentation de l’accompagnement à distance"
+              width={1200}
+              height={800}
+              className="h-auto w-full max-h-[min(22rem,55vh)] object-cover object-center sm:max-h-[min(28rem,60vh)]"
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
+          <div className="py-10 text-center sm:py-12">
+            <h1 className="font-display text-3xl font-semibold leading-tight text-[var(--color-ink)] sm:text-4xl">
+              {c.title}
+            </h1>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-[var(--color-body)]/95">{c.subtitle}</p>
+            <Link
+              to="/contact"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--color-cta)] px-8 py-3.5 text-sm font-bold text-[var(--color-on-cta)] shadow-[var(--shadow-soft)] transition hover:bg-[var(--color-cta-hover)] hover:text-white"
+            >
+              <Calendar className="h-4 w-4 shrink-0" aria-hidden />
+              Bilan offert (1h en visio)
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+        <p className="flex items-start justify-center gap-2 text-center font-display text-xl text-[var(--color-ink)] sm:text-2xl">
+          <MessageSquare className="mt-1 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+          <span>{c.introLead}</span>
+        </p>
+        <p className="mt-4 text-center text-[var(--color-body)]/95">{c.introSymptoms}</p>
+        <p className="mt-8 flex items-center justify-center gap-2 text-center font-medium text-[var(--color-brand)]">
+          <HelpCircle className="h-4 w-4 shrink-0" aria-hidden />
+          {c.introQuestion}
+        </p>
+      </section>
+
+      <section className="w-full bg-[var(--color-beige)] py-16 sm:py-20">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+          <div>
+            <h2 className="flex items-start gap-2 font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+              <Laptop className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <span>{c.distanceSection.title}</span>
+            </h2>
+            <p className="mt-6 leading-relaxed text-[var(--color-body)]/95">{c.distanceSection.p1}</p>
+            <p className="mt-6 font-medium text-[var(--color-ink)]">{c.distanceSection.highlight}</p>
+          </div>
+          <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-page)] shadow-sm">
+            <img
+              src={media.detoxVisio}
+              alt="Accompagnement en visio"
+              width={800}
+              height={600}
+              className="h-auto w-full object-cover"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
+          <div>
+            <h2 className="flex items-start gap-2 font-display text-2xl font-semibold text-[var(--color-ink)]">
+              <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <span>{c.benefits.title}</span>
+            </h2>
+            <IconList items={c.benefits.items} />
+            <p className="mt-6 font-medium text-[var(--color-ink)]">{c.benefits.closing}</p>
+          </div>
+          <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-beige)]">
+            <img
+              src={media.detoxWellbeing}
+              alt="Sérénité — illustration bien-être"
+              width={900}
+              height={700}
+              className="h-auto w-full object-cover"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section className="w-full bg-[var(--color-beige)] py-16 sm:py-20">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-start">
+          <figure className="order-2 overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-page)] lg:order-1">
+            <img
+              src={media.detoxNotebook}
+              alt="Suivi et carnet d’accompagnement"
+              width={900}
+              height={700}
+              className="h-auto w-full object-cover"
+              loading="lazy"
+            />
+          </figure>
+          <div className="order-1 lg:order-2">
+            <h2 className="flex items-start gap-2 font-display text-2xl font-semibold text-[var(--color-ink)]">
+              <ClipboardList className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <span>{c.howItWorks.title}</span>
+            </h2>
+            <p className="mt-4 text-[var(--color-body)]/95">{c.howItWorks.intro}</p>
+            <IconList items={c.howItWorks.bullets} />
+            <p className="mt-6 font-medium text-[var(--color-ink)]">{c.howItWorks.highlight1}</p>
+            <p className="mt-4 text-sm leading-relaxed text-[var(--color-body)]/90">{c.howItWorks.highlight2}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+        <h2 className="flex items-start gap-2 font-display text-2xl font-semibold text-[var(--color-ink)]">
+          <Heart className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+          <span>{c.approach.title}</span>
+        </h2>
+        <p className="mt-4 text-[var(--color-body)]/95">{c.approach.intro}</p>
+        <p className="mt-6 font-medium text-[var(--color-ink)]">{c.approach.goalsLabel}</p>
+        <IconList items={c.approach.goals} />
+      </section>
+
+      <section className="w-full bg-[var(--color-beige)] py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <h2 className="flex items-start gap-2 font-display text-2xl font-semibold text-[var(--color-ink)]">
+            <UserRound className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+            <span>{c.forWho.title}</span>
+          </h2>
+          <p className="mt-4 text-[var(--color-body)]/95">{c.forWho.intro}</p>
+          <IconList items={c.forWho.items} />
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+        <h2 className="flex items-start gap-2 font-display text-2xl font-semibold text-[var(--color-ink)]">
+          <Calendar className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+          <span>{c.modalities.title}</span>
+        </h2>
+        <p className="mt-4 text-[var(--color-body)]/95">{c.modalities.intro}</p>
+        <IconList items={c.modalities.items} />
+        <p className="mt-6 text-sm text-[var(--color-body)]/85">{c.modalities.tarifsHint}</p>
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Link
+            to="/tarifs"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--color-brand)]/30 px-6 py-3 text-sm font-semibold text-[var(--color-ink)] transition hover:border-[var(--color-brand)]/50"
           >
-            <div className="aspect-[16/10] overflow-hidden bg-[var(--color-beige)]">
-              <img
-                src={s.coverImage}
-                alt=""
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
-                loading="lazy"
-              />
-            </div>
-            <div className="flex flex-1 flex-col p-8">
-              <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)]">{s.title}</h2>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--color-body)]/90">{s.goal}</p>
-              <Link
-                to={`/programme/${s.slug}`}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-cta-hover)]"
+            Voir les tarifs
+            <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+          </Link>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--color-cta)] px-6 py-3 text-sm font-bold text-[var(--color-on-cta)] shadow-sm transition hover:bg-[var(--color-cta-hover)] hover:text-white"
+          >
+            <Calendar className="h-4 w-4 shrink-0" aria-hidden />
+            Réserver un bilan offert
+          </Link>
+        </div>
+      </section>
+
+      <section className="w-full border-t border-[var(--color-brand)]/10 bg-[var(--color-page)] py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <h2 className="flex items-center justify-center gap-2 text-center font-display text-3xl font-semibold text-[var(--color-ink)] sm:text-4xl">
+            <HelpCircle className="h-7 w-7 shrink-0 text-[var(--color-brand)]" aria-hidden />
+            Questions fréquentes
+          </h2>
+          <div className="mt-12 space-y-6">
+            {detoxFaq.map((item, i) => (
+              <div
+                key={`faq-${i}`}
+                className="rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-beige)]/50 p-6"
               >
-                En savoir plus
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden />
-              </Link>
-            </div>
-          </article>
-        ))}
-      </div>
+                <h3 className="flex items-start gap-2 font-display text-lg font-semibold text-[var(--color-ink)]">
+                  <MessageSquare className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                  <span>{item.question}</span>
+                </h3>
+                <div className="mt-3 space-y-3 text-sm leading-relaxed text-[var(--color-body)]/95">
+                  {item.answer.map((p, j) => (
+                    <p
+                      key={`faq-${i}-${j}`}
+                      className={p === 'Non.' ? 'font-semibold text-[var(--color-ink)]' : undefined}
+                    >
+                      {p}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full bg-[var(--color-beige)] py-16 sm:py-20">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-8 px-4 text-center sm:px-6 md:flex-row md:text-left">
+          <figure className="h-48 w-48 shrink-0 overflow-hidden rounded-full border border-[var(--color-brand)]/10 shadow-md">
+            <img
+              src={aboutPagePhoto.src}
+              alt={aboutPagePhoto.alt}
+              className="h-full w-full object-cover"
+              width={400}
+              height={400}
+              loading="lazy"
+            />
+          </figure>
+          <div>
+            <p className="font-display text-xl text-[var(--color-ink)]">Un bilan pour faire le point, sans engagement.</p>
+            <Link
+              to="/contact"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-cta)] px-8 py-3.5 text-sm font-bold text-[var(--color-on-cta)] shadow-[var(--shadow-soft)] transition hover:bg-[var(--color-cta-hover)] hover:text-white"
+            >
+              <Calendar className="h-4 w-4 shrink-0" aria-hidden />
+              Réserver un bilan offert
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

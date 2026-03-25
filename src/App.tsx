@@ -4,12 +4,13 @@ import { SiteLayout } from './components/layout/site-layout'
 import { AProposPage } from './pages/a-propos-page'
 import { ContactPage } from './pages/contact-page'
 import { HomePage } from './pages/home-page'
-import { LuxopuncturePage } from './pages/luxopuncture-page'
 import { ProgrammeDetailPage } from './pages/programme-detail-page'
 import { ProgrammePage } from './pages/programme-page'
 import { PublicationDetailPage } from './pages/publication-detail-page'
+import { PartenariatPage } from './pages/partenariat-page'
 import { PublicationsPage } from './pages/publications-page'
 import { TarifsPage } from './pages/tarifs-page'
+import { CabinetPage } from './pages/cabinet-page'
 import { TemoignagesPage } from './pages/temoignages-page'
 import { RequireAdmin } from './components/admin/require-admin'
 import { AdminDashboardPage } from './pages/admin/admin-dashboard-page'
@@ -36,9 +37,11 @@ export default function App() {
         />
         <Route element={<SiteLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="luxopuncture" element={<LuxopuncturePage />} />
+          <Route path="luxopuncture" element={<Navigate to="/cabinet#luxopuncture" replace />} />
+          <Route path="cabinet" element={<CabinetPage />} />
           <Route path="programme" element={<ProgrammePage />} />
           <Route path="programme/:slug" element={<ProgrammeDetailPage />} />
+          <Route path="partenariat" element={<PartenariatPage />} />
           <Route path="publications" element={<PublicationsPage />} />
           <Route path="publications/:slug" element={<PublicationDetailPage />} />
           <Route path="tarifs" element={<TarifsPage />} />

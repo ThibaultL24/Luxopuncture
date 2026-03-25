@@ -10,12 +10,33 @@ export const media = {
   machineLuxo: '/images/machine_luxo.jpeg',
   /** Section accueil « ce que vous pouvez en attendre » */
   cookiesPub: '/images/Photo%20cookies%20pub.jpg',
+  /** Page programme détox — en-tête (photo cookies / présentation) */
+  detoxProgramHero: '/images/Photo%20cookies%20pub.jpg',
+  /** Page programme détox — visio */
+  detoxVisio: '/images/camille2.jpeg',
+  /** Page programme détox — section « Ce que ce programme peut vous apporter » */
+  detoxWellbeing: '/images/sérénité.webp',
+  /** Page programme détox — carnet / suivi */
+  detoxNotebook: '/images/séance_découverte_offerte.jpeg',
   tarifs: '/images/séance_découverte_offerte.jpeg',
   agenda: '/images/agenda.jpeg',
-  camilleContact: '/images/camille2.jpeg',
+  /** Section accueil témoignages — présentation luxopuncture */
+  presentationLuxopuncture: '/images/présentation_luxopuncture.mp4',
 } as const
 
-/** Page Luxopuncture — série « explication » (alternance gauche / droite) */
+/** Visuels tuiles « PROGRAMME … » — page Cabinet uniquement (`public/images/cabinet/`) */
+export const cabinetProgramCardImages: Record<string, string> = {
+  poids: '/images/cabinet/programme_perte_de_poid_accueil.png',
+  stress: '/images/cabinet/programme_relaxation_accueil.png',
+  menopause: '/images/cabinet/programme_menopause_accueil.png',
+  tabac: '/images/cabinet/programme_tabac_accueil.png',
+}
+
+export function getCabinetProgramCardImage(slug: string, fallback: string): string {
+  return cabinetProgramCardImages[slug] ?? fallback
+}
+
+/** Illustrations explicatives — incluses dans le carrousel page Luxopuncture */
 export const luxopunctureExplanationImages: readonly { src: string; alt: string }[] = [
   { src: '/images/luxopuncture-explication.jpeg', alt: 'Illustration explicative — la luxopuncture (1/5)' },
   { src: '/images/luxopuncture-explication2.jpeg', alt: 'Illustration explicative — la luxopuncture (2/5)' },

@@ -9,7 +9,7 @@ export function BookingBar() {
           to="/contact"
           className="block text-sm font-bold text-[var(--color-on-cta)]"
         >
-          Prendre rendez-vous
+          Bilan offert — contact
         </Link>
       </div>
     </div>
