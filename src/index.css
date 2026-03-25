@@ -5,10 +5,30 @@
   --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
   --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 
-  /* Fonds */
-  --color-page: #f8f6f1;
-  --color-beige: #ebe7df;
-  --color-beige-deep: #d6cfc2;
+  /* Fonds — beiges chauds légèrement rosés (évite le gris-vert froid) */
+  --color-page: #faf6f2;
+  --color-beige: #efe5df;
+  --color-beige-deep: #dcc9c0;
+  /** Extrémité du dégradé — taupe rosé plus soutenu */
+  --color-beige-shadow: #c4a898;
+  /** Fin du dégradé page — rose-beige un peu plus marqué (contraste avec le blanc de départ) */
+  --color-beige-rose-end: #d4b8a8;
+  /** Cartes, encarts, boutons secondaires — contraste avec le fond chaud */
+  --color-surface: #ffffff;
+  --color-surface-rose: #f8f6f1;
+  /**
+   * Fond page : blanc net (long) → beige → rose-beige (fin plus marquée).
+   */
+  --page-bg-gradient: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 20%,
+    #fefdfb 32%,
+    var(--color-page) 44%,
+    var(--color-beige) 62%,
+    var(--color-beige-deep) 82%,
+    var(--color-beige-rose-end) 100%
+  );
 
   /* Chrome : nav & footer — aligné sur le fond du bandeau plumes (#23413b) */
   --color-brand: #23413b;
@@ -25,6 +45,11 @@
 
   /* Chaleur : beige / marron doux */
   --color-accent: #a68b6a;
+
+  /* Plume du logo / curseur — rouge-rose (réf. teinte curseur) */
+  --color-logo-feather: #e86888;
+  --color-logo-feather-mid: #d45078;
+  --color-logo-feather-deep: #a83858;
 
   --color-ink: #0f2523;
   --color-body: #3d4a48;
@@ -45,10 +70,26 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: #ffffff;
   }
 
+  /**
+   * Dégradé unique, fixe derrière tout le contenu (pas d’alternance par section).
+   */
   body {
-    @apply m-0 min-h-svh bg-[var(--color-page)] font-sans text-[var(--color-body)] antialiased;
+    @apply m-0 min-h-svh font-sans text-[var(--color-body)] antialiased;
+    position: relative;
+    isolation: isolate;
+    background: transparent;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--page-bg-gradient);
+    pointer-events: none;
   }
 
   :where(a, button, input, textarea, select):focus {
@@ -70,6 +111,22 @@
   }
 }
 
+@layer components {
+  /** Champs formulaire — espace admin (contraste doux sur fonds teintés) */
+  .admin-input {
+    @apply mt-1 w-full rounded-xl border border-[var(--color-brand)]/18 bg-white px-3 py-2 text-sm text-[var(--color-ink)] shadow-[inset_0_1px_2px_rgb(0_0_0_/0.035)];
+  }
+
+  .admin-shell {
+    @apply min-h-screen bg-[var(--color-surface-rose)];
+    background-image: radial-gradient(
+      ellipse 120% 80% at 100% 0%,
+      rgb(227 240 237 / 0.45) 0%,
+      transparent 55%
+    );
+  }
+}
+
 /* témoignages-page.tsx — banderole d’avis */
 @keyframes reviews-marquee {
   0% {
@@ -88,6 +145,104 @@
 
 .reviews-marquee-track:hover {
   animation-play-state: paused;
+}
+
+/* Éditorial — reveals (variantes pour éviter la monotonie) */
+.reveal {
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+
+.reveal--fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.reveal--fade-up.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal--fade {
+  opacity: 0;
+}
+
+.reveal--fade.reveal--visible {
+  opacity: 1;
+}
+
+.reveal--slide-left {
+  opacity: 0;
+  transform: translateX(36px);
+}
+
+.reveal--slide-left.reveal--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal--slide-right {
+  opacity: 0;
+  transform: translateX(-36px);
+}
+
+.reveal--slide-right.reveal--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal--scale {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+.reveal--scale.reveal--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--fade-up,
+  .reveal--fade,
+  .reveal--slide-left,
+  .reveal--slide-right,
+  .reveal--scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+.glass-soft {
+  background: rgb(255 255 255 / 0.58);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-soft {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/** Grain fixe très léger sur le contenu principal (voir `site-layout`) */
+.site-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: repeating-linear-gradient(
+    -22deg,
+    transparent,
+    transparent 3px,
+    rgb(15 37 35 / 0.045) 3px,
+    rgb(15 37 35 / 0.045) 3.5px
+  );
 }
 
 /*

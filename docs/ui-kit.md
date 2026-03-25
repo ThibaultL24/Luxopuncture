@@ -6,12 +6,12 @@ Document de référence pour la direction artistique et les patterns d’interfa
 
 ## 1. Identité visuelle
 
-| Aspect | Choix |
-|--------|--------|
-| **Ambiance** | Bien‑être, naturel, professionnel rassurant — verts profonds, beiges chauds, sans froideur clinique. |
-| **Contraste** | Le texte courant reste lisible sur fond crème ; les **actions** passent par un vert vif (`CTA`) pour se détacher du vert « chrome » (`brand`). |
-| **Forme** | Beaucoup de **coins arrondis** (`rounded-full` pour les boutons, `rounded-2xl` / `rounded-3xl` pour cartes et blocs). |
-| **Mise en page** | Contenu centré, **`max-width: 72rem`** (`max-w-6xl`), marges latérales **`px-4` → `sm:px-6`**. |
+| Aspect           | Choix                                                                                                                                          |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Ambiance**     | Bien‑être, naturel, professionnel rassurant — verts profonds, beiges chauds, sans froideur clinique.                                           |
+| **Contraste**    | Le texte courant reste lisible sur fond crème ; les **actions** passent par un vert vif (`CTA`) pour se détacher du vert « chrome » (`brand`). |
+| **Forme**        | Beaucoup de **coins arrondis** (`rounded-full` pour les boutons, `rounded-2xl` / `rounded-3xl` pour cartes et blocs).                          |
+| **Mise en page** | Contenu centré, **`max-width: 72rem`** (`max-w-6xl`), marges latérales **`px-4` → `sm:px-6`**.                                                 |
 
 ---
 
@@ -21,58 +21,58 @@ Les couleurs sont déclarées en variables CSS dans `@theme` (`src/index.css`) e
 
 ### Fonds & surfaces
 
-| Token | Hex | Usage |
-|-------|-----|--------|
-| `--color-page` | `#f8f6f1` | Fond principal de la page (blanc cassé / crème). |
-| `--color-beige` | `#ebe7df` | Surfaces secondaires, zones douces. |
-| `--color-beige-deep` | `#d6cfc2` | Variante plus marquée si besoin de relief. |
-| `--color-muted-green` | `#e3f0ed` | Bandes ou cartes très légères, halos du hero. |
+| Token                 | Hex       | Usage                                            |
+| --------------------- | --------- | ------------------------------------------------ |
+| `--color-page`        | `#f8f6f1` | Fond principal de la page (blanc cassé / crème). |
+| `--color-beige`       | `#ebe7df` | Surfaces secondaires, zones douces.              |
+| `--color-beige-deep`  | `#d6cfc2` | Variante plus marquée si besoin de relief.       |
+| `--color-muted-green` | `#e3f0ed` | Bandes ou cartes très légères, halos du hero.    |
 
 ### Marque (chrome)
 
-| Token | Hex | Usage |
-|-------|-----|--------|
-| `--color-brand` | `#0f3d3a` | Barre de navigation, pied de page, textes sur fond sombre. |
-| `--color-brand-mid` | `#165a54` | Dégradés (bannière CTA, etc.). |
-| `--color-brand-dark` | `#0a2c2a` | Renforcement (ex. menu mobile). |
+| Token                | Hex       | Usage                                                      |
+| -------------------- | --------- | ---------------------------------------------------------- |
+| `--color-brand`      | `#0f3d3a` | Barre de navigation, pied de page, textes sur fond sombre. |
+| `--color-brand-mid`  | `#165a54` | Dégradés (bannière CTA, etc.).                             |
+| `--color-brand-dark` | `#0a2c2a` | Renforcement (ex. menu mobile).                            |
 
 ### Actions (CTA)
 
-| Token | Hex | Usage |
-|-------|-----|--------|
-| `--color-cta` | `#3ddc84` | Bouton principal, lien actif dans la nav — vert **plus organique** que le néon type SaaS. |
-| `--color-cta-hover` | `#2aa86a` | Survol : un cran plus soutenu, toujours naturel. |
-| `--color-on-cta` | `#0a1f1c` | Texte sur bouton CTA (contraste sur vert clair). |
+| Token               | Hex       | Usage                                                                                     |
+| ------------------- | --------- | ----------------------------------------------------------------------------------------- |
+| `--color-cta`       | `#3ddc84` | Bouton principal, lien actif dans la nav — vert **plus organique** que le néon type SaaS. |
+| `--color-cta-hover` | `#2aa86a` | Survol : un cran plus soutenu, toujours naturel.                                          |
+| `--color-on-cta`    | `#0a1f1c` | Texte sur bouton CTA (contraste sur vert clair).                                          |
 
 ### Texte & accent
 
-| Token | Hex | Usage |
-|-------|-----|--------|
-| `--color-ink` | `#0f2523` | Titres, texte fort. |
-| `--color-body` | `#3d4a48` | Corps de texte, paragraphes. |
+| Token            | Hex       | Usage                                                                                                                                |
+| ---------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `--color-ink`    | `#0f2523` | Titres, texte fort.                                                                                                                  |
+| `--color-body`   | `#3d4a48` | Corps de texte, paragraphes.                                                                                                         |
 | `--color-accent` | `#a68b6a` | Surtitre / « eyebrow » + **ligne de séparation** légère sous l’eyebrow (`SectionHeading`) pour ancrer l’accent dans la mise en page. |
 
 ### Ombre
 
-| Token | Valeur | Usage |
-|-------|--------|--------|
+| Token           | Valeur                                         | Usage                                                         |
+| --------------- | ---------------------------------------------- | ------------------------------------------------------------- |
 | `--shadow-soft` | double couche (teinte brand + noir très léger) | Ombre plus **diffuse et naturelle** que l’ombre unique forte. |
 
 ### Rayons & espacement (tokens optionnels)
 
-| Token | Valeur | Usage |
-|-------|--------|--------|
+| Token                         | Valeur             | Usage                                                             |
+| ----------------------------- | ------------------ | ----------------------------------------------------------------- |
 | `--radius-sm` … `--radius-xl` | `0.75rem` → `2rem` | Cartes, blocs — à réutiliser progressivement dans les composants. |
-| `--spacing-section` | `5rem` | Rythme vertical type entre grandes sections. |
+| `--spacing-section`           | `5rem`             | Rythme vertical type entre grandes sections.                      |
 
 ---
 
 ## 3. Typographie
 
-| Rôle | Police | Chargement |
-|------|--------|------------|
-| **Titres** (display) | **Cormorant Garamond** — `font-display` | Google Fonts : 500, 600, 700 + italique 500 |
-| **Interface & texte** | **DM Sans** — `font-sans` (défaut `body`) | Google Fonts : 400, 500, 600 |
+| Rôle                  | Police                                    | Chargement                                  |
+| --------------------- | ----------------------------------------- | ------------------------------------------- |
+| **Titres** (display)  | **Cormorant Garamond** — `font-display`   | Google Fonts : 500, 600, 700 + italique 500 |
+| **Interface & texte** | **DM Sans** — `font-sans` (défaut `body`) | Google Fonts : 400, 500, 600                |
 
 ### Échelle indicative
 
@@ -147,24 +147,24 @@ Les couleurs sont déclarées en variables CSS dans `@theme` (`src/index.css`) e
 
 Checklist produit — le design soutient, le **message** convertit :
 
-| Levier | Vérification |
-|--------|----------------|
-| Hero | Bénéfice lisible en une phrase + CTA principal au-dessus de la ligne de flottaison. |
-| Répétition | CTA « Réserver / Contact » visible après scroll (bandeau, footer). |
-| Preuve | Témoignages (captures + vidéos) accessibles depuis l’accueil. |
-| Friction | Parcours contact simple, peu de champs inutiles. |
+| Levier     | Vérification                                                                        |
+| ---------- | ----------------------------------------------------------------------------------- |
+| Hero       | Bénéfice lisible en une phrase + CTA principal au-dessus de la ligne de flottaison. |
+| Répétition | CTA « Réserver / Contact » visible après scroll (bandeau, footer).                  |
+| Preuve     | Témoignages (captures + vidéos) accessibles depuis l’accueil.                       |
+| Friction   | Parcours contact simple, peu de champs inutiles.                                    |
 
 ---
 
 ## 9. Fichiers sources utiles
 
-| Fichier | Rôle |
-|---------|------|
-| `src/index.css` | Tokens `@theme`, animation banderole, styles de base. |
-| `index.html` | Chargement des polices Google. |
-| `src/components/ui/section-heading.tsx` | Pattern titre de section. |
-| `src/components/home/hero-section.tsx` | Hero, CTA, gradient de fond. |
-| `src/components/layout/navbar.tsx` | Navigation et états actifs. |
+| Fichier                                 | Rôle                                                  |
+| --------------------------------------- | ----------------------------------------------------- |
+| `src/index.css`                         | Tokens `@theme`, animation banderole, styles de base. |
+| `index.html`                            | Chargement des polices Google.                        |
+| `src/components/ui/section-heading.tsx` | Pattern titre de section.                             |
+| `src/components/home/hero-section.tsx`  | Hero, CTA, gradient de fond.                          |
+| `src/components/layout/navbar.tsx`      | Navigation et états actifs.                           |
 
 ---
 
@@ -174,4 +174,4 @@ Direction artistique et **système** (tokens, séparation brand / CTA, doc) sont
 
 ---
 
-*Ce document peut être mis à jour lorsque de nouveaux tokens ou composants sont ajoutés au projet.*
+_Ce document peut être mis à jour lorsque de nouveaux tokens ou composants sont ajoutés au projet._

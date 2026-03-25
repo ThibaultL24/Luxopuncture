@@ -7,7 +7,6 @@ import {
   Heart,
   HelpCircle,
   Images,
-  Lightbulb,
   ShieldAlert,
   Sparkles,
 } from 'lucide-react'
@@ -15,6 +14,14 @@ import { Link } from 'react-router-dom'
 import { useSiteData } from '../contexts/admin-context'
 import { getCabinetProgramCardImage, luxopunctureExplanationImages, media } from '../data/media'
 import { cabinetLuxoHypnoCopy, cabinetServiceTeasers, getServiceBySlug } from '../data/site-content'
+import {
+  EditorialQuote,
+  EditorialSectionImmersive,
+  RevealOnScroll,
+  SectionAtmosphere,
+  SectionDivider,
+  SectionGradientSpacer,
+} from '../components/editorial'
 import { ImageCarousel } from '../components/ui/image-carousel'
 import { WrittenReviewsMarquee } from '../components/written-reviews-marquee'
 import { SectionHeading } from '../components/ui/section-heading'
@@ -39,46 +46,61 @@ export function CabinetPage() {
   const x = cabinetLuxoHypnoCopy
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:py-20">
-      <SectionHeading
-        eyebrow="Cabinet"
-        title="Accompagnements au cabinet"
-        subtitle="Luxopuncture et hypnose — des protocoles adaptés à votre objectif."
-      />
+    <div className="bg-transparent">
+      <SectionAtmosphere variant="soft" placement="both">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="pt-12 pb-12 sm:pt-16 lg:pb-16 lg:pt-20">
+            <RevealOnScroll variant="fade-up">
+              <SectionHeading
+                eyebrow="Cabinet"
+                title="Accompagnements au cabinet"
+                subtitle="Luxopuncture et hypnose — des protocoles adaptés à votre objectif."
+              />
+            </RevealOnScroll>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2">
-        {cabinetServiceTeasers.map(({ slug, title, description }) => {
-          const service = getServiceBySlug(slug, services)
-          if (!service) return null
-          return (
-            <Link
-              key={slug}
-              to={`/programme/${slug}`}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-page)] shadow-sm transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
-            >
-              <div className="flex aspect-square items-center justify-center overflow-hidden bg-[var(--color-beige)] p-2 sm:p-3">
-                <img
-                  src={getCabinetProgramCardImage(slug, service.coverImage)}
-                  alt={title}
-                  className="h-full w-full max-h-full max-w-full object-contain transition duration-300 group-hover:scale-[1.02]"
-                  loading="lazy"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h2 className="font-display text-xl font-semibold text-[var(--color-ink)]">{title}</h2>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--color-body)]/90">{description}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-cta-hover)]">
-                  En savoir plus
-                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden />
-                </span>
-              </div>
-            </Link>
-          )
-        })}
-      </div>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2">
+              {cabinetServiceTeasers.map(({ slug, title, description }, i) => {
+                const service = getServiceBySlug(slug, services)
+                if (!service) return null
+                return (
+                  <RevealOnScroll key={slug} variant={i % 2 === 0 ? 'fade-up' : 'scale'}>
+                    <Link
+                      to={`/programme/${slug}`}
+                      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
+                    >
+                      <div className="flex aspect-square items-center justify-center overflow-hidden bg-[var(--color-surface-rose)] p-2 sm:p-3">
+                        <img
+                          src={getCabinetProgramCardImage(slug, service.coverImage)}
+                          alt={title}
+                          className="h-full w-full max-h-full max-w-full object-contain transition duration-300 group-hover:scale-[1.02]"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="flex flex-1 flex-col p-6">
+                        <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">{title}</h2>
+                        <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--color-body)]/90">{description}</p>
+                        <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-cta-hover)]">
+                          En savoir plus
+                          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden />
+                        </span>
+                      </div>
+                    </Link>
+                  </RevealOnScroll>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </SectionAtmosphere>
 
-      <div id="luxopuncture" className="mx-auto mt-20 max-w-3xl scroll-mt-28 border-t border-[var(--color-brand)]/10 pt-16">
-        <SectionHeading title={x.luxopunctureTitle} subtitle={x.luxopunctureIntro} />
+      <SectionDivider />
+
+      <SectionAtmosphere variant="medium" placement="diagonal">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div id="luxopuncture" className="mx-auto max-w-3xl scroll-mt-28 pt-8 sm:pt-12">
+          <RevealOnScroll variant="fade-up">
+            <SectionHeading title={x.luxopunctureTitle} subtitle={x.luxopunctureIntro} />
+          </RevealOnScroll>
 
         <div className="mx-auto mt-10 max-w-2xl space-y-5 text-[var(--color-body)]/95">
           {x.luxopuncturePoints.map((p) => (
@@ -89,7 +111,7 @@ export function CabinetPage() {
           ))}
         </div>
 
-        <figure className="mx-auto mt-10 max-w-xl overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-beige)]">
+        <figure className="mx-auto mt-10 max-w-xl overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)]">
           <img
             src={media.machineLuxo}
             alt="Appareil de luxopuncture"
@@ -101,18 +123,18 @@ export function CabinetPage() {
         </figure>
 
         <section className="mt-16 space-y-8">
-          <h3 className="text-center font-display text-xl font-semibold text-[var(--color-ink)]">
+          <h3 className="text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
             <span className="inline-flex items-start gap-2 text-left">
-              <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <HelpCircle className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
               <span>{x.forWhatTitle}</span>
             </span>
           </h3>
           <p className="text-[var(--color-body)]/95">{x.forWhatIntro}</p>
           <IconList items={x.forWhatList} />
 
-          <h3 className="pt-6 text-center font-display text-xl font-semibold text-[var(--color-ink)]">
+          <h3 className="pt-6 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
             <span className="inline-flex items-start gap-2 text-left">
-              <ArrowLeftRight className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <ArrowLeftRight className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
               <span>{x.vsAcupunctureTitle}</span>
             </span>
           </h3>
@@ -122,26 +144,26 @@ export function CabinetPage() {
             </p>
           ))}
 
-          <h3 className="pt-6 text-center font-display text-xl font-semibold text-[var(--color-ink)]">
+          <h3 className="pt-6 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
             <span className="inline-flex items-start gap-2 text-left">
-              <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <ShieldAlert className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
               <span>{x.contraTitle}</span>
             </span>
           </h3>
           <IconList items={x.contraList} />
           <p className="text-sm text-[var(--color-body)]/85">{x.contraFoot}</p>
 
-          <h3 className="pt-6 text-center font-display text-xl font-semibold text-[var(--color-ink)]">
+          <h3 className="pt-6 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
             <span className="inline-flex items-start gap-2 text-left">
-              <Heart className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <Heart className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
               <span>{x.painTitle}</span>
             </span>
           </h3>
           <p className="text-[var(--color-body)]/95">{x.painAnswer}</p>
 
-          <h3 className="pt-6 text-center font-display text-xl font-semibold text-[var(--color-ink)]">
+          <h3 className="pt-6 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
             <span className="inline-flex items-start gap-2 text-left">
-              <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
               <span>{x.hypnoComplementTitle}</span>
             </span>
           </h3>
@@ -152,30 +174,40 @@ export function CabinetPage() {
           ))}
         </section>
 
-        <section className="mt-20 space-y-6 border-t border-[var(--color-brand)]/10 pt-16">
-          <h2 className="text-center font-display text-2xl font-semibold text-[var(--color-ink)]">
-            <span className="inline-flex items-start gap-2 text-left">
-              <Brain className="mt-0.5 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.hypnoTitle}</span>
-            </span>
-          </h2>
-          <p className="leading-relaxed text-[var(--color-body)]/95">{x.hypnoIntro}</p>
-          <p className="flex items-start justify-center gap-2 text-center font-medium text-[var(--color-ink)]">
-            <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" aria-hidden />
-            <span>{x.hypnoHighlight}</span>
-          </p>
+        <SectionDivider />
 
-          <h3 className="pt-4 text-center font-display text-xl font-semibold text-[var(--color-ink)]">
+        <section className="mt-12 space-y-6 sm:mt-16">
+          <RevealOnScroll variant="fade-up">
+            <h2 className="text-center font-display text-4xl font-semibold leading-tight text-[var(--color-ink)] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
+              <span className="inline-flex items-start gap-3 text-left">
+                <Brain className="mt-1 h-8 w-8 shrink-0 text-[var(--color-brand)] sm:h-9 sm:w-9" aria-hidden />
+                <span>{x.hypnoTitle}</span>
+              </span>
+            </h2>
+          </RevealOnScroll>
+          <RevealOnScroll variant="fade-up">
+            <p className="leading-relaxed text-[var(--color-body)]/95">{x.hypnoIntro}</p>
+          </RevealOnScroll>
+        </section>
+
+        <EditorialSectionImmersive atmosphereVariant="strong" atmospherePlacement="center">
+          <RevealOnScroll variant="scale">
+            <EditorialQuote quote={`« ${x.hypnoHighlight} »`} variant="featured" />
+          </RevealOnScroll>
+        </EditorialSectionImmersive>
+
+        <section className="mt-12 space-y-8 sm:space-y-6">
+          <h3 className="text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
             <span className="inline-flex items-start gap-2 text-left">
-              <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <HelpCircle className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
               <span>{x.hypnoCasesTitle}</span>
             </span>
           </h3>
           <IconList items={x.hypnoCases} />
 
-          <h3 className="pt-4 text-center font-display text-xl font-semibold text-[var(--color-ink)]">
+          <h3 className="pt-4 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
             <span className="inline-flex items-start gap-2 text-left">
-              <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
               <span>{x.hypnoHowTitle}</span>
             </span>
           </h3>
@@ -185,7 +217,7 @@ export function CabinetPage() {
             </p>
           ))}
 
-          <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-beige)]">
+          <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)]">
             <img
               src={media.programmeLuxoHypnoHeader}
               alt="Luxothérapeute et hypnothérapeute — accompagnement"
@@ -196,9 +228,9 @@ export function CabinetPage() {
             />
           </figure>
 
-          <h3 className="text-center font-display text-xl font-semibold text-[var(--color-ink)]">
+          <h3 className="text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
             <span className="inline-flex items-start gap-2 text-left">
-              <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
               <span>{x.hypnoComplement2Title}</span>
             </span>
           </h3>
@@ -208,55 +240,71 @@ export function CabinetPage() {
             </p>
           ))}
 
-          <h3 className="text-center font-display text-xl font-semibold text-[var(--color-ink)]">
+          <h3 className="text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
             <span className="inline-flex items-start gap-2 text-left">
-              <Heart className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-brand)]" aria-hidden />
+              <Heart className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
               <span>{x.hypnoAdaptTitle}</span>
             </span>
           </h3>
           <p className="leading-relaxed text-[var(--color-body)]/95">{x.hypnoAdapt}</p>
         </section>
 
-        <div className="mt-20 border-t border-[var(--color-brand)]/10 pt-16">
-          <h2 className="text-center font-display text-xl font-semibold text-[var(--color-ink)]">
-            <span className="inline-flex items-center gap-2">
-              <Images className="h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              Illustrations explicatives
-            </span>
-          </h2>
-          <p className="mt-2 text-center text-sm text-[var(--color-body)]/85">Feuilleter les schémas pas à pas.</p>
+        <SectionDivider />
+
+        <div className="mt-8 sm:mt-12">
+          <RevealOnScroll variant="fade-up">
+            <h2 className="text-center font-display text-4xl font-semibold leading-tight text-[var(--color-ink)] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
+              <span className="inline-flex items-center gap-3">
+                <Images className="h-8 w-8 shrink-0 text-[var(--color-brand)] sm:h-9 sm:w-9" aria-hidden />
+                Illustrations explicatives
+              </span>
+            </h2>
+            <p className="mt-2 text-center text-sm text-[var(--color-body)]/85">Feuilleter les schémas pas à pas.</p>
+          </RevealOnScroll>
           <ImageCarousel className="mt-8" images={luxopunctureExplanationImages} />
         </div>
-      </div>
-
-      <div className="mt-14 flex flex-wrap justify-center gap-4 border-t border-[var(--color-brand)]/10 pt-12">
-        <Link
-          to="/programme"
-          className="inline-flex items-center gap-2 rounded-full bg-[var(--color-cta)] px-6 py-3 text-sm font-bold text-[var(--color-on-cta)] shadow-sm transition hover:bg-[var(--color-cta-hover)] hover:text-white"
-        >
-          À distance
-          <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-        </Link>
-        <Link
-          to="/contact"
-          className="inline-flex rounded-full bg-[var(--color-cta)] px-8 py-3.5 text-sm font-bold text-[var(--color-on-cta)] shadow-sm transition hover:bg-[var(--color-cta-hover)] hover:text-white"
-        >
-          Me contacter / prendre rendez-vous
-        </Link>
-      </div>
-
-      <section className="mt-20 border-t border-[var(--color-brand)]/10 pt-16">
-        <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)]">Quelques avis</h2>
-        <div className="mt-8">
-          <WrittenReviewsMarquee outerSurface="beige" />
         </div>
-        <Link
-          to="/temoignages"
-          className="mt-8 inline-flex text-sm font-semibold text-[var(--color-cta-hover)] underline-offset-4 hover:underline"
-        >
-          Voir tous les témoignages
-        </Link>
-      </section>
+        </div>
+      </SectionAtmosphere>
+
+      <SectionGradientSpacer />
+
+      <SectionAtmosphere variant="soft" placement="both">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="flex flex-wrap justify-center gap-4 py-12 sm:py-16">
+            <Link
+              to="/programme"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--color-cta)] px-6 py-3 text-sm font-bold text-[var(--color-on-cta)] shadow-sm transition hover:bg-[var(--color-cta-hover)] hover:text-white"
+            >
+              À distance
+              <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex rounded-full bg-[var(--color-cta)] px-8 py-3.5 text-sm font-bold text-[var(--color-on-cta)] shadow-sm transition hover:bg-[var(--color-cta-hover)] hover:text-white"
+            >
+              Me contacter / prendre rendez-vous
+            </Link>
+          </div>
+
+          <RevealOnScroll variant="fade-up">
+            <section className="pb-16 sm:pb-20">
+              <h2 className="font-display text-4xl font-semibold leading-tight text-[var(--color-ink)] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
+                Quelques avis
+              </h2>
+              <div className="mt-8">
+                <WrittenReviewsMarquee />
+              </div>
+              <Link
+                to="/temoignages"
+                className="mt-8 inline-flex text-sm font-semibold text-[var(--color-cta-hover)] underline-offset-4 hover:underline"
+              >
+                Voir tous les témoignages
+              </Link>
+            </section>
+          </RevealOnScroll>
+        </div>
+      </SectionAtmosphere>
     </div>
   )
 }

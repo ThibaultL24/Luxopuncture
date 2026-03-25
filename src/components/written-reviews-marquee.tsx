@@ -1,31 +1,23 @@
 // src/components/written-reviews-marquee.tsx
-import { avisSiteFilenames, avisSiteImageSrc } from '../data/avis-site'
+import { useSiteData } from '../contexts/admin-context'
+import { resolveReviewCaptureSlides } from '../lib/review-captures'
 
-interface WrittenReviewsMarqueeProps {
-  /** Bandeau extérieur : page (blanc cassé) ou beige — choisir l’inverse du fond de section pour le contraste. */
-  outerSurface?: 'page' | 'beige'
-}
-
-export function WrittenReviewsMarquee({ outerSurface = 'page' }: WrittenReviewsMarqueeProps) {
-  const strip = [...avisSiteFilenames, ...avisSiteFilenames]
-  const outerBg =
-    outerSurface === 'beige' ? 'bg-[var(--color-beige)]' : 'bg-[var(--color-page)]'
-  const innerBg =
-    outerSurface === 'beige' ? 'bg-[var(--color-page)]' : 'bg-[var(--color-beige)]'
+export function WrittenReviewsMarquee() {
+  const state = useSiteData()
+  const slides = resolveReviewCaptureSlides(state)
+  const strip = [...slides, ...slides]
 
   return (
-    <div
-      className={`overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 py-6 shadow-sm ${outerBg}`}
-    >
+    <div className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-transparent py-6 shadow-sm">
       <div className="reviews-marquee-track flex gap-8 px-4 md:gap-12">
-        {strip.map((filename, i) => (
+        {strip.map((slide, i) => (
           <figure
-            key={`${filename}-${i}`}
-            className={`w-[min(100%,15rem)] shrink-0 overflow-hidden rounded-xl border border-[var(--color-brand)]/10 shadow-sm sm:w-[17rem] ${innerBg}`}
+            key={`${slide.src}-${i}`}
+            className="w-[min(100%,15rem)] shrink-0 overflow-hidden rounded-xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm sm:w-[17rem]"
           >
             <img
-              src={avisSiteImageSrc(filename)}
-              alt={`Avis client ${i + 1}`}
+              src={slide.src}
+              alt={slide.alt || `Avis client ${i + 1}`}
               loading="lazy"
               decoding="async"
               className="h-auto w-full object-contain"

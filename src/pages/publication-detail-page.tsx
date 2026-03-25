@@ -2,6 +2,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { useSiteData } from '../contexts/admin-context'
 import { formatPublicationDate, getPublicationBySlug } from '../data/publications'
+import { RevealOnScroll, SectionAtmosphere, SectionDivider } from '../components/editorial'
 import { usePageTitle } from '../hooks/use-page-title'
 
 export function PublicationDetailPage() {
@@ -23,51 +24,69 @@ export function PublicationDetailPage() {
   }
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">Publication</p>
-      <time
-        dateTime={pub.date}
-        className="mt-3 block text-sm font-medium text-[var(--color-body)]/80"
-      >
-        {formatPublicationDate(pub.date)}
-      </time>
-      <h1 className="mt-4 font-display text-3xl font-semibold text-[var(--color-ink)] sm:text-4xl">{pub.title}</h1>
-      <p className="mt-6 text-lg leading-relaxed text-[var(--color-body)]/95">{pub.excerpt}</p>
+    <article className="bg-transparent">
+      <SectionAtmosphere variant="soft" placement="both">
+        <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
+          <RevealOnScroll variant="fade-up">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">Publication</p>
+            <time
+              dateTime={pub.date}
+              className="mt-3 block text-sm font-medium text-[var(--color-body)]/80"
+            >
+              {formatPublicationDate(pub.date)}
+            </time>
+            <h1 className="mt-4 font-display text-3xl font-semibold text-[var(--color-ink)] sm:text-4xl">{pub.title}</h1>
+            <p className="mt-6 text-lg leading-relaxed text-[var(--color-body)]/95">{pub.excerpt}</p>
+          </RevealOnScroll>
 
-      {pub.coverImage ? (
-        <div className="mt-10 overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-beige)] shadow-sm">
-          <img
-            src={pub.coverImage}
-            alt=""
-            className="h-auto w-full object-contain object-center"
-            width={1200}
-            height={800}
-            loading="eager"
-            decoding="async"
-          />
+          {pub.coverImage ? (
+            <RevealOnScroll variant="scale">
+              <div className="mt-10 overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm">
+                <img
+                  src={pub.coverImage}
+                  alt=""
+                  className="h-auto w-full object-contain object-center"
+                  width={1200}
+                  height={800}
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+            </RevealOnScroll>
+          ) : null}
+
+          <div className="mt-10 space-y-6 text-base leading-relaxed text-[var(--color-body)]/95">
+            {pub.body.map((para, i) => (
+              <RevealOnScroll key={i} variant={i % 2 === 0 ? 'fade-up' : 'fade'}>
+                <p>{para}</p>
+              </RevealOnScroll>
+            ))}
+          </div>
         </div>
-      ) : null}
+      </SectionAtmosphere>
 
-      <div className="mt-10 space-y-6 text-base leading-relaxed text-[var(--color-body)]/95">
-        {pub.body.map((para, i) => (
-          <p key={i}>{para}</p>
-        ))}
-      </div>
+      <SectionDivider />
 
-      <div className="mt-14 flex flex-wrap gap-4">
-        <Link
-          to="/contact"
-          className="inline-flex rounded-full bg-[var(--color-cta)] px-6 py-3 text-sm font-bold text-[var(--color-on-cta)] shadow-sm transition hover:bg-[var(--color-cta-hover)] hover:text-white"
-        >
-          Prendre rendez-vous
-        </Link>
-        <Link
-          to="/publications"
-          className="inline-flex rounded-full border border-[var(--color-brand)]/30 px-6 py-3 text-sm font-semibold text-[var(--color-ink)]"
-        >
-          Autres publications
-        </Link>
-      </div>
+      <SectionAtmosphere variant="medium" placement="diagonal">
+        <div className="mx-auto max-w-3xl px-4 pb-16 sm:px-6 lg:pb-24">
+          <RevealOnScroll variant="fade-up">
+            <div className="flex flex-wrap gap-4">
+              <Link
+                to="/contact"
+                className="inline-flex rounded-full bg-[var(--color-cta)] px-6 py-3 text-sm font-bold text-[var(--color-on-cta)] shadow-sm transition hover:bg-[var(--color-cta-hover)] hover:text-white"
+              >
+                Prendre rendez-vous
+              </Link>
+              <Link
+                to="/publications"
+                className="inline-flex rounded-full border border-[var(--color-brand)]/30 px-6 py-3 text-sm font-semibold text-[var(--color-ink)]"
+              >
+                Autres publications
+              </Link>
+            </div>
+          </RevealOnScroll>
+        </div>
+      </SectionAtmosphere>
     </article>
   )
 }

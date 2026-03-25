@@ -40,7 +40,7 @@ export function ImageCarousel({ images, className = '' }: ImageCarouselProps) {
   return (
     <div className={className}>
       <div
-        className="relative overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-beige)] shadow-sm"
+        className="relative overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm"
         role="region"
         aria-roledescription="carrousel"
         aria-label="Galerie d’images"

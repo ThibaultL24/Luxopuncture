@@ -1,0 +1,11 @@
+// src/components/editorial/index.ts
+export { BreathingMedia } from './breathing-media'
+export { EditorialInsight } from './editorial-insight'
+export { EditorialQuote } from './editorial-quote'
+export { EditorialSectionImmersive } from './editorial-section-immersive'
+export type { RevealVariant } from './reveal-on-scroll'
+export { RevealOnScroll } from './reveal-on-scroll'
+export type { AtmospherePlacement, AtmosphereVariant } from './section-atmosphere'
+export { SectionAtmosphere } from './section-atmosphere'
+export { SectionDivider } from './section-divider'
+export { SectionGradientSpacer } from './section-gradient-spacer'

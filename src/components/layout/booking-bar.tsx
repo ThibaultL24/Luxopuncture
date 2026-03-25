@@ -1,5 +1,6 @@
 // src/components/layout/booking-bar.tsx
 import { Link } from 'react-router-dom'
+import { trackClick } from '../../lib/analytics'
 
 export function BookingBar() {
   return (
@@ -7,6 +8,7 @@ export function BookingBar() {
       <div className="pointer-events-auto w-[min(92vw,28rem)] rounded-full border border-[var(--color-on-cta)]/25 bg-[var(--color-cta)] px-4 py-3 text-center shadow-[var(--shadow-soft)]">
         <Link
           to="/contact"
+          onClick={() => trackClick('cta_booking_bar_mobile')}
           className="block text-sm font-bold text-[var(--color-on-cta)]"
         >
           Bilan offert — contact

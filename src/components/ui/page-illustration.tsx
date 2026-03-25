@@ -8,7 +8,7 @@ interface PageIllustrationProps {
 
 export function PageIllustration({ src, alt, priority = false }: PageIllustrationProps) {
   return (
-    <figure className="mb-10 overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-beige)] shadow-sm">
+    <figure className="mb-10 overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm">
       <div className="aspect-[2/1] max-h-56 w-full sm:aspect-[2.2/1] sm:max-h-72">
         <img
           src={src}

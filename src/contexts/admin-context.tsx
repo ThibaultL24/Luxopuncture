@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from 'react'
 import { getDefaultAdminState } from '../lib/admin-defaults'
+import { mergeAdminState, mergeImportedAdminState } from '../lib/admin-merge'
 import { ADMIN_SESSION_KEY, ADMIN_STORAGE_KEY, type AdminState } from '../lib/admin-types'
 
 /** Valeurs par défaut (surchargeables via VITE_ADMIN_IDENTIFIER / VITE_ADMIN_PASSWORD) */
@@ -27,19 +28,6 @@ export interface AdminContextValue {
 }
 
 const AdminContext = createContext<AdminContextValue | null>(null)
-
-function mergeAdminState(defaults: AdminState, p: Partial<AdminState>): AdminState {
-  return {
-    publications: p.publications ?? defaults.publications,
-    testimonials: p.testimonials ?? defaults.testimonials,
-    services: p.services ?? defaults.services,
-    pricingRows: p.pricingRows ?? defaults.pricingRows,
-    heroCopy: { ...defaults.heroCopy, ...p.heroCopy },
-    contactInfo: { ...defaults.contactInfo, ...p.contactInfo },
-    site: { ...defaults.site, ...p.site },
-    testimonialVideoFiles: p.testimonialVideoFiles ?? defaults.testimonialVideoFiles,
-  }
-}
 
 function loadStoredState(): AdminState {
   const defaults = getDefaultAdminState()
@@ -95,23 +83,8 @@ export function AdminProvider({ children }: { children: ReactNode }) {
 
   const importState = useCallback((json: string) => {
     try {
-      const parsed = JSON.parse(json) as AdminState
-      const defaults = getDefaultAdminState()
-      const merged: AdminState = {
-        ...defaults,
-        ...parsed,
-        publications: Array.isArray(parsed.publications) ? parsed.publications : defaults.publications,
-        testimonials: Array.isArray(parsed.testimonials) ? parsed.testimonials : defaults.testimonials,
-        services: Array.isArray(parsed.services) ? parsed.services : defaults.services,
-        pricingRows: Array.isArray(parsed.pricingRows) ? parsed.pricingRows : defaults.pricingRows,
-        heroCopy: { ...defaults.heroCopy, ...parsed.heroCopy },
-        contactInfo: { ...defaults.contactInfo, ...parsed.contactInfo },
-        site: { ...defaults.site, ...parsed.site },
-        testimonialVideoFiles: Array.isArray(parsed.testimonialVideoFiles)
-          ? parsed.testimonialVideoFiles
-          : defaults.testimonialVideoFiles,
-      }
-      setStateInternal(merged)
+      const parsed = JSON.parse(json) as Partial<AdminState>
+      setStateInternal(mergeImportedAdminState(parsed))
       return { ok: true as const }
     } catch (e) {
       return { ok: false as const, error: e instanceof Error ? e.message : 'JSON invalide' }

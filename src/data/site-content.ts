@@ -216,7 +216,7 @@ export const pricingRows = [
   {
     label: 'À distance',
     price: '190 €',
-    note: 'Bilan initial en visio, 3 séances de suivi, accompagnement tout au long du programme, conseils et contenus personnalisés',
+    note: 'Bilan initial offert, 3 séances de suivi, accompagnement tout au long du programme, conseils et contenus personnalisés',
   },
   {
     label: 'Séance de suivi à distance',
@@ -235,7 +235,7 @@ export const tarifsPageSpec = {
     label: 'À distance',
     price: '190 €',
     includes: [
-      'un bilan initial en visio',
+      'un bilan initial offert',
       '3 séances de suivi',
       'un accompagnement tout au long du programme',
       'des conseils et contenus personnalisés',
@@ -392,6 +392,13 @@ export const detoxProgramCopy = {
   introLead: 'Vous avez l’impression de faire attention… mais votre corps ne suit plus ?',
   introSymptoms: 'Ballonnements, fatigue, envies de sucre…',
   introQuestion: 'Et si votre corps avait simplement besoin d’être rééquilibré ?',
+  /** Bloc citation — rythme éditorial (page programme) */
+  editorialQuote:
+    '« Votre corps n’a pas besoin de plus de contraintes — il a besoin d’être réécouté. »',
+  editorialInsight: {
+    title: 'À retenir',
+    body: 'Le programme est progressif : chaque étape s’adapte à votre rythme réel, sans rigidité ni culpabilisation.',
+  },
   distanceSection: {
     title: 'Un accompagnement à distance, simple et personnalisé',
     p1: 'Ce programme de détox à distance vous accompagne sur 3 semaines pour aider votre corps à retrouver un équilibre, en douceur et sans frustration.',

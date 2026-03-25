@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react'
 import plumeSrc from '../assets/plume_curseur.png'
 
 const FEATHER_ATTR = 'data-feather-cursor'
-const DISPLAY_HEIGHT_PX = 48
-/** Pointe de la plume ≈ hotspot */
-const HOTSPOT_X = -14
-const HOTSPOT_Y = -48
+const DISPLAY_HEIGHT_PX = 56
+/** Pointe de la plume ≈ hotspot (ajusté si DISPLAY_HEIGHT_PX change) */
+const HOTSPOT_X = -16
+const HOTSPOT_Y = -56
 const LERP_SMOOTH = 0.14
 const LERP_SNAP = 1
 /** Inclinaison de base vers la droite (positif = sens horaire) */
@@ -15,13 +15,17 @@ const LEAN_RIGHT_DEG = 78
 const TRAIL_SLOTS = 20
 const SAMPLE_CAP = 36
 
-/** Lisibilité sur fond clair : contour foncé + léger halo clair */
-const MAIN_FILTER =
-  'drop-shadow(0 0 1px rgb(15 37 35 / 0.55)) drop-shadow(0 0 3px rgb(15 37 35 / 0.28)) drop-shadow(0 2px 10px rgb(15 37 35 / 0.2)) drop-shadow(0 -0.5px 0 rgb(255 255 255 / 0.65))'
+/**
+ * Peu d’éclat (traits lisibles) ; rouge-rose renforcé via hue + saturation ciblée.
+ */
+const FEATHER_TINT =
+  'sepia(0.35) saturate(1.48) hue-rotate(314deg) brightness(0.88) contrast(1.16)'
+
+const MAIN_FILTER = `${FEATHER_TINT} drop-shadow(0 0 0.5px rgb(48 12 32 / 0.75)) drop-shadow(0 0 1px rgb(95 42 68 / 0.42))`
 
 function trailFilter(strength: number) {
   const a = 0.35 * strength
-  return `drop-shadow(0 0 1.5px rgb(15 37 35 / ${0.2 + a})) drop-shadow(0 1px 4px rgb(15 37 35 / ${0.12 + a * 0.5}))`
+  return `${FEATHER_TINT} drop-shadow(0 0 0.5px rgb(58 20 42 / ${0.32 + a * 0.3}))`
 }
 
 export function FeatherCursor() {
@@ -159,9 +163,9 @@ export function FeatherCursor() {
           alt=""
           aria-hidden
           draggable={false}
-          width={48}
+          width={52}
           height={DISPLAY_HEIGHT_PX}
-          className="pointer-events-none fixed left-0 top-0 z-[10049] h-[36px] w-auto select-none will-change-transform [backface-visibility:hidden]"
+          className="pointer-events-none fixed left-0 top-0 z-[10049] h-[42px] w-auto select-none will-change-transform [backface-visibility:hidden]"
           style={{
             opacity: 0,
             transformOrigin: '50% 100%',
@@ -174,9 +178,9 @@ export function FeatherCursor() {
         alt=""
         aria-hidden
         draggable={false}
-        width={64}
+        width={72}
         height={DISPLAY_HEIGHT_PX}
-        className="pointer-events-none fixed left-0 top-0 z-[10050] h-[48px] w-auto select-none will-change-transform [backface-visibility:hidden]"
+        className="pointer-events-none fixed left-0 top-0 z-[10050] h-[56px] w-auto select-none will-change-transform [backface-visibility:hidden]"
         style={{
           opacity: 0,
           transformOrigin: '50% 100%',
