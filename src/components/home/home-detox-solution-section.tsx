@@ -1,7 +1,7 @@
 // src/components/home/home-detox-solution-section.tsx
 import { ArrowRight, CheckCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useSiteData } from '../../contexts/admin-context'
+import { useSiteData } from '../../hooks/use-admin'
 import { RevealOnScroll, SectionAtmosphere } from '../editorial'
 
 export function HomeDetoxSolutionSection() {

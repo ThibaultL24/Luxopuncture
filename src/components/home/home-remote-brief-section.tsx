@@ -1,7 +1,7 @@
 // src/components/home/home-remote-brief-section.tsx
 import { ArrowRight, CheckCircle, Laptop } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useSiteData } from '../../contexts/admin-context'
+import { useSiteData } from '../../hooks/use-admin'
 import { RevealOnScroll, SectionAtmosphere } from '../editorial'
 
 export function HomeRemoteBriefSection() {

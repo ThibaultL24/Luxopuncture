@@ -50,6 +50,8 @@
   --color-logo-feather: #e86888;
   --color-logo-feather-mid: #d45078;
   --color-logo-feather-deep: #a83858;
+  /** Filtre appliqué au PNG du logo (navbar / footer) pour atténuer le rose de la plume */
+  --logo-png-filter: saturate(0.62) brightness(1.045);
 
   --color-ink: #0f2523;
   --color-body: #3d4a48;
@@ -67,10 +69,18 @@
   --spacing-section: 5rem;
 }
 
+/** OpenDyslexic — préférence utilisateur (voir OpenDyslexicToggle, localStorage) */
+html[data-dyslexic-font='true'] {
+  --font-sans: 'OpenDyslexic', 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'OpenDyslexic', 'Cormorant Garamond', ui-serif, Georgia, serif;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
     background-color: #ffffff;
+    /** +5 % sur la référence navigateur — tout le texte en rem suit légèrement. */
+    font-size: 105%;
   }
 
   /**
@@ -112,6 +122,11 @@
 }
 
 @layer components {
+  /** PNG logo — adoucit le rose de la plume (voir --logo-png-filter) */
+  .logo-laplace {
+    filter: var(--logo-png-filter);
+  }
+
   /** Champs formulaire — espace admin (contraste doux sur fonds teintés) */
   .admin-input {
     @apply mt-1 w-full rounded-xl border border-[var(--color-brand)]/18 bg-white px-3 py-2 text-sm text-[var(--color-ink)] shadow-[inset_0_1px_2px_rgb(0_0_0_/0.035)];

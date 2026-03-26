@@ -212,22 +212,6 @@ export const services: Service[] = [
   },
 ]
 
-export const pricingRows = [
-  {
-    label: 'À distance',
-    price: '190 €',
-    note: 'Bilan initial offert, 3 séances de suivi, accompagnement tout au long du programme, conseils et contenus personnalisés',
-  },
-  {
-    label: 'Séance de suivi à distance',
-    price: '45 €',
-    note: 'Réservée aux personnes ayant déjà réalisé le programme détox ou dans un accompagnement en cours — prolonge et consolide les résultats',
-  },
-  { label: 'Luxopuncture (cabinet)', price: '55 €', note: 'La séance — souvent en programme selon l’objectif' },
-  { label: 'Hypnose (cabinet)', price: '70 €', note: 'La séance' },
-  { label: 'Luxopuncture + hypnose', price: '80 €', note: 'La séance — approche complémentaire corps et profondeur' },
-] as const
-
 /** Page Tarifs — structure détaillée (spec Camille). */
 export const tarifsPageSpec = {
   distanceTitle: 'Programme à distance',
@@ -347,10 +331,10 @@ export const homeCopy = {
     cta: 'En savoir plus',
   },
   testimonials: {
-    eyebrow: 'Témoignages',
-    title: 'Avis écrits',
+    eyebrow: '',
+    title: 'Témoignages',
     intro:
-      'Avis écrits et vidéo de présentation — la page dédiée regroupe les retours et les vidéos.',
+      'Vidéo de présentation et bandeau d’avis en images — la page Témoignages rassemble aussi l’ensemble des retours.',
   },
 } as const
 

@@ -165,7 +165,7 @@ export function FeatherCursor() {
           draggable={false}
           width={52}
           height={DISPLAY_HEIGHT_PX}
-          className="pointer-events-none fixed left-0 top-0 z-[10049] h-[42px] w-auto select-none will-change-transform [backface-visibility:hidden]"
+          className="pointer-events-none fixed left-0 top-0 z-[10070] h-[42px] w-auto select-none will-change-transform [backface-visibility:hidden]"
           style={{
             opacity: 0,
             transformOrigin: '50% 100%',
@@ -180,7 +180,7 @@ export function FeatherCursor() {
         draggable={false}
         width={72}
         height={DISPLAY_HEIGHT_PX}
-        className="pointer-events-none fixed left-0 top-0 z-[10050] h-[56px] w-auto select-none will-change-transform [backface-visibility:hidden]"
+        className="pointer-events-none fixed left-0 top-0 z-[10071] h-[56px] w-auto select-none will-change-transform [backface-visibility:hidden]"
         style={{
           opacity: 0,
           transformOrigin: '50% 100%',

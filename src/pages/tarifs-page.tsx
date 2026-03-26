@@ -1,7 +1,7 @@
 // src/pages/tarifs-page.tsx
 import { CheckCircle, Euro, Leaf } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useSiteData } from '../contexts/admin-context'
+import { useSiteData } from '../hooks/use-admin'
 import { pageIllustrations } from '../data/site-content'
 import {
   RevealOnScroll,

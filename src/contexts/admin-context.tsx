@@ -1,13 +1,6 @@
 // src/contexts/admin-context.tsx
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from 'react'
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { AdminContext } from './admin-context-value'
 import { getDefaultAdminState } from '../lib/admin-defaults'
 import { mergeAdminState, mergeImportedAdminState } from '../lib/admin-merge'
 import { ADMIN_SESSION_KEY, ADMIN_STORAGE_KEY, type AdminState } from '../lib/admin-types'
@@ -16,18 +9,7 @@ import { ADMIN_SESSION_KEY, ADMIN_STORAGE_KEY, type AdminState } from '../lib/ad
 const DEFAULT_ADMIN_IDENTIFIER = 'camille123'
 const DEFAULT_ADMIN_PASSWORD = 'camille123'
 
-export interface AdminContextValue {
-  state: AdminState
-  setState: (next: AdminState | ((prev: AdminState) => AdminState)) => void
-  isAuthenticated: boolean
-  login: (identifier: string, password: string) => boolean
-  logout: () => void
-  resetToDefaults: () => void
-  importState: (json: string) => { ok: boolean; error?: string }
-  exportStateJson: () => string
-}
-
-const AdminContext = createContext<AdminContextValue | null>(null)
+export type { AdminContextValue } from './admin-context-value'
 
 function loadStoredState(): AdminState {
   const defaults = getDefaultAdminState()
@@ -106,15 +88,4 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   )
 
   return <AdminContext.Provider value={value}>{children}</AdminContext.Provider>
-}
-
-export function useAdmin(): AdminContextValue {
-  const ctx = useContext(AdminContext)
-  if (!ctx) throw new Error('AdminProvider manquant')
-  return ctx
-}
-
-/** Données site (public) — toujours via le provider */
-export function useSiteData(): AdminState {
-  return useAdmin().state
 }

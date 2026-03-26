@@ -1,5 +1,5 @@
 // src/pages/temoignages-page.tsx
-import { useSiteData } from '../contexts/admin-context'
+import { useSiteData } from '../hooks/use-admin'
 import { WrittenReviewsMarquee } from '../components/written-reviews-marquee'
 import { testimonialVideoSrc } from '../data/media'
 import { RevealOnScroll, SectionAtmosphere, SectionDivider } from '../components/editorial'

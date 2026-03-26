@@ -8,6 +8,8 @@ interface RevealOnScrollProps {
   children: ReactNode
   className?: string
   variant?: RevealVariant
+  /** Empêche de repasser en état caché au scroll (ex. hero en haut de page). */
+  keepVisible?: boolean
 }
 
 const variantClass: Record<RevealVariant, string> = {
@@ -18,8 +20,13 @@ const variantClass: Record<RevealVariant, string> = {
   scale: 'reveal reveal--scale',
 }
 
-export function RevealOnScroll({ children, className = '', variant = 'fade-up' }: RevealOnScrollProps) {
-  const { ref, isVisible } = useReveal()
+export function RevealOnScroll({
+  children,
+  className = '',
+  variant = 'fade-up',
+  keepVisible = false,
+}: RevealOnScrollProps) {
+  const { ref, isVisible } = useReveal({ keepVisible })
 
   return (
     <div

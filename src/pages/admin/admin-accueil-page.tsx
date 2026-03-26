@@ -1,32 +1,9 @@
 // src/pages/admin/admin-accueil-page.tsx
-import { useAdmin } from '../../contexts/admin-context'
+import { AdminField } from '../../components/admin/admin-field'
 import { StringListEditor } from '../../components/admin/string-list-editor'
 import { AdminPageHeader } from '../../components/admin/admin-page-header'
 import { AdminSection } from '../../components/admin/admin-section'
-
-function Field({
-  label,
-  value,
-  onChange,
-  multiline,
-}: {
-  label: string
-  value: string
-  onChange: (v: string) => void
-  multiline?: boolean
-}) {
-  const cls = 'admin-input'
-  return (
-    <label className="block text-sm font-medium text-[var(--color-ink)]">
-      {label}
-      {multiline ? (
-        <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={4} className={cls} />
-      ) : (
-        <input value={value} onChange={(e) => onChange(e.target.value)} className={cls} />
-      )}
-    </label>
-  )
-}
+import { useAdmin } from '../../hooks/use-admin'
 
 export function AdminAccueilPage() {
   const { state, setState } = useAdmin()
@@ -41,28 +18,28 @@ export function AdminAccueilPage() {
 
       <AdminSection variant="brand" title="Bandeau principal (photo + titre)" subtitle="En-tête hero en haut de la page.">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field
+          <AdminField
             label="Petit texte au-dessus du titre"
             value={heroCopy.eyebrow}
             onChange={(v) => setState((s) => ({ ...s, heroCopy: { ...s.heroCopy, eyebrow: v } }))}
           />
-          <Field
+          <AdminField
             label="Titre principal"
             value={heroCopy.title}
             onChange={(v) => setState((s) => ({ ...s, heroCopy: { ...s.heroCopy, title: v } }))}
           />
-          <Field
+          <AdminField
             label="Sous-titre (plusieurs lignes possibles)"
             value={heroCopy.subtitle}
             onChange={(v) => setState((s) => ({ ...s, heroCopy: { ...s.heroCopy, subtitle: v } }))}
             multiline
           />
-          <Field
+          <AdminField
             label="Texte du bouton vert (contact)"
             value={heroCopy.ctaPrimary}
             onChange={(v) => setState((s) => ({ ...s, heroCopy: { ...s.heroCopy, ctaPrimary: v } }))}
           />
-          <Field
+          <AdminField
             label="Texte du bouton secondaire (programme)"
             value={heroCopy.ctaSecondary}
             onChange={(v) => setState((s) => ({ ...s, heroCopy: { ...s.heroCopy, ctaSecondary: v } }))}
@@ -72,28 +49,28 @@ export function AdminAccueilPage() {
 
       <AdminSection variant="slate" title="Bloc « accroche »" subtitle="Juste sous le bandeau principal.">
         <div className="grid gap-4">
-          <Field
+          <AdminField
             label="Phrase d’accroche"
             value={homeCopy.hook.lead}
             onChange={(v) =>
               setState((s) => ({ ...s, homeCopy: { ...s.homeCopy, hook: { ...s.homeCopy.hook, lead: v } } }))
             }
           />
-          <Field
+          <AdminField
             label="Question mise en avant"
             value={homeCopy.hook.question}
             onChange={(v) =>
               setState((s) => ({ ...s, homeCopy: { ...s.homeCopy, hook: { ...s.homeCopy.hook, question: v } } }))
             }
           />
-          <Field
+          <AdminField
             label="Symptômes / exemples"
             value={homeCopy.hook.symptoms}
             onChange={(v) =>
               setState((s) => ({ ...s, homeCopy: { ...s.homeCopy, hook: { ...s.homeCopy.hook, symptoms: v } } }))
             }
           />
-          <Field
+          <AdminField
             label="Phrase de transition"
             value={homeCopy.hook.closing}
             onChange={(v) =>
@@ -106,7 +83,7 @@ export function AdminAccueilPage() {
 
       <AdminSection variant="mint" title="Bloc « détox »" subtitle="Solution détox / programme.">
         <div className="grid gap-4">
-          <Field
+          <AdminField
             label="Phrase d’intro"
             value={homeCopy.detoxSolution.intro}
             onChange={(v) =>
@@ -119,7 +96,7 @@ export function AdminAccueilPage() {
               }))
             }
           />
-          <Field
+          <AdminField
             label="Sous-titre (ex. « Un programme simple pour : »)"
             value={homeCopy.detoxSolution.subtitle}
             onChange={(v) =>
@@ -150,7 +127,7 @@ export function AdminAccueilPage() {
 
       <AdminSection variant="sand" title="Bloc « à distance (21 jours) »" subtitle="Résumé du programme à distance.">
         <div className="grid gap-4">
-          <Field
+          <AdminField
             label="Titre"
             value={homeCopy.remoteBrief.title}
             onChange={(v) =>
@@ -163,7 +140,7 @@ export function AdminAccueilPage() {
               }))
             }
           />
-          <Field
+          <AdminField
             label="Libellé au-dessus de la liste (ex. « Avec : »)"
             value={homeCopy.remoteBrief.withLabel}
             onChange={(v) =>
@@ -189,7 +166,7 @@ export function AdminAccueilPage() {
               }))
             }
           />
-          <Field
+          <AdminField
             label="Note en bas"
             value={homeCopy.remoteBrief.footnote}
             onChange={(v) =>
@@ -208,7 +185,7 @@ export function AdminAccueilPage() {
 
       <AdminSection variant="brand" title="Bloc « cabinet » (aperçu)" subtitle="Teaser vers le cabinet.">
         <div className="grid gap-4">
-          <Field
+          <AdminField
             label="Titre"
             value={homeCopy.cabinetTeaser.title}
             onChange={(v) =>
@@ -234,7 +211,7 @@ export function AdminAccueilPage() {
               }))
             }
           />
-          <Field
+          <AdminField
             label="Texte du bouton"
             value={homeCopy.cabinetTeaser.cta}
             onChange={(v) =>
@@ -252,7 +229,7 @@ export function AdminAccueilPage() {
 
       <AdminSection variant="rose" title="Bloc « témoignages » (accueil)" subtitle="Titres au-dessus du bandeau d’avis.">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field
+          <AdminField
             label="Petit titre au-dessus"
             value={homeCopy.testimonials.eyebrow}
             onChange={(v) =>
@@ -265,7 +242,7 @@ export function AdminAccueilPage() {
               }))
             }
           />
-          <Field
+          <AdminField
             label="Titre"
             value={homeCopy.testimonials.title}
             onChange={(v) =>
@@ -279,7 +256,7 @@ export function AdminAccueilPage() {
             }
           />
           <div className="sm:col-span-2">
-            <Field
+            <AdminField
               label="Texte d’introduction"
               value={homeCopy.testimonials.intro}
               onChange={(v) =>
@@ -299,13 +276,13 @@ export function AdminAccueilPage() {
 
       <AdminSection variant="mint" title="Bandeau vert en bas de page" subtitle="Call-to-action final avant le pied de page.">
         <div className="grid gap-4">
-          <Field
+          <AdminField
             label="Texte"
             value={bookingCta.text}
             onChange={(v) => setState((s) => ({ ...s, bookingCta: { ...s.bookingCta, text: v } }))}
             multiline
           />
-          <Field
+          <AdminField
             label="Texte du bouton"
             value={bookingCta.button}
             onChange={(v) => setState((s) => ({ ...s, bookingCta: { ...s.bookingCta, button: v } }))}

@@ -1,31 +1,8 @@
 // src/pages/admin/admin-coordonnees-page.tsx
-import { useAdmin } from '../../contexts/admin-context'
+import { AdminField } from '../../components/admin/admin-field'
 import { AdminPageHeader } from '../../components/admin/admin-page-header'
 import { AdminSection } from '../../components/admin/admin-section'
-
-function Field({
-  label,
-  value,
-  onChange,
-  multiline,
-}: {
-  label: string
-  value: string
-  onChange: (v: string) => void
-  multiline?: boolean
-}) {
-  const cls = 'admin-input'
-  return (
-    <label className="block text-sm font-medium text-[var(--color-ink)]">
-      {label}
-      {multiline ? (
-        <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={3} className={cls} />
-      ) : (
-        <input value={value} onChange={(e) => onChange(e.target.value)} className={cls} />
-      )}
-    </label>
-  )
-}
+import { useAdmin } from '../../hooks/use-admin'
 
 export function AdminCoordonneesPage() {
   const { state, setState } = useAdmin()
@@ -40,30 +17,32 @@ export function AdminCoordonneesPage() {
 
       <AdminSection variant="slate" title="Contact" subtitle="Téléphone, e-mail, adresse et disponibilités.">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field
+          <AdminField
             label="Téléphone"
             value={contactInfo.phone}
             onChange={(v) => setState((s) => ({ ...s, contactInfo: { ...s.contactInfo, phone: v } }))}
           />
-          <Field
+          <AdminField
             label="E-mail"
             value={contactInfo.email}
             onChange={(v) => setState((s) => ({ ...s, contactInfo: { ...s.contactInfo, email: v } }))}
           />
           <div className="sm:col-span-2">
-            <Field
+            <AdminField
               label="Adresse (résumé affiché dans le footer)"
               value={contactInfo.address}
               onChange={(v) => setState((s) => ({ ...s, contactInfo: { ...s.contactInfo, address: v } }))}
               multiline
+              rows={3}
             />
           </div>
           <div className="sm:col-span-2">
-            <Field
+            <AdminField
               label="Horaires / modalités de contact"
               value={contactInfo.hours}
               onChange={(v) => setState((s) => ({ ...s, contactInfo: { ...s.contactInfo, hours: v } }))}
               multiline
+              rows={3}
             />
           </div>
         </div>
@@ -71,18 +50,18 @@ export function AdminCoordonneesPage() {
 
       <AdminSection variant="sand" title="Nom du site (footer)" subtitle="Identité affichée en bas de page.">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field
+          <AdminField
             label="Nom affiché"
             value={site.name}
             onChange={(v) => setState((s) => ({ ...s, site: { ...s.site, name: v } }))}
           />
-          <Field
+          <AdminField
             label="Slogan (référence interne)"
             value={site.tagline}
             onChange={(v) => setState((s) => ({ ...s, site: { ...s.site, tagline: v } }))}
           />
           <div className="sm:col-span-2">
-            <Field
+            <AdminField
               label="Domaine (ligne sous le copyright)"
               value={site.domain}
               onChange={(v) => setState((s) => ({ ...s, site: { ...s.site, domain: v } }))}

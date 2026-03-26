@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Calendar, FileText, Mail, Phone } from 'lucide-react'
 import { media } from '../data/media'
 import { socialLinks } from '../data/site-content'
-import { useSiteData } from '../contexts/admin-context'
+import { useSiteData } from '../hooks/use-admin'
 import {
   RevealOnScroll,
   SectionAtmosphere,

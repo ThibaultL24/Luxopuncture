@@ -11,7 +11,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useSiteData } from '../contexts/admin-context'
+import { useSiteData } from '../hooks/use-admin'
 import { getCabinetProgramCardImage, luxopunctureExplanationImages, media } from '../data/media'
 import { cabinetLuxoHypnoCopy, cabinetServiceTeasers, getServiceBySlug } from '../data/site-content'
 import {

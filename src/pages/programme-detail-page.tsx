@@ -1,6 +1,6 @@
 // src/pages/programme-detail-page.tsx
 import { Link, useParams } from 'react-router-dom'
-import { useSiteData } from '../contexts/admin-context'
+import { useSiteData } from '../hooks/use-admin'
 import { getServiceBySlug } from '../data/site-content'
 import { RevealOnScroll, SectionAtmosphere, SectionDivider } from '../components/editorial'
 import { usePageTitle } from '../hooks/use-page-title'

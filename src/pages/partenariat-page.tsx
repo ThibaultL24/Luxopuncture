@@ -2,7 +2,7 @@
 import { RevealOnScroll, SectionAtmosphere } from '../components/editorial'
 import { SocialLinks } from '../components/social-links'
 import { SectionHeading } from '../components/ui/section-heading'
-import { useSiteData } from '../contexts/admin-context'
+import { useSiteData } from '../hooks/use-admin'
 import { usePageTitle } from '../hooks/use-page-title'
 
 export function PartenariatPage() {

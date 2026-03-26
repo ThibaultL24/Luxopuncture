@@ -1,7 +1,7 @@
 // src/pages/a-propos-page.tsx
 import { Link } from 'react-router-dom'
 import { aboutPagePhoto } from '../data/media'
-import { useSiteData } from '../contexts/admin-context'
+import { useSiteData } from '../hooks/use-admin'
 import { RevealOnScroll, SectionAtmosphere } from '../components/editorial'
 import { SocialLinks } from '../components/social-links'
 import { WrittenReviewsMarquee } from '../components/written-reviews-marquee'

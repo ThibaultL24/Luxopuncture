@@ -1,32 +1,9 @@
 // src/pages/admin/admin-tarifs-page.tsx
-import { useAdmin } from '../../contexts/admin-context'
+import { AdminField } from '../../components/admin/admin-field'
 import { StringListEditor } from '../../components/admin/string-list-editor'
 import { AdminPageHeader } from '../../components/admin/admin-page-header'
 import { AdminSection } from '../../components/admin/admin-section'
-
-function Field({
-  label,
-  value,
-  onChange,
-  multiline,
-}: {
-  label: string
-  value: string
-  onChange: (v: string) => void
-  multiline?: boolean
-}) {
-  const cls = 'admin-input'
-  return (
-    <label className="block text-sm font-medium text-[var(--color-ink)]">
-      {label}
-      {multiline ? (
-        <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={3} className={cls} />
-      ) : (
-        <input value={value} onChange={(e) => onChange(e.target.value)} className={cls} />
-      )}
-    </label>
-  )
-}
+import { useAdmin } from '../../hooks/use-admin'
 
 export function AdminTarifsPage() {
   const { state, setState } = useAdmin()
@@ -41,29 +18,30 @@ export function AdminTarifsPage() {
 
       <AdminSection variant="slate" title="En-tête de la page">
         <div className="space-y-4">
-          <Field
+          <AdminField
             label="Titre (onglet + haut de page)"
             value={t.pageTitle}
             onChange={(v) => setState((s) => ({ ...s, tarifsPage: { ...s.tarifsPage, pageTitle: v } }))}
           />
-          <Field
+          <AdminField
             label="Sous-titre"
             value={t.pageSubtitle}
             onChange={(v) => setState((s) => ({ ...s, tarifsPage: { ...s.tarifsPage, pageSubtitle: v } }))}
             multiline
+            rows={3}
           />
         </div>
       </AdminSection>
 
       <AdminSection variant="mint" title="Programme à distance" subtitle="Offre principale et suivi.">
         <div className="space-y-4">
-          <Field
+          <AdminField
             label="Titre affiché pour cette section"
             value={t.distanceTitle}
             onChange={(v) => setState((s) => ({ ...s, tarifsPage: { ...s.tarifsPage, distanceTitle: v } }))}
           />
           <div className="grid gap-4 border-t border-emerald-200/60 pt-4 sm:grid-cols-2">
-            <Field
+            <AdminField
               label="Bloc principal — libellé"
               value={t.detox.label}
               onChange={(v) =>
@@ -73,7 +51,7 @@ export function AdminTarifsPage() {
                 }))
               }
             />
-            <Field
+            <AdminField
               label="Bloc principal — prix"
               value={t.detox.price}
               onChange={(v) =>
@@ -97,7 +75,7 @@ export function AdminTarifsPage() {
           <div className="space-y-4 border-t border-emerald-200/60 pt-4">
             <p className="text-sm font-semibold text-[var(--color-ink)]">Séance de suivi à distance</p>
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field
+              <AdminField
                 label="Libellé"
                 value={t.suivi.label}
                 onChange={(v) =>
@@ -107,7 +85,7 @@ export function AdminTarifsPage() {
                   }))
                 }
               />
-              <Field
+              <AdminField
                 label="Prix"
                 value={t.suivi.price}
                 onChange={(v) =>
@@ -128,7 +106,7 @@ export function AdminTarifsPage() {
                 }))
               }
             />
-            <Field
+            <AdminField
               label="Phrase complémentaire sous le prix"
               value={t.suivi.note}
               onChange={(v) =>
@@ -138,6 +116,7 @@ export function AdminTarifsPage() {
                 }))
               }
               multiline
+              rows={3}
             />
           </div>
         </div>
@@ -145,7 +124,7 @@ export function AdminTarifsPage() {
 
       <AdminSection variant="brand" title="Séances au cabinet" subtitle="Tableau des prestations au cabinet.">
         <div className="space-y-4">
-          <Field
+          <AdminField
             label="Titre de la section"
             value={t.cabinetTitle}
             onChange={(v) => setState((s) => ({ ...s, tarifsPage: { ...s.tarifsPage, cabinetTitle: v } }))}
@@ -160,7 +139,7 @@ export function AdminTarifsPage() {
                 className="rounded-xl border border-[var(--color-brand)]/14 bg-white/90 p-4 shadow-[inset_0_1px_0_rgb(255_255_255_/0.9)]"
               >
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <Field
+                  <AdminField
                     label="Prestation"
                     value={row.label}
                     onChange={(v) =>
@@ -171,7 +150,7 @@ export function AdminTarifsPage() {
                       })
                     }
                   />
-                  <Field
+                  <AdminField
                     label="Prix"
                     value={row.price}
                     onChange={(v) =>
@@ -184,7 +163,7 @@ export function AdminTarifsPage() {
                   />
                 </div>
                 <div className="mt-3">
-                  <Field
+                  <AdminField
                     label="Précision (facultatif)"
                     value={row.note}
                     onChange={(v) =>
@@ -195,6 +174,7 @@ export function AdminTarifsPage() {
                       })
                     }
                     multiline
+                    rows={3}
                   />
                 </div>
                 <button
@@ -235,7 +215,7 @@ export function AdminTarifsPage() {
 
       <AdminSection variant="sand" title="Informations complémentaires">
         <div className="space-y-4">
-          <Field
+          <AdminField
             label="Titre de l’encadré"
             value={t.infosTitle}
             onChange={(v) => setState((s) => ({ ...s, tarifsPage: { ...s.tarifsPage, infosTitle: v } }))}

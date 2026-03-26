@@ -1,7 +1,8 @@
 // src/components/layout/footer.tsx
 import { Link } from 'react-router-dom'
-import { useSiteData } from '../../contexts/admin-context'
+import { useSiteData } from '../../hooks/use-admin'
 import { trackClick } from '../../lib/analytics'
+import { OpenDyslexicToggle } from './open-dyslexic-toggle'
 
 const footerLinks: readonly { to: string; label: string }[] = [
   { to: '/', label: 'Accueil' },
@@ -30,7 +31,7 @@ export function Footer() {
                 alt="Laplace Luxopuncture"
                 width={1200}
                 height={270}
-                className="block h-auto max-h-[3.75rem] w-auto max-w-[min(18rem,100%)] object-contain object-left sm:max-h-[4rem] lg:max-h-[4.25rem] lg:max-w-[20rem]"
+                className="logo-laplace block h-auto max-h-[3.75rem] w-auto max-w-[min(18rem,100%)] object-contain object-left sm:max-h-[4rem] lg:max-h-[4.25rem] lg:max-w-[20rem]"
                 decoding="async"
               />
             </Link>
@@ -82,6 +83,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+      <OpenDyslexicToggle variant="footer" />
       <div className="border-t border-white/10 py-2.5 text-center text-xs text-white/50">
         © {year} {site.name} · {site.domain}
       </div>

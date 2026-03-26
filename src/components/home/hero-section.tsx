@@ -1,6 +1,6 @@
 // src/components/home/hero-section.tsx
 import { Link } from 'react-router-dom'
-import { useSiteData } from '../../contexts/admin-context'
+import { useSiteData } from '../../hooks/use-admin'
 import { media } from '../../data/media'
 import { RevealOnScroll, SectionAtmosphere } from '../editorial'
 import { SocialLinks } from '../social-links'
@@ -11,7 +11,7 @@ export function HeroSection() {
     <section className="w-full border-b border-[var(--color-brand)]/10 bg-transparent">
       <SectionAtmosphere variant="soft" placement="both">
         <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-16 sm:px-6 sm:py-20 lg:flex-row lg:items-center lg:py-24">
-          <RevealOnScroll variant="slide-right" className="flex-1">
+          <RevealOnScroll variant="slide-right" className="flex-1" keepVisible>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--color-accent)]">
                 {heroCopy.eyebrow}
@@ -19,6 +19,9 @@ export function HeroSection() {
               <h1 className="mt-4 font-display text-4xl font-semibold leading-tight text-[var(--color-ink)] sm:text-5xl lg:text-[3.25rem]">
                 {heroCopy.title}
               </h1>
+              <p className="mt-3 text-center text-sm font-semibold text-[var(--color-cta-hover)] sm:text-left">
+                Bilan offert
+              </p>
               <p className="mt-6 max-w-xl whitespace-pre-line text-lg leading-relaxed text-[var(--color-body)]/95">
                 {heroCopy.subtitle}
               </p>
@@ -42,7 +45,7 @@ export function HeroSection() {
               </div>
             </div>
           </RevealOnScroll>
-          <RevealOnScroll variant="slide-left" className="flex flex-1 justify-center lg:justify-end">
+          <RevealOnScroll variant="slide-left" className="flex flex-1 justify-center lg:justify-end" keepVisible>
             <figure className="relative h-80 w-full max-w-xl overflow-hidden rounded-[2rem] border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-[var(--shadow-soft)] sm:h-96 lg:h-[28rem] lg:max-w-2xl">
               <img
                 src={media.heroSession}

@@ -1,6 +1,6 @@
 // src/components/home/home-hook-section.tsx
 import { Sparkles } from 'lucide-react'
-import { useSiteData } from '../../contexts/admin-context'
+import { useSiteData } from '../../hooks/use-admin'
 import { RevealOnScroll, SectionAtmosphere } from '../editorial'
 
 export function HomeHookSection() {

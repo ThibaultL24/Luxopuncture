@@ -1,7 +1,7 @@
 // src/pages/publications-page.tsx
 import { ArrowRight, BookOpen } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useSiteData } from '../contexts/admin-context'
+import { useSiteData } from '../hooks/use-admin'
 import { formatPublicationDate, listPublicationsNewestFirst } from '../data/publications'
 import { RevealOnScroll, SectionAtmosphere } from '../components/editorial'
 import { SectionHeading } from '../components/ui/section-heading'

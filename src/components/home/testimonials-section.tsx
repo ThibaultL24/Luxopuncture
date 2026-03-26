@@ -1,6 +1,6 @@
 // src/components/home/testimonials-section.tsx
 import { Link } from 'react-router-dom'
-import { useSiteData } from '../../contexts/admin-context'
+import { useSiteData } from '../../hooks/use-admin'
 import { media } from '../../data/media'
 import { RevealOnScroll, SectionAtmosphere } from '../editorial'
 import { WrittenReviewsMarquee } from '../written-reviews-marquee'
@@ -37,10 +37,6 @@ export function TestimonialsSection() {
                 </video>
               </figure>
             </div>
-          </RevealOnScroll>
-
-          <RevealOnScroll variant="fade-up">
-            <p className="mb-6 text-center text-sm font-semibold text-[var(--color-ink)]">Avis écrits</p>
           </RevealOnScroll>
 
           <WrittenReviewsMarquee />

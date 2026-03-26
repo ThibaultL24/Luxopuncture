@@ -41,7 +41,7 @@ export function Navbar() {
               alt="Laplace Luxopuncture"
               width={1200}
               height={270}
-              className="block h-full w-auto max-w-none origin-left object-contain object-left"
+              className="logo-laplace block h-full w-auto max-w-none origin-left object-contain object-left"
               decoding="async"
               fetchPriority="high"
             />

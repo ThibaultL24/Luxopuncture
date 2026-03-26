@@ -1,32 +1,9 @@
 // src/pages/admin/admin-a-propos-page.tsx
-import { useAdmin } from '../../contexts/admin-context'
+import { AdminField } from '../../components/admin/admin-field'
 import { StringListEditor } from '../../components/admin/string-list-editor'
 import { AdminPageHeader } from '../../components/admin/admin-page-header'
 import { AdminSection } from '../../components/admin/admin-section'
-
-function Field({
-  label,
-  value,
-  onChange,
-  multiline,
-}: {
-  label: string
-  value: string
-  onChange: (v: string) => void
-  multiline?: boolean
-}) {
-  const cls = 'admin-input'
-  return (
-    <label className="block text-sm font-medium text-[var(--color-ink)]">
-      {label}
-      {multiline ? (
-        <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={5} className={cls} />
-      ) : (
-        <input value={value} onChange={(e) => onChange(e.target.value)} className={cls} />
-      )}
-    </label>
-  )
-}
+import { useAdmin } from '../../hooks/use-admin'
 
 export function AdminAProposPage() {
   const { state, setState } = useAdmin()
@@ -41,12 +18,12 @@ export function AdminAProposPage() {
 
       <AdminSection variant="rose" title="Contenu de la page" subtitle="Présentation, paragraphes et formations.">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field
+          <AdminField
             label="Titre de la page"
             value={aboutPage.title}
             onChange={(v) => setState((s) => ({ ...s, aboutPage: { ...s.aboutPage, title: v } }))}
           />
-          <Field
+          <AdminField
             label="Votre nom"
             value={aboutPage.name}
             onChange={(v) => setState((s) => ({ ...s, aboutPage: { ...s.aboutPage, name: v } }))}

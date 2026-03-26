@@ -1,8 +1,9 @@
 // src/pages/admin/admin-layout.tsx
 import { useRef } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
-import { useAdmin } from '../../contexts/admin-context'
+import { useAdmin } from '../../hooks/use-admin'
 import { AdminColorLegend } from '../../components/admin/admin-color-legend'
+import { OpenDyslexicToggle } from '../../components/layout/open-dyslexic-toggle'
 
 const navItems: { to: string; label: string; end?: boolean }[] = [
   { to: '/admin', label: 'Vue d’ensemble', end: true },
@@ -102,6 +103,7 @@ export function AdminLayout() {
               >
                 Déconnexion
               </button>
+              <OpenDyslexicToggle variant="admin" />
             </div>
           </div>
         </aside>

@@ -21,8 +21,28 @@ function mergeHomeCopy(d: HomeCopyEditable, p?: Partial<HomeCopyEditable>): Home
       ...p.cabinetTeaser,
       lines: p.cabinetTeaser?.lines ?? d.cabinetTeaser.lines,
     },
-    testimonials: { ...d.testimonials, ...p.testimonials },
+    testimonials: normalizeTestimonialsBlock(
+      { ...d.testimonials, ...p.testimonials },
+      d.testimonials,
+    ),
   }
+}
+
+/** Ancien accueil : eyebrow « Témoignages » + titre « Avis écrits » — un seul titre désormais. */
+function normalizeTestimonialsBlock(
+  merged: HomeCopyEditable['testimonials'],
+  defaults: HomeCopyEditable['testimonials'],
+): HomeCopyEditable['testimonials'] {
+  let next = merged
+  if (next.eyebrow === 'Témoignages' && next.title === 'Avis écrits') {
+    next = { ...next, eyebrow: '', title: 'Témoignages' }
+  }
+  const oldIntro =
+    'Avis écrits et vidéo de présentation — la page dédiée regroupe les retours et les vidéos.'
+  if (next.intro === oldIntro) {
+    next = { ...next, intro: defaults.intro }
+  }
+  return next
 }
 
 function mergeTarifsPage(d: TarifsPageState, p?: Partial<TarifsPageState>): TarifsPageState {

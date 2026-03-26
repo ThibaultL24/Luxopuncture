@@ -1,38 +1,15 @@
 // src/pages/admin/admin-blog-page.tsx
 import { useMemo } from 'react'
-import { useAdmin } from '../../contexts/admin-context'
+import { AdminField } from '../../components/admin/admin-field'
 import type { Publication } from '../../data/publications'
 import { StringListEditor } from '../../components/admin/string-list-editor'
 import { DropZone } from '../../components/admin/drop-zone'
 import { AdminPageHeader } from '../../components/admin/admin-page-header'
 import { AdminSection, type AdminSectionVariant } from '../../components/admin/admin-section'
+import { useAdmin } from '../../hooks/use-admin'
 import { MAX_IMAGE_BYTES, parseArticleBodyFromText, readFileAsDataUrl, readFileAsText } from '../../lib/admin-file-helpers'
 
 const VARIANT_ROTATION: AdminSectionVariant[] = ['mint', 'brand', 'rose', 'sand', 'slate']
-
-function Field({
-  label,
-  value,
-  onChange,
-  multiline,
-}: {
-  label: string
-  value: string
-  onChange: (v: string) => void
-  multiline?: boolean
-}) {
-  const cls = 'admin-input'
-  return (
-    <label className="block text-sm font-medium text-[var(--color-ink)]">
-      {label}
-      {multiline ? (
-        <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={4} className={cls} />
-      ) : (
-        <input value={value} onChange={(e) => onChange(e.target.value)} className={cls} />
-      )}
-    </label>
-  )
-}
 
 function emptyArticle(): Publication {
   const d = new Date().toISOString().slice(0, 10)
@@ -117,14 +94,14 @@ export function AdminBlogPage() {
                   </p>
                 ) : null}
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Field label="Slug (URL)" value={pub.slug} onChange={(v) => updateAt(i, { slug: v })} />
-                  <Field label="Date (AAAA-MM-JJ)" value={pub.date} onChange={(v) => updateAt(i, { date: v })} />
+                  <AdminField label="Slug (URL)" value={pub.slug} onChange={(v) => updateAt(i, { slug: v })} />
+                  <AdminField label="Date (AAAA-MM-JJ)" value={pub.date} onChange={(v) => updateAt(i, { date: v })} />
                 </div>
                 <div className="mt-4">
-                  <Field label="Titre" value={pub.title} onChange={(v) => updateAt(i, { title: v })} />
+                  <AdminField label="Titre" value={pub.title} onChange={(v) => updateAt(i, { title: v })} />
                 </div>
                 <div className="mt-4">
-                  <Field
+                  <AdminField
                     label="Chapô / extrait (liste des articles)"
                     value={pub.excerpt}
                     onChange={(v) => updateAt(i, { excerpt: v })}
@@ -153,7 +130,7 @@ export function AdminBlogPage() {
                       }
                     }}
                   />
-                  <Field
+                  <AdminField
                     label="Image de couverture (chemin ou collage après import)"
                     value={pub.coverImage ?? ''}
                     onChange={(v) => updateAt(i, { coverImage: v || undefined })}

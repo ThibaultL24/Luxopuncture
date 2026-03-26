@@ -1,5 +1,5 @@
 // src/pages/admin/admin-temoignages-page.tsx
-import { useAdmin } from '../../contexts/admin-context'
+import { useAdmin } from '../../hooks/use-admin'
 import type { Testimonial } from '../../data/site-content'
 import { StringListEditor } from '../../components/admin/string-list-editor'
 import { ReviewCaptureSlidesEditor } from '../../components/admin/review-capture-slides-editor'

@@ -1,36 +1,13 @@
 // src/pages/admin/admin-programmes-page.tsx
 import { useMemo } from 'react'
-import { useAdmin } from '../../contexts/admin-context'
+import { AdminField } from '../../components/admin/admin-field'
 import type { Service } from '../../data/site-content'
 import { StringListEditor } from '../../components/admin/string-list-editor'
 import { AdminPageHeader } from '../../components/admin/admin-page-header'
 import { AdminSection, type AdminSectionVariant } from '../../components/admin/admin-section'
+import { useAdmin } from '../../hooks/use-admin'
 
 const VARIANT_ROTATION: AdminSectionVariant[] = ['brand', 'mint', 'rose', 'sand', 'slate']
-
-function Field({
-  label,
-  value,
-  onChange,
-  multiline,
-}: {
-  label: string
-  value: string
-  onChange: (v: string) => void
-  multiline?: boolean
-}) {
-  const cls = 'admin-input'
-  return (
-    <label className="block text-sm font-medium text-[var(--color-ink)]">
-      {label}
-      {multiline ? (
-        <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={4} className={cls} />
-      ) : (
-        <input value={value} onChange={(e) => onChange(e.target.value)} className={cls} />
-      )}
-    </label>
-  )
-}
 
 function defaultService(): Service {
   return {
@@ -121,15 +98,15 @@ export function AdminProgrammesPage() {
                   </p>
                 ) : null}
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Field
+                  <AdminField
                     label="Slug (URL, sans espaces)"
                     value={svc.slug}
                     onChange={(v) => updateAt(i, { slug: v })}
                   />
-                  <Field label="Titre affiché" value={svc.title} onChange={(v) => updateAt(i, { title: v })} />
+                  <AdminField label="Titre affiché" value={svc.title} onChange={(v) => updateAt(i, { title: v })} />
                 </div>
                 <div className="mt-4">
-                  <Field
+                  <AdminField
                     label="Objectif (court)"
                     value={svc.goal}
                     onChange={(v) => updateAt(i, { goal: v })}
@@ -137,7 +114,7 @@ export function AdminProgrammesPage() {
                   />
                 </div>
                 <div className="mt-4">
-                  <Field
+                  <AdminField
                     label="Texte d’introduction"
                     value={svc.intro}
                     onChange={(v) => updateAt(i, { intro: v })}
@@ -145,12 +122,12 @@ export function AdminProgrammesPage() {
                   />
                 </div>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                  <Field
+                  <AdminField
                     label="Durée (ex. Environ 45 min)"
                     value={svc.duration ?? ''}
                     onChange={(v) => updateAt(i, { duration: v })}
                   />
-                  <Field
+                  <AdminField
                     label="Image de couverture (chemin, ex. /images/…)"
                     value={svc.coverImage}
                     onChange={(v) => updateAt(i, { coverImage: v })}

@@ -1,6 +1,6 @@
 // src/components/home/cta-banner.tsx
 import { Link } from 'react-router-dom'
-import { useSiteData } from '../../contexts/admin-context'
+import { useSiteData } from '../../hooks/use-admin'
 import { RevealOnScroll } from '../editorial'
 
 export function CtaBanner() {

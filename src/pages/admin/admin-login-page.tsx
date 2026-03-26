@@ -1,7 +1,8 @@
 // src/pages/admin/admin-login-page.tsx
 import { useState, type FormEvent } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { useAdmin } from '../../contexts/admin-context'
+import { OpenDyslexicToggle } from '../../components/layout/open-dyslexic-toggle'
+import { useAdmin } from '../../hooks/use-admin'
 
 export function AdminLoginPage() {
   const { login, isAuthenticated } = useAdmin()
@@ -66,6 +67,7 @@ export function AdminLoginPage() {
             </form>
           </div>
         </div>
+        <OpenDyslexicToggle variant="admin" />
       </div>
     </div>
   )

@@ -8,6 +8,13 @@
       name="description"
       content="Luxopuncture — méthode douce sans aiguilles pour l'équilibre du corps. Prise de rendez-vous."
     />
+    <script>
+      try {
+        if (localStorage.getItem('luxopuncture-open-dyslexic') === '1') {
+          document.documentElement.setAttribute('data-dyslexic-font', 'true')
+        }
+      } catch (_) {}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
