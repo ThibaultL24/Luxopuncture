@@ -220,7 +220,7 @@ export const tarifsPageSpec = {
     price: '190 €',
     includes: [
       'un bilan initial offert',
-      '3 séances de suivi',
+      '4 séances de suivi',
       'un accompagnement tout au long du programme',
       'des conseils et contenus personnalisés',
     ],
@@ -405,7 +405,7 @@ export const detoxProgramCopy = {
       'Je vous accompagne sur 3 semaines, avec un suivi régulier et un cadre adapté à vous. Concrètement :',
     bullets: [
       'un bilan en début de programme pour faire le point ensemble',
-      '3 rendez-vous en visio pour vous suivre et ajuster si besoin',
+      '4 rendez-vous en visio pour vous suivre et ajuster si besoin',
       'des conseils personnalisés et des contenus concrets pour vous guider au quotidien',
       'ma présence tout au long du programme pour répondre à vos questions et vous accompagner',
     ],
@@ -434,7 +434,7 @@ export const detoxProgramCopy = {
   modalities: {
     title: 'Modalités',
     intro: 'Le programme se déroule sur 3 semaines avec un accompagnement personnalisé comprenant :',
-    items: ['1 bilan initial en visio', '3 séances de suivi', 'un accompagnement tout au long du programme'],
+    items: ['1 bilan initial en visio', '4 séances de suivi', 'un accompagnement tout au long du programme'],
     tarifsHint: 'Les tarifs sont disponibles sur la page dédiée.',
   },
 } as const

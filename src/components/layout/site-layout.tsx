@@ -1,5 +1,6 @@
 // src/components/layout/site-layout.tsx
 import { Outlet, useLocation } from "react-router-dom";
+import { FeatherTrailBackground } from "../feather-trail-background";
 import { FeatherCursor } from "../feather-cursor";
 import { BookingBar } from "./booking-bar";
 import { Footer } from "./footer";
@@ -16,7 +17,8 @@ export function SiteLayout() {
   }, [pathname, hash]);
 
   return (
-    <div className="flex min-h-svh flex-col">
+    <div className="relative isolate flex min-h-svh flex-col">
+      <FeatherTrailBackground />
       <FeatherCursor />
       <Navbar />
       <main className="site-grain relative isolate flex-1 pb-24 sm:pb-0">

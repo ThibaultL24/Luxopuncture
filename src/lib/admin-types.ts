@@ -36,11 +36,34 @@ export interface BookingCtaState {
   button: string
 }
 
+/** Réseaux d’une personne mise en avant (chaîne vide = icône affichée, lien « bientôt »). */
+export interface PartenariatPartnerSocials {
+  instagram: string
+  facebook: string
+  linkedin: string
+}
+
+export interface PartenariatPartnerCard {
+  id: string
+  name: string
+  role: string
+  /** Texte riche léger : **gras** interprété côté affichage. */
+  paragraphs: string[]
+  images: { src: string; alt: string }[]
+  websiteUrl: string
+  websiteLabel: string
+  socials: PartenariatPartnerSocials
+}
+
 export interface PartenariatPageState {
   pageTitle: string
   pageSubtitle: string
+  /** Titre au-dessus des fiches (ex. Recommandations). */
   productsTitle: string
+  /** Court paragraphe d’introduction. */
   productsBody: string
+  /** Fiches personnes + textes + visuels (défaut : Caroline / CCC&BIO). */
+  partners: PartenariatPartnerCard[]
   networksTitle: string
   networksBody: string
 }

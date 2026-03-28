@@ -10,7 +10,10 @@ export function AdminPartenariatPage() {
 
   return (
     <div className="space-y-8">
-      <AdminPageHeader title="Partenariat" subtitle="Titres et textes affichés sur la page Partenariat." />
+      <AdminPageHeader
+        title="Partenariat"
+        subtitle="Titres et textes d’intro / pied de page. Les fiches partenaires (visuels, paragraphes, liens) sont dans les données par défaut du site."
+      />
 
       <AdminSection variant="sand" title="En-tête de page">
         <div className="space-y-4">
@@ -29,7 +32,7 @@ export function AdminPartenariatPage() {
         </div>
       </AdminSection>
 
-      <AdminSection variant="mint" title="Bloc produits partenaires">
+      <AdminSection variant="mint" title="Bloc « recommandations » (intro)" subtitle="S’affiche au-dessus des fiches partenaires.">
         <div className="space-y-4">
           <AdminField
             label="Titre du bloc"

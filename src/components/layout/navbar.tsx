@@ -18,7 +18,7 @@ const navLinks = [
 
 function linkClassName(isActive: boolean) {
   return [
-    "shrink-0 whitespace-nowrap rounded-full px-1.5 py-0.5 text-xs font-medium leading-tight transition-colors sm:px-1.5 sm:py-1 sm:text-sm lg:px-2 lg:text-base xl:px-2.5",
+    "shrink-0 whitespace-nowrap rounded-full px-1.5 py-0.5 text-xs font-medium leading-tight transition-colors sm:px-1.5 sm:py-1 sm:text-sm xl:px-2.5 xl:text-base",
     isActive
       ? "bg-[var(--color-cta)] text-[var(--color-on-cta)] shadow-sm"
       : "text-white/90 hover:bg-white/10 hover:text-white",
@@ -30,7 +30,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 overflow-hidden border-b border-white/10 bg-[var(--color-brand)] shadow-[var(--shadow-soft)]">
-      <div className="mx-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 gap-y-1.5 px-3 py-2 sm:px-4 sm:py-2.5 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-x-2.5 lg:px-4 lg:py-2.5">
+      <div className="mx-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 gap-y-1.5 px-3 py-2 sm:px-4 sm:py-2.5 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:gap-x-2.5 xl:px-4 xl:py-2.5">
         <div className="flex min-w-0 justify-self-start">
           <Link
             to="/"
@@ -49,7 +49,7 @@ export function Navbar() {
         </div>
 
         <nav
-          className="hidden min-w-0 flex-wrap items-center justify-center justify-self-center gap-x-0.5 gap-y-1 self-center px-1 lg:flex"
+          className="hidden min-w-0 flex-wrap items-center justify-center justify-self-center gap-x-0.5 gap-y-1 self-center px-1 xl:flex"
           aria-label="Navigation principale"
         >
           {navLinks.map((l) => (
@@ -67,13 +67,13 @@ export function Navbar() {
           <Link
             to="/contact"
             onClick={() => trackClick("cta_reserver_nav_desktop")}
-            className="hidden rounded-full bg-[var(--color-cta)] px-3.5 py-1.5 text-sm font-bold leading-tight text-[var(--color-on-cta)] shadow-md transition hover:bg-[var(--color-cta-hover)] hover:text-white sm:px-4 sm:py-2 sm:text-base lg:inline-flex"
+            className="hidden rounded-full bg-[var(--color-cta)] px-3.5 py-1.5 text-sm font-bold leading-tight text-[var(--color-on-cta)] shadow-md transition hover:bg-[var(--color-cta-hover)] hover:text-white sm:px-4 sm:py-2 sm:text-base xl:inline-flex"
           >
             Réserver
           </Link>
           <button
             type="button"
-            className="inline-flex rounded-full border border-white/25 p-1.5 text-white lg:hidden"
+            className="inline-flex rounded-full border border-white/25 p-1.5 text-white xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
@@ -87,7 +87,7 @@ export function Navbar() {
       {open ? (
         <div
           id="mobile-nav"
-          className="border-t border-white/10 bg-[var(--color-brand-dark)] px-4 pb-5 lg:hidden"
+          className="border-t border-white/10 bg-[var(--color-brand-dark)] px-4 pb-5 xl:hidden"
         >
           <div className="mx-auto flex max-w-6xl flex-col gap-1.5 pt-3">
             {navLinks.map((l) => (

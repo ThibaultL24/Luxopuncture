@@ -107,7 +107,7 @@ export function ProgrammePage() {
               <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-[var(--shadow-soft)] lg:translate-y-3">
                 <img
                   src={media.detoxVisio}
-                  alt="Accompagnement en visio"
+                  alt="Camille — accompagnement à distance en visio"
                   width={800}
                   height={600}
                   className="h-auto w-full object-cover"

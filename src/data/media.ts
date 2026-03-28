@@ -4,16 +4,16 @@ const T = 'témoignages'
 export const media = {
   /** Hero page d’accueil */
   heroSession: '/images/camille1.jpeg',
-  /** Bandeau page liste Programmes — luxothérapeute & hypnothérapeute */
-  programmeLuxoHypnoHeader: '/images/luxotherapeute-hypnotherapeute.png',
+  /** Page Cabinet — section hypnose (accompagnement tabac) */
+  programmeLuxoHypnoHeader: '/images/camille_tabac.jpeg',
   /** Appareil de luxopuncture — section accueil « méthode en trois temps » */
   machineLuxo: '/images/machine_luxo.jpeg',
   /** Section accueil « ce que vous pouvez en attendre » */
   cookiesPub: '/images/Photo%20cookies%20pub.jpg',
   /** Page programme détox — en-tête (photo cookies / présentation) */
   detoxProgramHero: '/images/Photo%20cookies%20pub.jpg',
-  /** Page programme détox — visio */
-  detoxVisio: '/images/camille2.jpeg',
+  /** Page programme À distance — bloc « Un accompagnement à distance… » (visio) */
+  detoxVisio: '/images/camille7.jpeg',
   /** Page programme détox — section « Ce que ce programme peut vous apporter » */
   detoxWellbeing: '/images/sérénité.webp',
   /** Page programme détox — carnet / suivi */
@@ -35,6 +35,26 @@ export const cabinetProgramCardImages: Record<string, string> = {
 export function getCabinetProgramCardImage(slug: string, fallback: string): string {
   return cabinetProgramCardImages[slug] ?? fallback
 }
+
+/** Photos cabinet / séances — page Cabinet (section hypnose) */
+export const cabinetAmbianceImages: readonly { src: string; alt: string }[] = [
+  { src: '/images/cabinet1.jpeg', alt: 'Le cabinet — espace d’accueil' },
+  { src: '/images/perte_poid.jpeg', alt: 'Accompagnement perte de poids au cabinet' },
+  { src: '/images/camille4.jpeg', alt: 'Camille — séance au cabinet' },
+]
+
+/** Photos page Cabinet — section La luxopuncture */
+export const luxopunctureCabinetPhotos: readonly { src: string; alt: string }[] = [
+  { src: '/images/camille6.jpeg', alt: 'Camille — luxopuncture au cabinet' },
+  { src: '/images/camille_séance.jpeg', alt: 'Séance de luxopuncture au cabinet' },
+  { src: '/images/camille_séance2.jpeg', alt: 'Accompagnement luxopuncture — séance' },
+]
+
+/** Visuel à côté de « Pour quelles problématiques ? » — page Cabinet */
+export const luxopunctureForWhatImage = {
+  src: '/images/img1.jpeg',
+  alt: 'Illustration — accompagnement luxopuncture au cabinet',
+} as const
 
 /** Illustrations explicatives — incluses dans le carrousel page Luxopuncture */
 export const luxopunctureExplanationImages: readonly { src: string; alt: string }[] = [

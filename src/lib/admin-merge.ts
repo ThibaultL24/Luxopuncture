@@ -1,6 +1,14 @@
 // src/lib/admin-merge.ts — fusion des données admin (stockage / import) avec les défauts
 import { getDefaultAdminState } from './admin-defaults'
-import type { AboutPageState, AdminState, HomeCopyEditable, PartenariatPageState, TarifsPageState } from './admin-types'
+import type {
+  AboutPageState,
+  AdminState,
+  HomeCopyEditable,
+  PartenariatPartnerCard,
+  PartenariatPartnerSocials,
+  PartenariatPageState,
+  TarifsPageState,
+} from './admin-types'
 
 function mergeHomeCopy(d: HomeCopyEditable, p?: Partial<HomeCopyEditable>): HomeCopyEditable {
   if (!p) return d
@@ -45,8 +53,15 @@ function normalizeTestimonialsBlock(
   return next
 }
 
+function migrateDetoxIncludesLines(includes: string[]): string[] {
+  return includes.map((line) =>
+    /^3 séances de suivi$/i.test(line.trim()) ? line.replace(/3/i, '4') : line,
+  )
+}
+
 function mergeTarifsPage(d: TarifsPageState, p?: Partial<TarifsPageState>): TarifsPageState {
   if (!p) return d
+  const includes = migrateDetoxIncludesLines(p.detox?.includes ?? d.detox.includes)
   return {
     pageTitle: p.pageTitle ?? d.pageTitle,
     pageSubtitle: p.pageSubtitle ?? d.pageSubtitle,
@@ -54,7 +69,7 @@ function mergeTarifsPage(d: TarifsPageState, p?: Partial<TarifsPageState>): Tari
     detox: {
       label: p.detox?.label ?? d.detox.label,
       price: p.detox?.price ?? d.detox.price,
-      includes: p.detox?.includes ?? d.detox.includes,
+      includes,
     },
     suivi: {
       label: p.suivi?.label ?? d.suivi.label,
@@ -79,9 +94,59 @@ function mergeAbout(d: AboutPageState, p?: Partial<AboutPageState>): AboutPageSt
   }
 }
 
+function mergePartenariatPartnerSocials(
+  def: PartenariatPartnerSocials,
+  over?: PartenariatPartnerSocials,
+): PartenariatPartnerSocials {
+  if (!over) return def
+  const pick = (persisted: string, fallback: string) =>
+    persisted.trim() !== '' ? persisted : fallback
+  return {
+    instagram: pick(over.instagram, def.instagram),
+    facebook: pick(over.facebook, def.facebook),
+    linkedin: pick(over.linkedin, def.linkedin),
+  }
+}
+
+const LEGACY_PARTENARIAT_PAGE_SUBTITLE =
+  'Des personnes et des marques que j’aime vous faire découvrir — sélectionnées pour la qualité de leur démarche et leur exigence.'
+
+/** Sous-titre : défaut vide ; on efface anciennes phrases et brouillons « note de rédaction » encore en localStorage. */
+function mergePartenariatPageSubtitle(defaultSubtitle: string, persisted?: string): string {
+  if (persisted === undefined) return defaultSubtitle
+  const t = persisted.trim()
+  if (t === '') return defaultSubtitle
+  if (t === LEGACY_PARTENARIAT_PAGE_SUBTITLE.trim()) return defaultSubtitle
+  if (t.toLowerCase().includes('présentation des produits de caroline')) return defaultSubtitle
+  return persisted
+}
+
+/** Fiches partenaires : images et liens réseaux vides côté stockage sont complétés par les défauts du code. */
+function mergePartenariatPartners(
+  defaults: PartenariatPartnerCard[],
+  persisted?: PartenariatPartnerCard[],
+): PartenariatPartnerCard[] {
+  if (!persisted?.length) return defaults
+  const defaultIds = new Set(defaults.map((x) => x.id))
+  const merged = defaults.map((def) => {
+    const over = persisted.find((x) => x.id === def.id)
+    if (!over) return def
+    return {
+      ...def,
+      ...over,
+      images: def.images,
+      socials: mergePartenariatPartnerSocials(def.socials, over.socials),
+    }
+  })
+  const extras = persisted.filter((x) => !defaultIds.has(x.id))
+  return extras.length ? [...merged, ...extras] : merged
+}
+
 function mergePartenariat(d: PartenariatPageState, p?: Partial<PartenariatPageState>): PartenariatPageState {
   if (!p) return d
-  return { ...d, ...p }
+  const partners = mergePartenariatPartners(d.partners, p.partners)
+  const pageSubtitle = mergePartenariatPageSubtitle(d.pageSubtitle, p.pageSubtitle)
+  return { ...d, ...p, partners, pageSubtitle }
 }
 
 /** Fusionne un état partiel (localStorage, import) avec les valeurs par défaut. */

@@ -11,6 +11,7 @@ import {
   tarifsPageSpec,
   testimonials,
 } from '../data/site-content'
+import { defaultPartenariatPartnerCards } from '../data/partenariat-defaults'
 import { testimonialVideoFiles } from '../data/media'
 import type { AdminState, TarifsPageState } from './admin-types'
 
@@ -69,13 +70,15 @@ function defaultHomeCopy(): AdminState['homeCopy'] {
 
 function defaultPartenariat(): AdminState['partenariatPage'] {
   return {
-    pageTitle: 'Partenariats',
-    pageSubtitle: 'Recommandations et collaborations — contenu en cours de rédaction.',
-    productsTitle: 'Produits partenaires',
+    pageTitle: 'Partenariats & recommandations',
+    pageSubtitle: '',
+    productsTitle: 'Recommandations',
     productsBody:
-      'Une présentation des produits de Caroline (lien vers sa page et son site) et un texte de recommandation seront ajoutés ici.',
-    networksTitle: 'Réseaux',
-    networksBody: 'Retrouvez-moi aussi sur les réseaux — textes de recommandation à compléter.',
+      'Chaque fiche résume en quelques lignes le parcours et l’offre : n’hésitez pas à aller voir directement sur leurs sites ou leurs réseaux.',
+    partners: clone(defaultPartenariatPartnerCards),
+    networksTitle: 'Mes réseaux',
+    networksBody:
+      'Pour échanger sur la luxopuncture, l’hypnose ou le cabinet, vous pouvez aussi me suivre ici :',
   }
 }
 

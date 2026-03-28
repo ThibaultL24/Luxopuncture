@@ -12,7 +12,14 @@ import {
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useSiteData } from '../hooks/use-admin'
-import { getCabinetProgramCardImage, luxopunctureExplanationImages, media } from '../data/media'
+import {
+  cabinetAmbianceImages,
+  getCabinetProgramCardImage,
+  luxopunctureCabinetPhotos,
+  luxopunctureForWhatImage,
+  luxopunctureExplanationImages,
+  media,
+} from '../data/media'
 import { cabinetLuxoHypnoCopy, cabinetServiceTeasers, getServiceBySlug } from '../data/site-content'
 import {
   EditorialQuote,
@@ -27,9 +34,11 @@ import { WrittenReviewsMarquee } from '../components/written-reviews-marquee'
 import { SectionHeading } from '../components/ui/section-heading'
 import { usePageTitle } from '../hooks/use-page-title'
 
-function IconList({ items }: { items: readonly string[] }) {
+function IconList({ items, className = '' }: { items: readonly string[]; className?: string }) {
   return (
-    <ul className="mx-auto max-w-xl space-y-2 text-[var(--color-body)]/95">
+    <ul
+      className={`space-y-2 text-[var(--color-body)]/95 ${className || 'mx-auto max-w-xl'}`}
+    >
       {items.map((item) => (
         <li key={item} className="flex gap-2.5 text-left">
           <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" aria-hidden />
@@ -39,6 +48,9 @@ function IconList({ items }: { items: readonly string[] }) {
     </ul>
   )
 }
+
+const [cabinetRoomPhoto, seancePhoto, seance2Photo] = cabinetAmbianceImages
+const [camille6LuxoPhoto, luxoSeancePhoto, luxoSeance2Photo] = luxopunctureCabinetPhotos
 
 export function CabinetPage() {
   usePageTitle('Cabinet & accompagnements')
@@ -96,84 +108,176 @@ export function CabinetPage() {
       <SectionDivider />
 
       <SectionAtmosphere variant="medium" placement="diagonal">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
-          <div id="luxopuncture" className="mx-auto max-w-3xl scroll-mt-28 pt-8 sm:pt-12">
-          <RevealOnScroll variant="fade-up">
-            <SectionHeading title={x.luxopunctureTitle} subtitle={x.luxopunctureIntro} />
-          </RevealOnScroll>
+        <div id="luxopuncture" className="scroll-mt-28">
+          <div className="mx-auto max-w-4xl px-4 pt-8 sm:px-6 sm:pt-12">
+            <div className="mx-auto max-w-3xl">
+              <RevealOnScroll variant="fade-up">
+                <SectionHeading title={x.luxopunctureTitle} subtitle={x.luxopunctureIntro} />
+              </RevealOnScroll>
+            </div>
+          </div>
 
-        <div className="mx-auto mt-10 max-w-2xl space-y-5 text-[var(--color-body)]/95">
-          {x.luxopuncturePoints.map((p) => (
-            <p key={p} className="flex gap-2.5 leading-relaxed">
-              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span className="text-left">{p}</span>
-            </p>
-          ))}
-        </div>
+        <section className="mt-10 w-full space-y-14 sm:mt-12 sm:space-y-16">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
+              <RevealOnScroll variant="slide-left" className="order-2 lg:order-1 lg:-translate-x-2">
+                <figure className="flex overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] p-4 shadow-[var(--shadow-soft)] lg:translate-y-3 sm:p-6">
+                  <img
+                    src={media.machineLuxo}
+                    alt="Appareil de luxopuncture"
+                    width={1200}
+                    height={900}
+                    className="mx-auto h-auto w-full max-h-[min(20rem,52vh)] object-contain sm:max-h-[min(24rem,55vh)]"
+                    loading="lazy"
+                  />
+                </figure>
+              </RevealOnScroll>
+              <RevealOnScroll variant="slide-right" className="order-1 lg:order-2 lg:translate-x-2 lg:pl-2">
+                <div className="mx-auto max-w-2xl space-y-5 text-[var(--color-body)]/95 lg:mx-0">
+                  {x.luxopuncturePoints.map((p) => (
+                    <p key={p} className="flex gap-2.5 leading-relaxed">
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                      <span className="text-left">{p}</span>
+                    </p>
+                  ))}
+                </div>
+              </RevealOnScroll>
+            </div>
+          </div>
 
-        <figure className="mx-auto mt-10 max-w-xl overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)]">
-          <img
-            src={media.machineLuxo}
-            alt="Appareil de luxopuncture"
-            width={1200}
-            height={900}
-            className="mx-auto h-auto w-full max-w-lg object-contain"
-            loading="lazy"
-          />
-        </figure>
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
+              <RevealOnScroll variant="slide-right">
+                <div>
+                  <h3 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+                    <span className="inline-flex items-start gap-2 text-left">
+                      <HelpCircle className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                      <span>{x.forWhatTitle}</span>
+                    </span>
+                  </h3>
+                  <p className="mt-4 text-[var(--color-body)]/95">{x.forWhatIntro}</p>
+                  <IconList items={x.forWhatList} className="mt-6 max-w-none" />
+                </div>
+              </RevealOnScroll>
+              <RevealOnScroll variant="slide-left">
+                <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] lg:-translate-y-2">
+                  <img
+                    src={luxopunctureForWhatImage.src}
+                    alt={luxopunctureForWhatImage.alt}
+                    width={900}
+                    height={700}
+                    className="h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </figure>
+              </RevealOnScroll>
+            </div>
+          </div>
 
-        <section className="mt-16 space-y-8">
-          <h3 className="text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
-            <span className="inline-flex items-start gap-2 text-left">
-              <HelpCircle className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.forWhatTitle}</span>
-            </span>
-          </h3>
-          <p className="text-[var(--color-body)]/95">{x.forWhatIntro}</p>
-          <IconList items={x.forWhatList} />
-
-          <h3 className="pt-6 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
-            <span className="inline-flex items-start gap-2 text-left">
-              <ArrowLeftRight className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.vsAcupunctureTitle}</span>
-            </span>
-          </h3>
-          {x.vsAcupuncture.map((p) => (
-            <p key={p} className="leading-relaxed text-[var(--color-body)]/95">
-              {p}
-            </p>
-          ))}
-
-          <h3 className="pt-6 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
-            <span className="inline-flex items-start gap-2 text-left">
-              <ShieldAlert className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.contraTitle}</span>
-            </span>
-          </h3>
-          <IconList items={x.contraList} />
-          <p className="text-sm text-[var(--color-body)]/85">{x.contraFoot}</p>
-
-          <h3 className="pt-6 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
-            <span className="inline-flex items-start gap-2 text-left">
-              <Heart className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.painTitle}</span>
-            </span>
-          </h3>
-          <p className="text-[var(--color-body)]/95">{x.painAnswer}</p>
-
-          <h3 className="pt-6 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
-            <span className="inline-flex items-start gap-2 text-left">
-              <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.hypnoComplementTitle}</span>
-            </span>
-          </h3>
-          {x.hypnoComplement.map((p) => (
-            <p key={p} className="leading-relaxed text-[var(--color-body)]/95">
-              {p}
-            </p>
-          ))}
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-14">
+              <RevealOnScroll variant="slide-right" className="order-2 lg:order-1">
+                <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm lg:-translate-x-3 lg:translate-y-6">
+                  <img
+                    src={luxoSeance2Photo.src}
+                    alt={luxoSeance2Photo.alt}
+                    width={900}
+                    height={700}
+                    className="h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </figure>
+              </RevealOnScroll>
+              <RevealOnScroll variant="slide-left" className="order-1 lg:order-2">
+                <div className="lg:pl-2">
+                  <h3 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+                    <span className="inline-flex items-start gap-2 text-left">
+                      <ArrowLeftRight className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                      <span>{x.vsAcupunctureTitle}</span>
+                    </span>
+                  </h3>
+                  {x.vsAcupuncture.map((para) => (
+                    <p key={para} className="mt-4 leading-relaxed text-[var(--color-body)]/95 first:mt-6">
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              </RevealOnScroll>
+            </div>
+          </div>
         </section>
 
+        <div className="mx-auto mt-16 max-w-6xl space-y-14 px-4 sm:space-y-16 sm:px-6">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
+            <RevealOnScroll variant="slide-right">
+              <div className="space-y-8">
+                <div>
+                  <h3 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+                    <span className="inline-flex items-start gap-2 text-left">
+                      <ShieldAlert className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                      <span>{x.contraTitle}</span>
+                    </span>
+                  </h3>
+                  <IconList items={x.contraList} className="mt-4 max-w-none" />
+                  <p className="mt-3 text-sm text-[var(--color-body)]/85">{x.contraFoot}</p>
+                </div>
+                <div>
+                  <h3 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+                    <span className="inline-flex items-start gap-2 text-left">
+                      <Heart className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                      <span>{x.painTitle}</span>
+                    </span>
+                  </h3>
+                  <p className="mt-4 text-[var(--color-body)]/95">{x.painAnswer}</p>
+                </div>
+              </div>
+            </RevealOnScroll>
+            <RevealOnScroll variant="slide-left">
+              <figure className="mx-auto w-full max-w-[min(100%,20.5rem)] overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] sm:max-w-[min(100%,22.25rem)] lg:max-w-[min(100%,24rem)] lg:-translate-y-2">
+                <img
+                  src={luxoSeancePhoto.src}
+                  alt={luxoSeancePhoto.alt}
+                  width={900}
+                  height={700}
+                  className="h-auto w-full object-cover"
+                  loading="lazy"
+                />
+              </figure>
+            </RevealOnScroll>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-14">
+            <RevealOnScroll variant="slide-right" className="order-2 lg:order-1">
+              <figure className="mx-auto w-full max-w-[min(100%,20.5rem)] overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm sm:max-w-[min(100%,22.25rem)] lg:max-w-[min(100%,24rem)] lg:-translate-x-3 lg:translate-y-4">
+                <img
+                  src={camille6LuxoPhoto.src}
+                  alt={camille6LuxoPhoto.alt}
+                  width={900}
+                  height={700}
+                  className="h-auto w-full object-cover"
+                  loading="lazy"
+                />
+              </figure>
+            </RevealOnScroll>
+            <RevealOnScroll variant="slide-left" className="order-1 lg:order-2">
+              <div className="lg:pl-2">
+                <h3 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+                  <span className="inline-flex items-start gap-2 text-left">
+                    <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                    <span>{x.hypnoComplementTitle}</span>
+                  </span>
+                </h3>
+                {x.hypnoComplement.map((p) => (
+                  <p key={p} className="mt-4 leading-relaxed text-[var(--color-body)]/95 first:mt-6">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </RevealOnScroll>
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <SectionDivider />
 
         <section className="mt-12 space-y-6 sm:mt-16">
@@ -195,60 +299,138 @@ export function CabinetPage() {
             <EditorialQuote quote={`« ${x.hypnoHighlight} »`} variant="featured" />
           </RevealOnScroll>
         </EditorialSectionImmersive>
+        </div>
+        </div>
 
-        <section className="mt-12 space-y-8 sm:space-y-6">
-          <h3 className="text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
-            <span className="inline-flex items-start gap-2 text-left">
-              <HelpCircle className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.hypnoCasesTitle}</span>
-            </span>
-          </h3>
-          <IconList items={x.hypnoCases} />
+        {/* Même rythme que page À distance : image / texte en alternance, pleine largeur max-w-6xl */}
+        <section className="mt-12 w-full space-y-14 sm:mt-16 sm:space-y-16">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            {/* Image gauche, texte droite — comme « accompagnement en visio » */}
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
+              <RevealOnScroll variant="slide-left" className="order-2 lg:order-1 lg:-translate-x-2">
+                <figure className="mx-auto w-full max-w-[min(100%,20.5rem)] overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-[var(--shadow-soft)] sm:max-w-[min(100%,22.25rem)] lg:max-w-[min(100%,24rem)] lg:translate-y-3">
+                  <img
+                    src={media.programmeLuxoHypnoHeader}
+                    alt="Camille — accompagnement arrêt du tabac"
+                    width={1200}
+                    height={800}
+                    className="h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </figure>
+              </RevealOnScroll>
+              <RevealOnScroll variant="slide-right" className="order-1 lg:order-2 lg:translate-x-2 lg:pl-2">
+                <div>
+                  <h3 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+                    <span className="inline-flex items-start gap-2 text-left">
+                      <HelpCircle className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                      <span>{x.hypnoCasesTitle}</span>
+                    </span>
+                  </h3>
+                  <IconList items={x.hypnoCases} className="mt-6 max-w-none" />
+                </div>
+              </RevealOnScroll>
+            </div>
+          </div>
 
-          <h3 className="pt-4 text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
-            <span className="inline-flex items-start gap-2 text-left">
-              <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.hypnoHowTitle}</span>
-            </span>
-          </h3>
-          {x.hypnoHow.map((p) => (
-            <p key={p} className="leading-relaxed text-[var(--color-body)]/95">
-              {p}
-            </p>
-          ))}
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            {/* Texte gauche, image droite — comme « ce que ce programme peut vous apporter » */}
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
+              <RevealOnScroll variant="slide-right">
+                <div>
+                  <h3 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+                    <span className="inline-flex items-start gap-2 text-left">
+                      <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                      <span>{x.hypnoHowTitle}</span>
+                    </span>
+                  </h3>
+                  {x.hypnoHow.map((p) => (
+                    <p key={p} className="mt-4 leading-relaxed text-[var(--color-body)]/95 first:mt-6">
+                      {p}
+                    </p>
+                  ))}
+                </div>
+              </RevealOnScroll>
+              <RevealOnScroll variant="slide-left">
+                <figure className="mx-auto w-full max-w-[min(100%,20.5rem)] overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] sm:max-w-[min(100%,22.25rem)] lg:max-w-[min(100%,24rem)] lg:-translate-y-2">
+                  <img
+                    src={cabinetRoomPhoto.src}
+                    alt={cabinetRoomPhoto.alt}
+                    width={900}
+                    height={700}
+                    className="h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </figure>
+              </RevealOnScroll>
+            </div>
+          </div>
 
-          <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)]">
-            <img
-              src={media.programmeLuxoHypnoHeader}
-              alt="Luxothérapeute et hypnothérapeute — accompagnement"
-              width={1200}
-              height={640}
-              className="h-auto w-full object-cover"
-              loading="lazy"
-            />
-          </figure>
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            {/* Image gauche, texte droite — comme « déroulé / carnet » */}
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-14">
+              <RevealOnScroll variant="slide-right" className="order-2 lg:order-1">
+                <figure className="mx-auto w-full max-w-[min(100%,20.5rem)] overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm sm:max-w-[min(100%,22.25rem)] lg:max-w-[min(100%,24rem)] lg:-translate-x-3 lg:translate-y-6">
+                  <img
+                    src={seancePhoto.src}
+                    alt={seancePhoto.alt}
+                    width={900}
+                    height={700}
+                    className="h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </figure>
+              </RevealOnScroll>
+              <RevealOnScroll variant="slide-left" className="order-1 lg:order-2">
+                <div className="lg:pl-2">
+                  <h3 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+                    <span className="inline-flex items-start gap-2 text-left">
+                      <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                      <span>{x.hypnoComplement2Title}</span>
+                    </span>
+                  </h3>
+                  {x.hypnoComplement2.map((p) => (
+                    <p key={p} className="mt-4 leading-relaxed text-[var(--color-body)]/95 first:mt-6">
+                      {p}
+                    </p>
+                  ))}
+                </div>
+              </RevealOnScroll>
+            </div>
+          </div>
 
-          <h3 className="text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
-            <span className="inline-flex items-start gap-2 text-left">
-              <Sparkles className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.hypnoComplement2Title}</span>
-            </span>
-          </h3>
-          {x.hypnoComplement2.map((p) => (
-            <p key={p} className="leading-relaxed text-[var(--color-body)]/95">
-              {p}
-            </p>
-          ))}
-
-          <h3 className="text-center font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
-            <span className="inline-flex items-start gap-2 text-left">
-              <Heart className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
-              <span>{x.hypnoAdaptTitle}</span>
-            </span>
-          </h3>
-          <p className="leading-relaxed text-[var(--color-body)]/95">{x.hypnoAdapt}</p>
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            {/* Texte gauche, image droite */}
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
+              <RevealOnScroll variant="slide-right">
+                <div>
+                  <h3 className="font-display text-2xl font-semibold text-[var(--color-ink)] sm:text-3xl">
+                    <span className="inline-flex items-start gap-2 text-left">
+                      <Heart className="mt-1 h-6 w-6 shrink-0 text-[var(--color-brand)]" aria-hidden />
+                      <span>{x.hypnoAdaptTitle}</span>
+                    </span>
+                  </h3>
+                  <p className="mt-6 leading-relaxed text-[var(--color-body)]/95">{x.hypnoAdapt}</p>
+                </div>
+              </RevealOnScroll>
+              <RevealOnScroll variant="slide-left">
+                <figure className="mx-auto w-full max-w-[min(100%,20.5rem)] overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] sm:max-w-[min(100%,22.25rem)] lg:max-w-[min(100%,24rem)] lg:-translate-y-2">
+                  <img
+                    src={seance2Photo.src}
+                    alt={seance2Photo.alt}
+                    width={900}
+                    height={700}
+                    className="h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </figure>
+              </RevealOnScroll>
+            </div>
+          </div>
         </section>
 
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="mx-auto max-w-3xl">
         <SectionDivider />
 
         <div className="mt-8 sm:mt-12">
