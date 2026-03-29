@@ -1,5 +1,5 @@
 // src/contexts/accessibility-context.tsx
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AccessibilityContext } from './accessibility-context-value'
 
 const STORAGE_KEY = 'luxopuncture-open-dyslexic'
@@ -23,11 +23,13 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
     }
   }, [openDyslexicFont])
 
-  return (
-    <AccessibilityContext.Provider
-      value={{ openDyslexicFont, setOpenDyslexicFont: setOpenDyslexicFontState }}
-    >
-      {children}
-    </AccessibilityContext.Provider>
+  const value = useMemo(
+    () => ({
+      openDyslexicFont,
+      setOpenDyslexicFont: setOpenDyslexicFontState,
+    }),
+    [openDyslexicFont, setOpenDyslexicFontState],
   )
+
+  return <AccessibilityContext.Provider value={value}>{children}</AccessibilityContext.Provider>
 }

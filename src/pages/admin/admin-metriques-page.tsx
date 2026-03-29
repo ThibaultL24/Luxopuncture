@@ -54,8 +54,10 @@ export function AdminMetriquesPage() {
   const [storeVersion, setStoreVersion] = useState(0)
 
   // Après clearEvents(), on incrémente storeVersion pour relire le store (non réactif).
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- dépendance volontaire
-  const events = useMemo(() => readEvents(), [storeVersion])
+  const events = useMemo(() => {
+    void storeVersion
+    return readEvents()
+  }, [storeVersion])
   const filtered = useMemo(() => filterEventsByRange(events, rangeDays), [events, rangeDays])
   const overview = useMemo(() => aggregateOverview(filtered), [filtered])
   const chartDays = Math.min(rangeDays, 31)
