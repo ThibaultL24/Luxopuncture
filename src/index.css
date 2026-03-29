@@ -267,3 +267,13 @@ html[data-feather-cursor],
 html[data-feather-cursor] * {
   cursor: none !important;
 }
+
+/* Avis en grand : curseur natif lisible (la plume est sous le modal, z-index plus bas) */
+html[data-feather-cursor] .review-capture-lightbox-root,
+html[data-feather-cursor] .review-capture-lightbox-root * {
+  cursor: auto !important;
+}
+
+html[data-feather-cursor] .review-capture-lightbox-root button {
+  cursor: pointer !important;
+}

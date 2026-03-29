@@ -10,7 +10,7 @@ export function ProgrammeDetailPage() {
   const { services } = useSiteData()
   const service = slug ? getServiceBySlug(slug, services) : undefined
 
-  usePageTitle(service?.title ?? 'Programme')
+  usePageTitle(service?.title ?? 'À distance')
 
   if (!service) {
     return (

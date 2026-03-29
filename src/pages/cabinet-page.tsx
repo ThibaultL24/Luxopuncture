@@ -53,7 +53,7 @@ const [cabinetRoomPhoto, seancePhoto, seance2Photo] = cabinetAmbianceImages
 const [camille6LuxoPhoto, luxoSeancePhoto, luxoSeance2Photo] = luxopunctureCabinetPhotos
 
 export function CabinetPage() {
-  usePageTitle('Cabinet & accompagnements')
+  usePageTitle('Cabinet')
   const { services } = useSiteData()
   const x = cabinetLuxoHypnoCopy
 

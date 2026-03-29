@@ -36,11 +36,15 @@ export interface BookingCtaState {
   button: string
 }
 
-/** Réseaux d’une personne mise en avant (chaîne vide = icône affichée, lien « bientôt »). */
+/** Réseaux d’une personne mise en avant (chaîne vide = masqué sauf Instagram / Facebook / LinkedIn si utilisés ailleurs). */
 export interface PartenariatPartnerSocials {
   instagram: string
   facebook: string
   linkedin: string
+  /** Optionnel — profil GitHub. */
+  github?: string
+  /** Optionnel — profil X (Twitter). */
+  x?: string
 }
 
 export interface PartenariatPartnerCard {

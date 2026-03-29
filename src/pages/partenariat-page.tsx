@@ -7,7 +7,7 @@ import { useSiteData } from '../hooks/use-admin'
 import { usePageTitle } from '../hooks/use-page-title'
 
 export function PartenariatPage() {
-  usePageTitle('Partenariats & recommandations')
+  usePageTitle('Recommandations')
   const { partenariatPage: p } = useSiteData()
 
   return (

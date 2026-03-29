@@ -7,13 +7,13 @@ import { OpenDyslexicToggle } from './open-dyslexic-toggle'
 const footerLinks: readonly { to: string; label: string }[] = [
   { to: '/', label: 'Accueil' },
   { to: '/programme', label: 'À distance' },
-  { to: '/cabinet', label: 'Cabinet & la luxopuncture' },
+  { to: '/cabinet', label: 'Cabinet' },
   { to: '/tarifs', label: 'Tarifs' },
   { to: '/temoignages', label: 'Témoignages' },
-  { to: '/publications', label: 'Blog' },
   { to: '/a-propos', label: 'À propos' },
-  { to: '/partenariat', label: 'Partenariat' },
+  { to: '/recommandations', label: 'Recommandations' },
   { to: '/contact', label: 'Contact' },
+  { to: '/publications', label: 'Blog' },
 ] as const
 
 export function Footer() {

@@ -101,10 +101,14 @@ function mergePartenariatPartnerSocials(
   if (!over) return def
   const pick = (persisted: string, fallback: string) =>
     persisted.trim() !== '' ? persisted : fallback
+  const pickOpt = (persisted: string | undefined, fallback: string | undefined) =>
+    persisted !== undefined && persisted.trim() !== '' ? persisted : fallback
   return {
     instagram: pick(over.instagram, def.instagram),
     facebook: pick(over.facebook, def.facebook),
     linkedin: pick(over.linkedin, def.linkedin),
+    github: pickOpt(over.github, def.github),
+    x: pickOpt(over.x, def.x),
   }
 }
 

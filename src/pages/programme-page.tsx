@@ -164,7 +164,7 @@ export function ProgrammePage() {
             <figure className="order-2 overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm lg:order-1 lg:-translate-x-3 lg:translate-y-6">
               <img
                 src={media.detoxNotebook}
-                alt="Suivi et carnet d’accompagnement"
+                alt="Bilan offert — premier rendez-vous"
                 width={900}
                 height={700}
                 className="h-auto w-full object-cover"

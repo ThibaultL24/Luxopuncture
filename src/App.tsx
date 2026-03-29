@@ -51,7 +51,8 @@ export default function App() {
           <Route path="accueil" element={<AdminAccueilPage />} />
           <Route path="coordonnees" element={<AdminCoordonneesPage />} />
           <Route path="a-propos" element={<AdminAProposPage />} />
-          <Route path="partenariat" element={<AdminPartenariatPage />} />
+          <Route path="recommandations" element={<AdminPartenariatPage />} />
+          <Route path="partenariat" element={<Navigate to="/admin/recommandations" replace />} />
           <Route path="tarifs" element={<AdminTarifsPage />} />
           <Route path="programmes" element={<AdminProgrammesPage />} />
           <Route path="blog" element={<AdminBlogPage />} />
@@ -64,7 +65,8 @@ export default function App() {
           <Route path="cabinet" element={<CabinetPage />} />
           <Route path="programme" element={<ProgrammePage />} />
           <Route path="programme/:slug" element={<ProgrammeDetailPage />} />
-          <Route path="partenariat" element={<PartenariatPage />} />
+          <Route path="recommandations" element={<PartenariatPage />} />
+          <Route path="partenariat" element={<Navigate to="/recommandations" replace />} />
           <Route path="publications" element={<PublicationsPage />} />
           <Route path="publications/:slug" element={<PublicationDetailPage />} />
           <Route path="tarifs" element={<TarifsPage />} />

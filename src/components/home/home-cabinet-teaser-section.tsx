@@ -16,8 +16,8 @@ export function HomeCabinetTeaserSection() {
           <RevealOnScroll variant="slide-right" className="order-2 lg:order-1">
             <figure className="overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm lg:-translate-x-2 lg:translate-y-2">
               <img
-                src={media.tarifs}
-                alt="Cabinet — espace d’accueil"
+                src={media.homeCabinetTeaser}
+                alt="Bilan offert — premier rendez-vous"
                 width={900}
                 height={700}
                 className="h-auto w-full object-cover object-center"

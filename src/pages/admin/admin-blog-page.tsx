@@ -47,8 +47,8 @@ export function AdminBlogPage() {
   return (
     <div className="space-y-8">
       <AdminPageHeader
-        title="Blog / publications"
-        subtitle="Articles sur /publications — date au format AAAA-MM-JJ. Glisser-déposer une image de couverture ou un fichier .txt / .md pour le corps."
+        title="Blog"
+        subtitle="Articles sur /publications (blog) — date au format AAAA-MM-JJ. Glisser-déposer une image de couverture ou un fichier .txt / .md pour le corps."
       />
       <div className="flex justify-end">
         <button

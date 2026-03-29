@@ -9,8 +9,6 @@ import { ADMIN_SESSION_KEY, ADMIN_STORAGE_KEY, type AdminState } from '../lib/ad
 const DEFAULT_ADMIN_IDENTIFIER = 'camille123'
 const DEFAULT_ADMIN_PASSWORD = 'camille123'
 
-export type { AdminContextValue } from './admin-context-value'
-
 function loadStoredState(): AdminState {
   const defaults = getDefaultAdminState()
   try {

@@ -8,7 +8,7 @@ import { SectionHeading } from '../components/ui/section-heading'
 import { usePageTitle } from '../hooks/use-page-title'
 
 export function PublicationsPage() {
-  usePageTitle('Publications')
+  usePageTitle('Blog')
   const { publications } = useSiteData()
   const items = listPublicationsNewestFirst(publications)
 
@@ -18,7 +18,7 @@ export function PublicationsPage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
           <RevealOnScroll variant="fade-up">
             <SectionHeading
-              title="Publications"
+              title="Blog"
               subtitle="Articles et notes — actualités et éclairages sur la luxopuncture et le bien-être."
             />
           </RevealOnScroll>

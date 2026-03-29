@@ -16,16 +16,19 @@ export const media = {
   detoxVisio: '/images/camille7.jpeg',
   /** Page programme détox — section « Ce que ce programme peut vous apporter » */
   detoxWellbeing: '/images/sérénité.webp',
-  /** Page programme détox — carnet / suivi */
-  detoxNotebook: '/images/séance_découverte_offerte.jpeg',
-  tarifs: '/images/séance_découverte_offerte.jpeg',
+  /** Page programme À distance — section « Comment ça se passe » (visuel) */
+  detoxNotebook: '/images/bilan_offert2.jpeg',
+  /** Bandeau Tarifs + illustration associée (`pageIllustrations`) */
+  tarifs: '/images/bilan_offert1.jpeg',
+  /** Accueil — bloc « Je propose également des accompagnements au cabinet » (visuel) */
+  homeCabinetTeaser: '/images/bilan_offert1.jpeg',
   agenda: '/images/agenda.jpeg',
   /** Section accueil témoignages — présentation luxopuncture */
   presentationLuxopuncture: '/images/présentation_luxopuncture.mp4',
 } as const
 
 /** Visuels tuiles « PROGRAMME … » — page Cabinet uniquement (`public/images/cabinet/`) */
-export const cabinetProgramCardImages: Record<string, string> = {
+const cabinetProgramCardImages: Record<string, string> = {
   poids: '/images/cabinet/programme_perte_de_poid_accueil.png',
   stress: '/images/cabinet/programme_relaxation_accueil.png',
   menopause: '/images/cabinet/programme_menopause_accueil.png',
@@ -73,6 +76,7 @@ export const aboutPagePhoto = {
 
 /** Vidéos témoignages (dossier `public/images/témoignages/`) */
 export const testimonialVideoFiles: readonly string[] = [
+  'WhatsApp Video 2026-03-29 at 20.18.52.mp4',
   'WhatsApp Video 2026-03-22 at 21.24.50.mp4',
   'WhatsApp Video 2026-03-22 at 21.24.50 (1).mp4',
   'WhatsApp Video 2026-03-22 at 21.24.50 (2).mp4',

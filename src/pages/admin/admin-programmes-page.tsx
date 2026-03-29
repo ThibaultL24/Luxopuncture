@@ -54,7 +54,7 @@ export function AdminProgrammesPage() {
   return (
     <div className="space-y-8">
       <AdminPageHeader
-        title="Programmes"
+        title="À distance"
         subtitle="Chaque fiche correspond à une page /programme/… — le « slug » (lettres et tirets) doit être unique."
       />
       <div className="flex justify-end">

@@ -28,7 +28,7 @@ const rows: { variant: AdminSectionVariant; title: string; text: string }[] = [
   {
     variant: 'sand',
     title: 'Beige',
-    text: 'Infos complémentaires, partenariat, encadrés « chaleur ».',
+    text: 'Infos complémentaires, recommandations, encadrés « chaleur ».',
   },
   {
     variant: 'slate',

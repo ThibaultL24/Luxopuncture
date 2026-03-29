@@ -11,7 +11,7 @@ const navLinks = [
   { to: "/tarifs", label: "Tarifs" },
   { to: "/temoignages", label: "Témoignages" },
   { to: "/a-propos", label: "À propos" },
-  { to: "/partenariat", label: "Partenariat" },
+  { to: "/recommandations", label: "Recommandations" },
   { to: "/contact", label: "Contact" },
   { to: "/publications", label: "Blog" },
 ];

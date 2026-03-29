@@ -2,7 +2,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useId, useState } from 'react'
 
-export interface ImageCarouselSlide {
+interface ImageCarouselSlide {
   src: string
   alt: string
 }

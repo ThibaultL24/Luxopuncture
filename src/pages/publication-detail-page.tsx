@@ -10,14 +10,14 @@ export function PublicationDetailPage() {
   const { publications } = useSiteData()
   const pub = slug ? getPublicationBySlug(slug, publications) : undefined
 
-  usePageTitle(pub?.title ?? 'Publication')
+  usePageTitle(pub?.title ?? 'Blog')
 
   if (!pub) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-24 text-center">
         <h1 className="font-display text-2xl font-semibold text-[var(--color-ink)]">Article introuvable</h1>
         <Link to="/publications" className="mt-6 inline-block text-[var(--color-cta-hover)] hover:underline">
-          Retour aux publications
+          Retour au blog
         </Link>
       </div>
     )
@@ -28,7 +28,7 @@ export function PublicationDetailPage() {
       <SectionAtmosphere variant="soft" placement="both">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
           <RevealOnScroll variant="fade-up">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">Publication</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">Blog</p>
             <time
               dateTime={pub.date}
               className="mt-3 block text-sm font-medium text-[var(--color-body)]/80"
@@ -81,7 +81,7 @@ export function PublicationDetailPage() {
                 to="/publications"
                 className="inline-flex rounded-full border border-[var(--color-brand)]/30 px-6 py-3 text-sm font-semibold text-[var(--color-ink)]"
               >
-                Autres publications
+                Autres articles
               </Link>
             </div>
           </RevealOnScroll>

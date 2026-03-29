@@ -1,7 +1,7 @@
 // src/components/admin/admin-field.tsx
 import type { ChangeEvent } from 'react'
 
-export interface AdminFieldProps {
+interface AdminFieldProps {
   label: string
   value: string
   onChange: (value: string) => void

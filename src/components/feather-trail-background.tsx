@@ -11,8 +11,8 @@ function getReducedMotionSnapshot() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-/** Décale la plume vers le bas après centrage (proportionnel à la hauteur). */
-const FEATHER_SHIFT_DOWN_RATIO = 0.032;
+/** Décale la plume après centrage sur le viewport (0 = centre géométrique exact). */
+const FEATHER_SHIFT_DOWN_RATIO = 0.008;
 
 /** Aligné sur `src/index.css` — effet vanilla porté avec cette palette */
 const THEME = {
@@ -104,7 +104,7 @@ export function FeatherTrailBackground() {
 
     const DURATION = 8500;
     const HOLD_PORTION = 0.18;
-    let startTime = performance.now();
+    const startTime = performance.now();
 
     function featherSpineLocal(t: number): Point {
       const p0 = { x: width * 0.78, y: height * 0.12 };
@@ -214,7 +214,7 @@ export function FeatherTrailBackground() {
       c.clearRect(0, 0, width, height);
       const bg = c.createRadialGradient(
         width * 0.5,
-        height * 0.48,
+        height * 0.5,
         10,
         width * 0.5,
         height * 0.5,
@@ -457,7 +457,7 @@ export function FeatherTrailBackground() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 -z-10 h-svh min-h-0 w-full overflow-hidden mix-blend-multiply opacity-[0.38] mask-[radial-gradient(ellipse_85%_75%_at_50%_42%,black_20%,transparent_72%)]"
+      className="pointer-events-none fixed inset-0 -z-10 h-svh min-h-0 w-full overflow-hidden mix-blend-multiply opacity-[0.38] mask-[radial-gradient(ellipse_85%_75%_at_50%_50%,black_22%,transparent_72%)]"
       aria-hidden
     >
       <canvas ref={canvasRef} className="block h-full w-full" />

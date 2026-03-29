@@ -3,11 +3,25 @@ import { useEffect, useRef, useState } from 'react'
 import plumeSrc from '../assets/plume_curseur.png'
 
 const FEATHER_ATTR = 'data-feather-cursor'
+const DISPLAY_WIDTH_PX = 72
 const DISPLAY_HEIGHT_PX = 56
-/** Pointe de la plume ≈ hotspot (ajusté si DISPLAY_HEIGHT_PX change) */
-const HOTSPOT_X = -16
-const HOTSPOT_Y = -56
-const LERP_SMOOTH = 0.14
+/**
+ * PNG source carré 720×720 ; la tige (calame) utile au pointeur est en bas à droite.
+ * Coordonnées source du calame → espace d’affichage width×height.
+ */
+const SOURCE_PX = 720
+const STEM_SOURCE_X = 495
+const STEM_SOURCE_Y = 555
+const STEM_X = (STEM_SOURCE_X * DISPLAY_WIDTH_PX) / SOURCE_PX
+const STEM_Y = (STEM_SOURCE_Y * DISPLAY_HEIGHT_PX) / SOURCE_PX
+const STEM_ORIGIN_CSS = `${STEM_X}px ${STEM_Y}px`
+/** Décalage Y léger de la traînée (ajuster si besoin après changement de tige) */
+const TRAIL_Y_OFFSET_PX = 0
+/** Rapproche les premiers segments de la position actuelle de la plume (0 = désactivé) */
+const TRAIL_HEAD_GLUE = 0.38
+const TRAIL_HEAD_GLUE_FALLOFF = 7
+/** Plus élevé = la plume colle davantage au pointeur (moins de retard visuel). */
+const LERP_SMOOTH = 0.26
 const LERP_SNAP = 1
 /** Inclinaison de base vers la droite (positif = sens horaire) */
 const LEAN_RIGHT_DEG = 78
@@ -94,7 +108,7 @@ export function FeatherCursor() {
       const vy = velRef.current.y
       const tilt = Math.max(-22, Math.min(22, vx * 0.35 + vy * 0.06))
       const sway = reducedMotion ? 0 : Math.sin(now / 720) * 5
-      const bob = reducedMotion ? 0 : Math.sin(now / 500) * 1.2
+      const bob = reducedMotion ? 0 : Math.sin(now / 500) * 0.45
       const angle = tilt + sway + LEAN_RIGHT_DEG
 
       const px = posRef.current.x + bob
@@ -102,7 +116,7 @@ export function FeatherCursor() {
 
       const mainEl = mainRef.current
       if (mainEl) {
-        mainEl.style.transform = `translate3d(${px}px, ${py}px, 0) translate(${HOTSPOT_X}px, ${HOTSPOT_Y}px) rotate(${angle}deg)`
+        mainEl.style.transform = `translate3d(${px - STEM_X}px, ${py - STEM_Y}px, 0) rotate(${angle}deg)`
         mainEl.style.opacity = visibleRef.current ? '1' : '0'
       }
 
@@ -124,14 +138,21 @@ export function FeatherCursor() {
           el.style.opacity = '0'
           continue
         }
+        const head = samplesRef.current[0]
+        const glue = Math.max(0, 1 - i / TRAIL_HEAD_GLUE_FALLOFF) * TRAIL_HEAD_GLUE
+        const x = s.x + (head.x - s.x) * glue
+        const y = s.y + (head.y - s.y) * glue
         const t = i / (TRAIL_SLOTS - 1 || 1)
         const fade = 1 - t
         const opacity = (0.035 + fade * 0.3) * v
         const scale = 0.16 + fade * 0.4
-        const drift = reducedMotion ? 0 : Math.sin(now / 380 + i * 0.7) * (0.6 + t)
-        const angleTrail = s.angle * (0.88 - t * 0.12) + drift * 0.4 + LEAN_RIGHT_DEG
+        const driftAmp = i < 4 ? 0.22 : 1
+        const drift =
+          reducedMotion ? 0 : Math.sin(now / 380 + i * 0.7) * (0.6 + t) * driftAmp
+        const angleBase = s.angle + (head.angle - s.angle) * glue * 0.5
+        const angleTrail = angleBase * (0.88 - t * 0.12) + drift * 0.3 + LEAN_RIGHT_DEG
         el.style.opacity = String(opacity)
-        el.style.transform = `translate3d(${s.x}px, ${s.y}px, 0) translate(${HOTSPOT_X * scale}px, ${HOTSPOT_Y * scale}px) rotate(${angleTrail}deg) scale(${scale})`
+        el.style.transform = `translate3d(${x}px, ${y + TRAIL_Y_OFFSET_PX}px, 0) translate(${-STEM_X}px, ${-STEM_Y}px) rotate(${angleTrail}deg) scale(${scale})`
         el.style.filter = trailFilter(fade)
       }
 
@@ -163,12 +184,12 @@ export function FeatherCursor() {
           alt=""
           aria-hidden
           draggable={false}
-          width={52}
+          width={DISPLAY_WIDTH_PX}
           height={DISPLAY_HEIGHT_PX}
-          className="pointer-events-none fixed left-0 top-0 z-[10070] h-[42px] w-auto select-none will-change-transform [backface-visibility:hidden]"
+          className="pointer-events-none fixed left-0 top-0 z-[10070] h-[56px] w-auto select-none will-change-transform [backface-visibility:hidden]"
           style={{
             opacity: 0,
-            transformOrigin: '50% 100%',
+            transformOrigin: STEM_ORIGIN_CSS,
           }}
         />
       ))}
@@ -178,12 +199,12 @@ export function FeatherCursor() {
         alt=""
         aria-hidden
         draggable={false}
-        width={72}
+        width={DISPLAY_WIDTH_PX}
         height={DISPLAY_HEIGHT_PX}
         className="pointer-events-none fixed left-0 top-0 z-[10071] h-[56px] w-auto select-none will-change-transform [backface-visibility:hidden]"
         style={{
           opacity: 0,
-          transformOrigin: '50% 100%',
+          transformOrigin: STEM_ORIGIN_CSS,
           filter: MAIN_FILTER,
         }}
       />

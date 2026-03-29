@@ -1,4 +1,4 @@
-// src/data/partenariat-defaults.ts — fiches « recommandations » (page Partenariat)
+// src/data/partenariat-defaults.ts — fiches « recommandations » (page /recommandations)
 import type { PartenariatPartnerCard } from '../lib/admin-types'
 
 /** Contenu inspiré de la marque [CCC&BIO](https://cccetbio.fr/) — cosmétiques bio, France. */
@@ -27,6 +27,26 @@ export const defaultPartenariatPartnerCards: PartenariatPartnerCard[] = [
       instagram: 'https://www.instagram.com/_cccetbio/',
       facebook: 'https://www.facebook.com/share/1CVdewam2o/',
       linkedin: 'https://www.linkedin.com/in/caroline-gallouin-0a8242385/',
+    },
+  },
+  {
+    id: 'thibault-lenormand-dev',
+    name: 'Thibault Lenormand',
+    role: 'Développeur fullstack — je vous le recommande',
+    paragraphs: [
+      'Je tenais à mettre en avant **Thibault** : ce n’est pas une fiche “profil”, c’est une **recommandation**. Son parcours ne ressemble à aucun autre — **lettres modernes**, **théâtre** au Cours Florent, puis le **code** et le **web2 / web3**. On sent chez lui ce mélange rare : exigence sur les mots, goût pour le travail bien fait, et une vraie **écoute** quand il conçoit un outil ou une interface.',
+      'Formé au bootcamp **The Hacking Project**, il accompagne des projets qui vont du site classique aux sujets plus **techniques** (données, **IA**, **Web3**). Il s’implique aussi dans l’écosystème **Intuition**, où il porte une vision de la **réputation** et du **contrôle des données** plus équitable pour les utilisateurs. Quand il faut expliquer ou rédiger, son bagage littéraire fait la différence : les textes restent **clairs** et **humains**.',
+      'Si vous cherchez quelqu’un pour un **projet digital** — avec du **sens**, de la **pédagogie** et le souci du **détail** — vous pouvez le contacter via son **profil Malt** pour une mission ou un échange. Les liens ci-dessous permettent aussi de voir son travail et de le suivre.',
+    ],
+    images: [{ src: '/images/thibault-lenormand.png', alt: 'Thibault Lenormand' }],
+    websiteUrl: 'https://www.malt.fr/profile/thibaultlenormand1',
+    websiteLabel: 'Malt — missions & contact',
+    socials: {
+      instagram: '',
+      facebook: '',
+      linkedin: 'https://www.linkedin.com/in/thibault-lenormand-b38b96268/',
+      github: 'https://github.com/ThibaultL24',
+      x: 'https://x.com/ThibaultLENORM2',
     },
   },
 ]

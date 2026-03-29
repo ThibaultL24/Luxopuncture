@@ -11,7 +11,7 @@ export function AdminPartenariatPage() {
   return (
     <div className="space-y-8">
       <AdminPageHeader
-        title="Partenariat"
+        title="Recommandations"
         subtitle="Titres et textes d’intro / pied de page. Les fiches partenaires (visuels, paragraphes, liens) sont dans les données par défaut du site."
       />
 

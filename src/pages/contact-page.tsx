@@ -1,5 +1,5 @@
 // src/pages/contact-page.tsx
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Calendar, FileText, Mail, Phone } from 'lucide-react'
 import { media } from '../data/media'
 import { socialLinks } from '../data/site-content'
@@ -11,11 +11,15 @@ import {
 } from '../components/editorial'
 import { SectionHeading } from '../components/ui/section-heading'
 import { usePageTitle } from '../hooks/use-page-title'
-import { trackClick, trackFormSubmit } from '../lib/analytics'
+import { trackClick } from '../lib/analytics'
+import { ContactForm } from '../components/contact-form'
 
 export function ContactPage() {
   usePageTitle('Contact')
   const { contactInfo, site } = useSiteData()
+  const [searchParams] = useSearchParams()
+  const formSent = searchParams.get('envoye') === '1'
+
   return (
     <div className="bg-transparent">
       <SectionAtmosphere variant="soft" placement="both">
@@ -138,52 +142,17 @@ export function ContactPage() {
             </RevealOnScroll>
 
             <RevealOnScroll variant="slide-left" className="order-1 lg:order-2">
-              <div id="formulaire" className="rounded-3xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] p-8 shadow-sm lg:translate-y-1">
-                <h2 className="font-display text-xl font-semibold text-[var(--color-ink)]">Formulaire</h2>
-                <form
-                  className="mt-6 space-y-4"
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    trackFormSubmit('contact_form_intent')
-                  }}
-                >
-                  <label className="block text-sm font-medium text-[var(--color-ink)]">
-                    Nom
-                    <input
-                      type="text"
-                      name="name"
-                      className="mt-1.5 w-full rounded-xl border border-[var(--color-brand)]/15 bg-white px-4 py-3 text-sm outline-none ring-[var(--color-brand)] focus:ring-2"
-                      placeholder="Votre nom"
-                    />
-                  </label>
-                  <label className="block text-sm font-medium text-[var(--color-ink)]">
-                    Email
-                    <input
-                      type="email"
-                      name="email"
-                      className="mt-1.5 w-full rounded-xl border border-[var(--color-brand)]/15 bg-white px-4 py-3 text-sm outline-none ring-[var(--color-brand)] focus:ring-2"
-                      placeholder="vous@email.com"
-                    />
-                  </label>
-                  <label className="block text-sm font-medium text-[var(--color-ink)]">
-                    Message
-                    <textarea
-                      name="message"
-                      rows={4}
-                      className="mt-1.5 w-full resize-y rounded-xl border border-[var(--color-brand)]/15 bg-white px-4 py-3 text-sm outline-none ring-[var(--color-brand)] focus:ring-2"
-                      placeholder="Votre demande et disponibilités"
-                    />
-                  </label>
-                  <button
-                    type="submit"
-                    className="w-full rounded-full bg-[var(--color-cta)] px-6 py-3 text-sm font-bold text-[var(--color-on-cta)] shadow-sm transition hover:bg-[var(--color-cta-hover)] hover:text-white"
+              <div id="formulaire" className="scroll-mt-24">
+                {formSent ? (
+                  <p
+                    className="mb-6 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-900 dark:text-emerald-100"
+                    role="status"
                   >
-                    Envoyer
-                  </button>
-                </form>
-                <p className="mt-4 text-center text-xs text-[var(--color-body)]/70">
-                  {site.domain}
-                </p>
+                    Merci — votre message a bien été envoyé. Je vous réponds dès que possible.
+                  </p>
+                ) : null}
+                <ContactForm recipientEmail={contactInfo.email} />
+                <p className="mt-4 text-center text-xs text-[var(--color-body)]/70">{site.domain}</p>
               </div>
             </RevealOnScroll>
           </div>

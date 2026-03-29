@@ -1,9 +1,9 @@
-// src/components/review-capture-lightbox.tsx — z-[10060] : rester sous le curseur plume (feather-cursor z-[10071])
+// src/components/review-capture-lightbox.tsx — z-[10080] : au-dessus du curseur plume (feather z-[10070]–[10071])
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 
-export interface ReviewCaptureLightboxProps {
+interface ReviewCaptureLightboxProps {
   open: boolean
   onClose: () => void
   src: string
@@ -35,7 +35,7 @@ export function ReviewCaptureLightbox({ open, onClose, src, alt }: ReviewCapture
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[10060] flex items-center justify-center p-4 sm:p-6"
+      className="review-capture-lightbox-root fixed inset-0 z-[10080] flex cursor-auto items-center justify-center p-4 sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-label={alt ? `Avis : ${alt}` : 'Avis agrandi'}

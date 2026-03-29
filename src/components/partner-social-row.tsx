@@ -1,6 +1,6 @@
 // src/components/partner-social-row.tsx
 import type { ReactNode } from 'react'
-import { Facebook, Globe, Instagram, Linkedin } from 'lucide-react'
+import { Facebook, Github, Globe, Instagram, Linkedin, Twitter } from 'lucide-react'
 import type { PartenariatPartnerSocials } from '../lib/admin-types'
 
 const activeClass =
@@ -69,15 +69,31 @@ export function PartnerSocialRow({ websiteUrl, websiteLabel, socials, nameForLab
         </span>
       )}
       <div className="flex flex-wrap items-center gap-3" role="list" aria-label={`Réseaux de ${nameForLabel}`}>
-        <SocialSlot href={socials.instagram} label="Instagram">
-          <Instagram className="h-5 w-5" strokeWidth={1.75} aria-hidden />
-        </SocialSlot>
-        <SocialSlot href={socials.facebook} label="Facebook">
-          <Facebook className="h-5 w-5" strokeWidth={1.75} aria-hidden />
-        </SocialSlot>
-        <SocialSlot href={socials.linkedin} label="LinkedIn">
-          <Linkedin className="h-5 w-5" strokeWidth={1.75} aria-hidden />
-        </SocialSlot>
+        {socials.instagram?.trim() ? (
+          <SocialSlot href={socials.instagram} label="Instagram">
+            <Instagram className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+          </SocialSlot>
+        ) : null}
+        {socials.facebook?.trim() ? (
+          <SocialSlot href={socials.facebook} label="Facebook">
+            <Facebook className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+          </SocialSlot>
+        ) : null}
+        {socials.linkedin?.trim() ? (
+          <SocialSlot href={socials.linkedin} label="LinkedIn">
+            <Linkedin className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+          </SocialSlot>
+        ) : null}
+        {socials.github?.trim() ? (
+          <SocialSlot href={socials.github} label="GitHub">
+            <Github className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+          </SocialSlot>
+        ) : null}
+        {socials.x?.trim() ? (
+          <SocialSlot href={socials.x} label="X (Twitter)">
+            <Twitter className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+          </SocialSlot>
+        ) : null}
       </div>
     </div>
   )

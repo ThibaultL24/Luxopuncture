@@ -70,9 +70,9 @@ function defaultHomeCopy(): AdminState['homeCopy'] {
 
 function defaultPartenariat(): AdminState['partenariatPage'] {
   return {
-    pageTitle: 'Partenariats & recommandations',
+    pageTitle: 'Recommandations',
     pageSubtitle: '',
-    productsTitle: 'Recommandations',
+    productsTitle: 'À découvrir',
     productsBody:
       'Chaque fiche résume en quelques lignes le parcours et l’offre : n’hésitez pas à aller voir directement sur leurs sites ou leurs réseaux.',
     partners: clone(defaultPartenariatPartnerCards),

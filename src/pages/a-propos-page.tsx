@@ -69,9 +69,6 @@ export function AProposPage() {
 
               <div className="rounded-2xl border border-dashed border-[var(--color-brand)]/25 bg-[var(--color-surface-rose)] p-6">
                 <p className="font-medium text-[var(--color-ink)]">{bioCarouselIntro}</p>
-                <p className="mt-4 text-sm italic text-[var(--color-body)]/85">
-                  Carrousel d’exemples et de résultats — à intégrer (visuels fournis ultérieurement).
-                </p>
               </div>
 
               <RevealOnScroll variant="fade-up">

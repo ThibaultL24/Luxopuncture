@@ -17,11 +17,16 @@ const cards: { to: string; title: string; desc: string; variant: AdminSectionVar
     variant: 'slate',
   },
   { to: '/admin/a-propos', title: 'À propos', desc: 'Titre, présentation, paragraphes, diplômes.', variant: 'rose' },
-  { to: '/admin/partenariat', title: 'Partenariat', desc: 'Titres et textes de la page Partenariat.', variant: 'sand' },
+  {
+    to: '/admin/recommandations',
+    title: 'Recommandations',
+    desc: 'Titres et textes de la page Recommandations.',
+    variant: 'sand',
+  },
   { to: '/admin/tarifs', title: 'Tarifs', desc: 'Prix à distance, suivi, cabinet, informations complémentaires.', variant: 'mint' },
   {
     to: '/admin/programmes',
-    title: 'Programmes',
+    title: 'À distance',
     desc: 'Fiches programmes (cabinet) : texte, prix affichés sur les pages détail.',
     variant: 'brand',
   },

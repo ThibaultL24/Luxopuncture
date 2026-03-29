@@ -2,7 +2,7 @@
 import type { ReactNode } from 'react'
 import { useReveal } from '../../hooks/use-reveal'
 
-export type RevealVariant = 'fade-up' | 'fade' | 'slide-left' | 'slide-right' | 'scale'
+type RevealVariant = 'fade-up' | 'fade' | 'slide-left' | 'slide-right' | 'scale'
 
 interface RevealOnScrollProps {
   children: ReactNode

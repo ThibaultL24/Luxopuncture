@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     host: true,
-    allowedHosts: ['.ngrok-free.app'],
+    /** Sous-domaines ngrok (le tunnel change d’URL à chaque démarrage). Préfixe "." = ce domaine et ses sous-domaines. */
+    allowedHosts: ['.ngrok-free.app', '.ngrok.io', '.ngrok.app'],
   },
 })

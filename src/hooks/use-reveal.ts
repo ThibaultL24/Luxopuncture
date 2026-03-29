@@ -7,7 +7,7 @@ const defaultOptions: IntersectionObserverInit = {
   threshold: 0.08,
 }
 
-export interface UseRevealOptions {
+interface UseRevealOptions {
   /**
    * Si true : une fois visible, ne repasse pas en état « caché » quand le bloc sort du viewport
    * (évite que le hero redevienne invisible au scroll). Par défaut false : l’animation peut se rejouer.

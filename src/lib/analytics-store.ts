@@ -1,7 +1,7 @@
 // src/lib/analytics-store.ts — persistance locale des événements (navigateur)
 import type { AnalyticsEvent } from './analytics-types'
 
-export const ANALYTICS_STORAGE_KEY = 'laplace-analytics-events-v1'
+const ANALYTICS_STORAGE_KEY = 'laplace-analytics-events-v1'
 const MAX_EVENTS = 8000
 
 export function readEvents(): AnalyticsEvent[] {
@@ -16,7 +16,7 @@ export function readEvents(): AnalyticsEvent[] {
   }
 }
 
-export function writeEvents(events: AnalyticsEvent[]): void {
+function writeEvents(events: AnalyticsEvent[]): void {
   try {
     localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(events))
   } catch {
@@ -55,7 +55,7 @@ export function filterEventsByRange(events: AnalyticsEvent[], days: number): Ana
   return events.filter((e) => inRange(e.ts, days))
 }
 
-export interface AnalyticsOverview {
+interface AnalyticsOverview {
   pageViews: number
   uniqueVisitors: number
   clicks: number

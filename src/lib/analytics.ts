@@ -48,7 +48,7 @@ function maybeIngest(event: AnalyticsEvent): void {
   }
 }
 
-export function trackEvent(
+function trackEvent(
   type: AnalyticsEventType,
   path: string,
   label: string | null = null,
