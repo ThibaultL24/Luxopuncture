@@ -1,177 +1,210 @@
-# Kit UI — Laplace Luxopuncture
+# Kit UI & design — Laplace Luxopuncture
 
-Document de référence pour la direction artistique et les patterns d’interface du site. Les valeurs ci‑dessous proviennent de `src/index.css` et des composants existants.
+Référence **direction artistique** : **couleurs**, **typographie**, **CSS**, **composants**, **effets** et **principes de cohérence**. Les valeurs numériques (hex, rayons) proviennent de `src/index.css` (`@theme`).
+
+L’**architecture technique** du dépôt est décrite dans [`architecture.md`](./architecture.md).
 
 ---
 
 ## 1. Identité visuelle
 
-| Aspect           | Choix                                                                                                                                          |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Ambiance**     | Bien‑être, naturel, professionnel rassurant — verts profonds, beiges chauds, sans froideur clinique.                                           |
-| **Contraste**    | Le texte courant reste lisible sur fond crème ; les **actions** passent par un vert vif (`CTA`) pour se détacher du vert « chrome » (`brand`). |
-| **Forme**        | Beaucoup de **coins arrondis** (`rounded-full` pour les boutons, `rounded-2xl` / `rounded-3xl` pour cartes et blocs).                          |
-| **Mise en page** | Contenu centré, **`max-width: 72rem`** (`max-w-6xl`), marges latérales **`px-4` → `sm:px-6`**.                                                 |
+| Aspect | Choix |
+|--------|--------|
+| **Ambiance** | Bien-être, naturel, professionnel — verts profonds (chrome), beiges chauds légèrement rosés, **pas** de « clinique froide ». |
+| **Contraste** | Texte sur fond crème lisible ; **actions** via un vert **CTA** distinct du vert **brand** (barre nav / footer). |
+| **Forme** | Coins arrondis : `rounded-full` (boutons), `rounded-2xl` / `rounded-3xl` (cartes, blocs). |
+| **Mise en page** | Contenu centré, **`max-w-6xl`** (`72rem`), marges `px-4` → `sm:px-6`, sections verticales `py-16`–`py-24`. |
 
 ---
 
-## 2. Palette de couleurs
+## 2. Typographie
 
-Les couleurs sont déclarées en variables CSS dans `@theme` (`src/index.css`) et utilisées via `var(--color-*)` dans les composants.
+| Rôle | Police | Variable CSS |
+|------|--------|----------------|
+| Titres (display) | **Cormorant Garamond** | `--font-display` |
+| Corps & UI | **DM Sans** | `--font-sans` (défaut `body`) |
+| Option dyslexie | **OpenDyslexic** (remplace display + sans) | `html[data-dyslexic-font='true']` |
+
+**Chargement** : Google Fonts (Cormorant + DM Sans) dans `index.html` ; OpenDyslexic via `@fontsource` dans `main.tsx`.
+
+**Échelle indicative** : hero en `font-display` `text-4xl` → `lg:text-[3.25rem]` ; `SectionHeading` en display `text-3xl` → `lg:text-[2.75rem]` ; eyebrow en `text-xs`, `uppercase`, `tracking-[0.2em]`, couleur accent.
+
+---
+
+## 3. Palette de couleurs (`@theme` dans `index.css`)
+
+Les couleurs sont exposées en **variables CSS** et utilisées en Tailwind via `text-[var(--color-ink)]`, `bg-[var(--color-brand)]`, etc. (ou extensions si configurées).
 
 ### Fonds & surfaces
 
-| Token                 | Hex       | Usage                                            |
-| --------------------- | --------- | ------------------------------------------------ |
-| `--color-page`        | `#f8f6f1` | Fond principal de la page (blanc cassé / crème). |
-| `--color-beige`       | `#ebe7df` | Surfaces secondaires, zones douces.              |
-| `--color-beige-deep`  | `#d6cfc2` | Variante plus marquée si besoin de relief.       |
-| `--color-muted-green` | `#e3f0ed` | Bandes ou cartes très légères, halos du hero.    |
+| Token | Hex (réf.) | Usage |
+|-------|--------------|--------|
+| `--color-page` | `#faf6f2` | Fond « page » dans le dégradé |
+| `--color-beige` | `#efe5df` | Zone beige du dégradé |
+| `--color-beige-deep` | `#dcc9c0` | Extrémité chaude du dégradé |
+| `--color-beige-shadow` | `#c4a898` | Taupe rosé (référence extrême) |
+| `--color-beige-rose-end` | `#d4b8a8` | Fin du dégradé horizontal |
+| `--color-surface` | `#ffffff` | Cartes, encarts blancs |
+| `--color-surface-rose` | `#f8f6f1` | Fonds rosé très léger |
+| `--color-muted-green` | `#e3f0ed` | Halos, bandes douces |
 
-### Marque (chrome)
+### Chrome (navigation & footer)
 
-| Token                | Hex       | Usage                                                      |
-| -------------------- | --------- | ---------------------------------------------------------- |
-| `--color-brand`      | `#0f3d3a` | Barre de navigation, pied de page, textes sur fond sombre. |
-| `--color-brand-mid`  | `#165a54` | Dégradés (bannière CTA, etc.).                             |
-| `--color-brand-dark` | `#0a2c2a` | Renforcement (ex. menu mobile).                            |
+| Token | Hex | Usage |
+|-------|-----|--------|
+| `--color-brand` | `#23413b` | Nav, footer, texte sur fond sombre |
+| `--color-brand-mid` | `#2f5a52` | Survols, focus, dégradés CTA |
+| `--color-brand-dark` | `#1a322e` | Renforcement (ex. menu mobile) |
 
 ### Actions (CTA)
 
-| Token               | Hex       | Usage                                                                                     |
-| ------------------- | --------- | ----------------------------------------------------------------------------------------- |
-| `--color-cta`       | `#3ddc84` | Bouton principal, lien actif dans la nav — vert **plus organique** que le néon type SaaS. |
-| `--color-cta-hover` | `#2aa86a` | Survol : un cran plus soutenu, toujours naturel.                                          |
-| `--color-on-cta`    | `#0a1f1c` | Texte sur bouton CTA (contraste sur vert clair).                                          |
+| Token | Hex | Usage |
+|-------|-----|--------|
+| `--color-cta` | `#3ddc84` | Bouton principal, lien actif fort |
+| `--color-cta-hover` | `#2aa86a` | Survol |
+| `--color-on-cta` | `#0a1f1c` | Texte sur bouton CTA |
 
-### Texte & accent
+### Texte & accents
 
-| Token            | Hex       | Usage                                                                                                                                |
-| ---------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `--color-ink`    | `#0f2523` | Titres, texte fort.                                                                                                                  |
-| `--color-body`   | `#3d4a48` | Corps de texte, paragraphes.                                                                                                         |
-| `--color-accent` | `#a68b6a` | Surtitre / « eyebrow » + **ligne de séparation** légère sous l’eyebrow (`SectionHeading`) pour ancrer l’accent dans la mise en page. |
+| Token | Hex | Usage |
+|-------|-----|--------|
+| `--color-ink` | `#0f2523` | Titres, texte fort |
+| `--color-body` | `#3d4a48` | Corps de texte |
+| `--color-accent` | `#a68b6a` | Eyebrows, filets, détails |
 
-### Ombre
+### Plume / identité rose (logo, admin, curseur)
 
-| Token           | Valeur                                         | Usage                                                         |
-| --------------- | ---------------------------------------------- | ------------------------------------------------------------- |
-| `--shadow-soft` | double couche (teinte brand + noir très léger) | Ombre plus **diffuse et naturelle** que l’ombre unique forte. |
+| Token | Hex | Usage |
+|-------|-----|--------|
+| `--color-logo-feather` | `#e86888` | Référence teinte plume |
+| `--color-logo-feather-mid` | `#d45078` | Variantes |
+| `--color-logo-feather-deep` | `#a83858` | Variantes |
+| `--logo-png-filter` | `saturate(0.62) brightness(1.045)` | Classe `.logo-laplace` sur le PNG navbar |
 
-### Rayons & espacement (tokens optionnels)
+### Ombre & rythme
 
-| Token                         | Valeur             | Usage                                                             |
-| ----------------------------- | ------------------ | ----------------------------------------------------------------- |
-| `--radius-sm` … `--radius-xl` | `0.75rem` → `2rem` | Cartes, blocs — à réutiliser progressivement dans les composants. |
-| `--spacing-section`           | `5rem`             | Rythme vertical type entre grandes sections.                      |
-
----
-
-## 3. Typographie
-
-| Rôle                  | Police                                    | Chargement                                  |
-| --------------------- | ----------------------------------------- | ------------------------------------------- |
-| **Titres** (display)  | **Cormorant Garamond** — `font-display`   | Google Fonts : 500, 600, 700 + italique 500 |
-| **Interface & texte** | **DM Sans** — `font-sans` (défaut `body`) | Google Fonts : 400, 500, 600                |
-
-### Échelle indicative
-
-- **Hero** : `font-display`, `text-4xl` → `sm:text-5xl` → `lg:text-[3.25rem]`, `font-semibold`.
-- **Titres de section** (`SectionHeading`) : `text-3xl` → `sm:text-4xl` → `lg:text-[2.75rem]`.
-- **Surtitre (eyebrow)** : `text-xs`, `font-semibold`, `uppercase`, `tracking-[0.2em]` à `0.25em`, couleur `accent`.
-- **Sous-titre de section** : `text-lg`, `leading-relaxed`, `text-[var(--color-body)]/90`.
+| Token | Rôle |
+|-------|------|
+| `--shadow-soft` | Double couche (teinte brand + noir léger) — ombres cartes |
+| `--radius-sm` … `--radius-xl` | `0.75rem` → `2rem` |
+| `--spacing-section` | `5rem` — rythme vertical entre grandes sections |
 
 ---
 
-## 4. Composants récurrents
+## 4. Fond de page (dégradé fixe)
 
-### Bouton principal
+- **Un seul** dégradé horizontal, **fixe** (`body::before`, `z-index: -1`), défini par `--page-bg-gradient` : blanc → crème → beige → rose-beige.
+- **Pas** d’alternance de fond par section : le contenu est en `background: transparent` ; seules **cartes** et **blocs** apportent une surface opaque (`--color-surface`, etc.).
 
-- `rounded-full`, `bg-[var(--color-cta)]`, `text-[var(--color-on-cta)]`, `font-bold`, `text-sm`, padding type `px-8 py-3.5`.
-- Hover : `hover:bg-[var(--color-cta-hover)]`, souvent `hover:text-white`.
-- Ombre optionnelle : `shadow-[var(--shadow-soft)]`.
+---
 
-### Bouton secondaire
+## 5. Grain & effets de surface
 
-- `rounded-full`, `border border-[var(--color-brand)]/25`, fond `bg-white/90`, `backdrop-blur`, texte `ink`.
-- Hover : bordure renforcée, fond plus opaque.
+| Élément | Implémentation |
+|---------|----------------|
+| **Grain** | Classe `.site-grain` sur `<main>` : `::after` avec `repeating-linear-gradient`, opacité très faible, léger bruit visuel. |
+| **Glass** | `.glass-soft` : blanc semi-transparent + `backdrop-filter: blur` (désactivé si `prefers-reduced-motion` / pas de blur forcé). |
 
-### Titres de section
+---
 
-- Composant `SectionHeading` : surtitre optionnel (accent), titre display (ink), sous-titre optionnel. Alignement par défaut **centré**, `max-w-3xl`.
+## 6. Animations & éditorial
 
-### Cartes de contenu
+### Reveal au scroll (`RevealOnScroll` + composants editorial)
 
-- Souvent : `rounded-2xl`, `border border-[var(--color-brand)]/10`, fond `white` ou `bg-[var(--color-page)]`, `shadow-sm`.
+Classes CSS dans `index.css` :
 
-### Barre de navigation
+- `.reveal` + variantes : `reveal--fade-up`, `reveal--fade`, `reveal--slide-left`, `reveal--slide-right`, `reveal--scale`
+- Transition `opacity` + `transform` ; état visible `.reveal--visible`
+- **`prefers-reduced-motion: reduce`** : passages en visible sans animation
 
-- Fond `brand`, texte blanc ; lien actif = **pill** avec fond `cta` et texte `on-cta`.
-- CTA « Réserver » : même style que le bouton principal.
+### SectionAtmosphere (`SectionAtmosphere`)
+
+Fonds de section alternés (variants `soft`, `medium`, diagonal) pour structurer visuellement sans changer le dégradé global de page.
+
+### Banderole d’avis (`reviews-marquee`)
+
+- `@keyframes reviews-marquee` — translation horizontale, durée ~55s, linéaire, infini
+- `.reviews-marquee-track:hover` → `animation-play-state: paused`
+
+### Curseur plume (`FeatherCursor` + `FeatherTrailBackground`)
+
+- Canvas / overlay sur le site **public** uniquement
+- `html[data-feather-cursor]` → curseur natif masqué ; exceptions pour lightbox avis (curseur normal)
+- **Admin** : pas de curseur plume
+
+---
+
+## 7. Composants récurrents (patterns)
+
+### Boutons
+
+- **Primaire** : `rounded-full`, `bg-[var(--color-cta)]`, `text-[var(--color-on-cta)]`, `font-bold`, hover `hover:bg-[var(--color-cta-hover)]`
+- **Secondaire** : bordure `brand`, fond blanc / semi-transparent
+
+### `SectionHeading`
+
+Surtitre (eyebrow) optionnel en accent, titre display, sous-titre optionnel ; souvent centré, `max-w-3xl`.
+
+### Cartes
+
+- `rounded-2xl`, `border` vert léger, `bg-[var(--color-surface)]` ou blanc, `shadow-sm` ou `shadow-[var(--shadow-soft)]`
+
+### Navigation
+
+- Fond `--color-brand`, texte clair ; lien actif = **pilule** avec fond `--color-cta` et `--color-on-cta`
 
 ### Bandeau CTA pleine largeur
 
-- Dégradé `from brand-mid via brand to brand-dark`, texte blanc, titre en `font-display`, bouton CTA identique au primaire.
+- Dégradé `brand-mid` → `brand` → `brand-dark`, texte blanc, titre en `font-display`
 
-### Banderole d’avis (captures)
+### Icônes
 
-- Piste en flex + animation `reviews-marquee` (~55 s, linéaire, infini) ; pause au survol (`animation-play-state: paused`).
-
----
-
-## 5. Iconographie
-
-- Icônes : **Lucide React** (`lucide-react`), taille souvent `h-4 w-4` à `h-5 w-5`, couleur héritée ou `text-[var(--color-cta-hover)]` pour les étoiles.
+- **Lucide React** — tailles courantes `h-4 w-4` à `h-6 w-6`
 
 ---
 
-## 6. Images
+## 8. Images
 
-- Photos : `object-cover` dans des cadres arrondis ; hero avec `rounded-[2rem]` et léger dégradé sombre en bas pour légende.
-- Captures d’avis : `object-contain` dans des cartes étroites pour préserver la lecture du texte sur l’image.
-
----
-
-## 7. Principes à respecter pour rester cohérent
-
-1. **Ne pas introduire** de nouvelle couleur de marque forte hors de la palette (garder le duo vert profond + vert CTA + beige).
-2. **Reserver le CTA vert** aux actions principales (réserver, contact, lien actif important) — éviter de l’utiliser pour de gros aplats de fond.
-3. **Titres** : toujours en **Cormorant Garamond** — ne pas mélanger une autre serif pour les H1–H2.
-4. **Espacements** : privilégier la grille `max-w-6xl` + `py-16` / `py-20` / `py-24` pour les sections verticales.
-5. **Accessibilité** : conserver des contrastes suffisants (texte `body` sur `page` ; boutons CTA avec `on-cta`).
-6. **Focus clavier** : `focus-visible` — contour `brand-mid` sur le contenu clair, **`cta` dans le `<header>`** (fond sombre) ; boutons `disabled` atténués.
+- Photos : souvent `object-cover` dans cadres arrondis ; hero avec coins arrondis larges.
+- Captures d’avis : `object-contain` pour préserver la lecture du texte.
 
 ---
 
-## 8. Conversion & contenu (hors pure DA)
+## 9. Accessibilité
 
-Checklist produit — le design soutient, le **message** convertit :
-
-| Levier     | Vérification                                                                        |
-| ---------- | ----------------------------------------------------------------------------------- |
-| Hero       | Bénéfice lisible en une phrase + CTA principal au-dessus de la ligne de flottaison. |
-| Répétition | CTA « Réserver / Contact » visible après scroll (bandeau, footer).                  |
-| Preuve     | Témoignages (captures + vidéos) accessibles depuis l’accueil.                       |
-| Friction   | Parcours contact simple, peu de champs inutiles.                                    |
+- **Focus** : `:focus-visible` — contour `brand-mid` ; dans le **header** (fond sombre), outline **CTA** pour contraste.
+- **Dyslexie** : toggle → `data-dyslexic-font` sur `<html>`.
+- **Mouvement réduit** : reveals et glass adaptés (voir sections ci-dessus).
 
 ---
 
-## 9. Fichiers sources utiles
+## 10. Espace admin (shell)
 
-| Fichier                                 | Rôle                                                  |
-| --------------------------------------- | ----------------------------------------------------- |
-| `src/index.css`                         | Tokens `@theme`, animation banderole, styles de base. |
-| `index.html`                            | Chargement des polices Google.                        |
-| `src/components/ui/section-heading.tsx` | Pattern titre de section.                             |
-| `src/components/home/hero-section.tsx`  | Hero, CTA, gradient de fond.                          |
-| `src/components/layout/navbar.tsx`      | Navigation et états actifs.                           |
+- `.admin-shell` : fond `--color-surface-rose` + léger **radial-gradient** vert
+- `.admin-input` : champs formulaire cohérents avec la palette admin (bordures `brand` douces)
 
 ---
 
-## 10. Note de synthèse (review produit)
+## 11. Principes pour rester cohérent
 
-Direction artistique et **système** (tokens, séparation brand / CTA, doc) sont au niveau « site vitrine premium ». Le prochain palier est surtout **conversion** : hiérarchie du hero, répétition des CTA, preuves sociales et friction contact — itérer avec tests utilisateurs ou analytics plutôt que seulement la palette.
+1. Ne pas introduire de **nouvelle couleur de marque** hors palette (brand / CTA / beige / accent).
+2. Réserver le **vert CTA** aux actions principales — pas pour de grands aplats de fond.
+3. **Titres** : rester sur **Cormorant Garamond** pour les H1–H2 de marque.
+4. **Espacements** : privilégier `max-w-6xl` + rythme vertical homogène entre sections.
+5. **Contraste** : `body` sur fond page ; `on-cta` sur boutons CTA.
 
 ---
 
-_Ce document peut être mis à jour lorsque de nouveaux tokens ou composants sont ajoutés au projet._
+## 12. Fichiers sources utiles
+
+| Fichier | Rôle |
+|---------|------|
+| `src/index.css` | `@theme`, `body::before`, animations, reveal, marquee, grain, curseur |
+| `index.html` | Polices Google, meta de base |
+| `src/components/ui/section-heading.tsx` | Titres de section |
+| `src/components/layout/site-layout.tsx` | Shell, grain, JSON-LD, curseur |
+| `src/components/editorial/` | Reveal, sections, dividers |
+
+---
+
+*Document à mettre à jour lorsque de nouveaux tokens ou composants sont ajoutés.*

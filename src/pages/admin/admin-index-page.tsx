@@ -5,42 +5,45 @@ import { AdminPageHeader } from '../../components/admin/admin-page-header'
 
 const cards: { to: string; title: string; desc: string; variant: AdminSectionVariant }[] = [
   {
-    to: '/admin/accueil',
-    title: 'Page d’accueil',
-    desc: 'Texte du bandeau principal, blocs « accroche », détox, à distance, témoignages, bandeau vert en bas.',
-    variant: 'brand',
-  },
-  {
     to: '/admin/coordonnees',
-    title: 'Coordonnées & nom du site',
-    desc: 'Téléphone, e-mail, adresse, horaires, nom affiché sur le site et footer.',
+    title: 'Coordonnées & site',
+    desc: 'Téléphone, e-mail, adresse, horaires, nom du site — appliqués partout (footer, contact, SEO).',
     variant: 'slate',
   },
-  { to: '/admin/a-propos', title: 'À propos', desc: 'Titre, présentation, paragraphes, diplômes.', variant: 'rose' },
   {
     to: '/admin/recommandations',
     title: 'Recommandations',
-    desc: 'Titres et textes de la page Recommandations.',
+    desc: 'Page partenariat : textes et fiches (ajouter ou retirer des personnes mises en avant).',
     variant: 'sand',
   },
-  { to: '/admin/tarifs', title: 'Tarifs', desc: 'Prix à distance, suivi, cabinet, informations complémentaires.', variant: 'mint' },
+  {
+    to: '/admin/tarifs',
+    title: 'Tarifs',
+    desc: 'Programme à distance, suivi, séances au cabinet, encadré d’informations.',
+    variant: 'mint',
+  },
   {
     to: '/admin/programmes',
-    title: 'À distance',
-    desc: 'Fiches programmes (cabinet) : texte, prix affichés sur les pages détail.',
+    title: 'Programmes',
+    desc: 'Fiches programmes (cabinet) : textes et visuels des pages détail.',
     variant: 'brand',
   },
-  { to: '/admin/blog', title: 'Blog', desc: 'Articles : ajouter, modifier, supprimer.', variant: 'mint' },
+  {
+    to: '/admin/blog',
+    title: 'Blog',
+    desc: 'Articles : ajouter, modifier, supprimer.',
+    variant: 'mint',
+  },
   {
     to: '/admin/temoignages',
     title: 'Témoignages',
-    desc: 'Avis écrits, vidéos ; images du bandeau défilant.',
+    desc: 'Avis écrits, vidéos, bandeau d’images.',
     variant: 'rose',
   },
   {
     to: '/admin/metriques',
     title: 'Métriques',
-    desc: 'Indicateurs (pages vues, clics suivis) — données locales ou export JSON.',
+    desc: 'Indicateurs locaux et export des événements (pages vues, clics).',
     variant: 'mint',
   },
 ]
@@ -58,7 +61,7 @@ export function AdminIndexPage() {
     <div className="space-y-8">
       <AdminPageHeader
         title="Vue d’ensemble"
-        subtitle="Choisissez une rubrique. Les changements sont enregistrés automatiquement dans ce navigateur — pensez à télécharger une sauvegarde (JSON) après des modifications importantes. Les bandes colorées sur les cartes suivent la légende affichée au-dessus."
+        subtitle="Les changements sont enregistrés dans ce navigateur (localStorage). Exportez un JSON après des modifications importantes. L’accueil et la page À propos restent édités dans le code du dépôt."
       />
 
       <ul className="grid gap-4 sm:grid-cols-2">

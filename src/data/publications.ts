@@ -106,7 +106,7 @@ export const defaultPublications: Publication[] = [
       'Son développement s’explique en partie par une évolution des attentes : de plus en plus de personnes recherchent des approches douces, sans médicament, capables d’agir à la fois sur le corps et sur le comportement. La luxopuncture s’inscrit dans cette tendance, en proposant une intervention rapide, généralement organisée en plusieurs séances rapprochées.',
       'Si elle ne dispose pas encore d’un corpus scientifique équivalent à celui de disciplines médicales plus anciennes, elle s’inscrit néanmoins dans une logique cohérente avec les recherches actuelles sur les interactions entre système nerveux, émotions et comportements. À ce titre, elle trouve sa place comme outil d’accompagnement, notamment dans des démarches de changement où la dimension comportementale est centrale.',
     ],
-    coverImage: '/images/blog/article-1.png',
+    coverImage: '/images/blog/luxopuncture-soin.png',
   },
 ]
 

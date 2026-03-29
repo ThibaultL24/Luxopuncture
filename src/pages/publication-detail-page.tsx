@@ -1,16 +1,43 @@
 // src/pages/publication-detail-page.tsx
-import { Link, useParams } from 'react-router-dom'
+import { useMemo } from 'react'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { useSiteData } from '../hooks/use-admin'
 import { formatPublicationDate, getPublicationBySlug } from '../data/publications'
 import { RevealOnScroll, SectionAtmosphere, SectionDivider } from '../components/editorial'
+import { JsonLd } from '../components/seo/json-ld'
 import { usePageTitle } from '../hooks/use-page-title'
+import { buildBlogPostingJsonLd, buildBreadcrumbJsonLd, siteOrigin } from '../lib/schema-org'
 
 export function PublicationDetailPage() {
   const { slug } = useParams()
-  const { publications } = useSiteData()
+  const location = useLocation()
+  const { publications, site, aboutPage } = useSiteData()
   const pub = slug ? getPublicationBySlug(slug, publications) : undefined
 
   usePageTitle(pub?.title ?? 'Blog')
+
+  const articleLd = useMemo(() => {
+    if (!pub) return null
+    const origin = siteOrigin(site)
+    const pageUrl = `${origin}${location.pathname}`
+    return buildBlogPostingJsonLd({
+      origin,
+      siteName: site.name,
+      practitionerName: aboutPage.name,
+      pub,
+      pageUrl,
+    })
+  }, [pub, site, aboutPage.name, location.pathname])
+
+  const breadcrumbLd = useMemo(() => {
+    if (!pub) return null
+    const origin = siteOrigin(site)
+    return buildBreadcrumbJsonLd(origin, [
+      { name: 'Accueil', path: '/' },
+      { name: 'Blog', path: '/publications' },
+      { name: pub.title, path: location.pathname },
+    ])
+  }, [pub, site, location.pathname])
 
   if (!pub) {
     return (
@@ -25,6 +52,8 @@ export function PublicationDetailPage() {
 
   return (
     <article className="bg-transparent">
+      {articleLd ? <JsonLd data={articleLd} /> : null}
+      {breadcrumbLd ? <JsonLd data={breadcrumbLd} /> : null}
       <SectionAtmosphere variant="soft" placement="both">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:py-24">
           <RevealOnScroll variant="fade-up">
@@ -44,7 +73,7 @@ export function PublicationDetailPage() {
               <div className="mt-10 overflow-hidden rounded-2xl border border-[var(--color-brand)]/10 bg-[var(--color-surface)] shadow-sm">
                 <img
                   src={pub.coverImage}
-                  alt=""
+                  alt={pub.title}
                   className="h-auto w-full object-contain object-center"
                   width={1200}
                   height={800}

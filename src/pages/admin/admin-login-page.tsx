@@ -34,7 +34,8 @@ export function AdminLoginPage() {
             <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-brand)]/85">Espace réservé</p>
             <h1 className="mt-2 font-display text-2xl font-semibold text-[var(--color-ink)]">Administration</h1>
             <p className="mt-2 text-sm text-[var(--color-body)]/85">
-              Les modifications sont enregistrées dans ce navigateur (localStorage).
+              Coordonnées, recommandations, tarifs, programmes, blog, témoignages, métriques — enregistrement dans ce
+              navigateur (localStorage).
             </p>
             <form onSubmit={handleSubmit} className="mt-8 space-y-4">
               <label className="block text-sm font-medium text-[var(--color-ink)]">

@@ -15,16 +15,14 @@ import { TemoignagesPage } from './pages/temoignages-page'
 import { RequireAdmin } from './components/admin/require-admin'
 import { AdminLayout } from './pages/admin/admin-layout'
 import { AdminIndexPage } from './pages/admin/admin-index-page'
-import { AdminAccueilPage } from './pages/admin/admin-accueil-page'
+import { AdminBlogPage } from './pages/admin/admin-blog-page'
+import { AdminTemoignagesPage } from './pages/admin/admin-temoignages-page'
 import { AdminCoordonneesPage } from './pages/admin/admin-coordonnees-page'
-import { AdminAProposPage } from './pages/admin/admin-a-propos-page'
 import { AdminPartenariatPage } from './pages/admin/admin-partenariat-page'
 import { AdminTarifsPage } from './pages/admin/admin-tarifs-page'
 import { AdminProgrammesPage } from './pages/admin/admin-programmes-page'
-import { AdminBlogPage } from './pages/admin/admin-blog-page'
-import { AdminTemoignagesPage } from './pages/admin/admin-temoignages-page'
-import { AdminLoginPage } from './pages/admin/admin-login-page'
 import { AdminMetriquesPage } from './pages/admin/admin-metriques-page'
+import { AdminLoginPage } from './pages/admin/admin-login-page'
 import { AnalyticsRouteTracker } from './components/analytics-route-tracker'
 
 function RedirectPrestationSlugToProgramme() {
@@ -48,9 +46,7 @@ export default function App() {
           }
         >
           <Route index element={<AdminIndexPage />} />
-          <Route path="accueil" element={<AdminAccueilPage />} />
           <Route path="coordonnees" element={<AdminCoordonneesPage />} />
-          <Route path="a-propos" element={<AdminAProposPage />} />
           <Route path="recommandations" element={<AdminPartenariatPage />} />
           <Route path="partenariat" element={<Navigate to="/admin/recommandations" replace />} />
           <Route path="tarifs" element={<AdminTarifsPage />} />
@@ -58,6 +54,7 @@ export default function App() {
           <Route path="blog" element={<AdminBlogPage />} />
           <Route path="temoignages" element={<AdminTemoignagesPage />} />
           <Route path="metriques" element={<AdminMetriquesPage />} />
+          <Route path="*" element={<Navigate to="/admin" replace />} />
         </Route>
         <Route element={<SiteLayout />}>
           <Route index element={<HomePage />} />

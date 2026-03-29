@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AdminContext } from './admin-context-value'
 import { getDefaultAdminState } from '../lib/admin-defaults'
-import { mergeAdminState, mergeImportedAdminState } from '../lib/admin-merge'
+import { mergeImportedAdminState, persistedAdminPayload } from '../lib/admin-merge'
 import { ADMIN_SESSION_KEY, ADMIN_STORAGE_KEY, type AdminState } from '../lib/admin-types'
 
 /** Valeurs par défaut (surchargeables via VITE_ADMIN_IDENTIFIER / VITE_ADMIN_PASSWORD) */
@@ -10,14 +10,13 @@ const DEFAULT_ADMIN_IDENTIFIER = 'camille123'
 const DEFAULT_ADMIN_PASSWORD = 'camille123'
 
 function loadStoredState(): AdminState {
-  const defaults = getDefaultAdminState()
   try {
     const raw = localStorage.getItem(ADMIN_STORAGE_KEY)
-    if (!raw) return defaults
+    if (!raw) return getDefaultAdminState()
     const parsed = JSON.parse(raw) as Partial<AdminState>
-    return mergeAdminState(defaults, parsed)
+    return mergeImportedAdminState(parsed)
   } catch {
-    return defaults
+    return getDefaultAdminState()
   }
 }
 
@@ -31,7 +30,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(state))
+      localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(persistedAdminPayload(state)))
     } catch {
       /* quota */
     }
@@ -59,7 +58,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     setStateInternal(getDefaultAdminState())
   }, [])
 
-  const exportStateJson = useCallback(() => JSON.stringify(state, null, 2), [state])
+  const exportStateJson = useCallback(() => JSON.stringify(persistedAdminPayload(state), null, 2), [state])
 
   const importState = useCallback((json: string) => {
     try {

@@ -2,7 +2,7 @@
 
 Site web pour **Camille Laplace**, luxothérapeute et hypnothérapeute à **Avignon**. Il présente la **luxopuncture** (méthode douce sans aiguilles), les **programmes** au cabinet (perte de poids, tabac, stress, ménopause, etc.), le **programme détox 21 jours à distance**, les **tarifs**, les **témoignages** (vidéos et avis), le **blog** / publications, la page **partenariat / recommandations**, et les **coordonnées** avec formulaire de contact.
 
-Domaine de référence : **laplaceluxopuncture.fr** (configurable dans les textes / admin).
+Domaine de référence : **laplaceluxopuncture.fr** (partie du contenu éditable via `/admin`, voir ci‑dessous).
 
 ---
 
@@ -46,13 +46,19 @@ Les pages consomment ces données via **`useSiteData()`** (`src/hooks/use-admin.
 
 ### Zone `/admin`
 
-- **Authentification** : login sur `/admin/login` ; session en **sessionStorage** ; identifiants surchargeables par **`VITE_ADMIN_IDENTIFIER`** et **`VITE_ADMIN_PASSWORD`** (voir `.env.example`).
-- **Persistance** : état éditable sérialisé en **localStorage** (clé définie dans `src/lib/admin-types.ts`), fusionné avec **`getDefaultAdminState()`** (`src/lib/admin-defaults.ts`) pour rester compatible après évolutions du schéma.
-- **Import / export JSON** : sauvegarde et restauration du contenu depuis l’interface admin (`mergeImportedAdminState` dans `src/lib/admin-merge.ts`).
+- **Périmètre éditable** : **coordonnées & branding** (`contactInfo`, `site`), **recommandations** (`partenariatPage`), **tarifs**, **programmes** (`services`), **blog** (`publications`), **témoignages** (avis, vidéos, bandeau). **Métriques** : lecture / export des événements analytics locaux (pas dans le même JSON de sauvegarde).
+- **Hors admin (code)** : page d’**accueil** (`homeCopy`, hero…), page **À propos** (`aboutPage`) — à modifier dans le dépôt puis rebuild.
+- **Authentification** : `/admin/login` ; **sessionStorage** ; identifiants via **`VITE_ADMIN_IDENTIFIER`** / **`VITE_ADMIN_PASSWORD`** (voir `.env.example`).
+- **Persistance** : les champs ci‑dessus (sauf métriques) sont en **localStorage** et dans l’**export JSON** (`persistedAdminPayload` / `mergeImportedAdminState` dans `src/lib/admin-merge.ts`). Les très anciennes sauvegardes contenant encore hero / booking / about déclenchent une fusion complète une fois (`isLegacyFullAdminPersist`).
 
 ### Analytics
 
 - Suivi de navigation léger côté client (`AnalyticsRouteTracker`, `src/lib/analytics*.ts`) ; URL d’ingestion optionnelle via **`VITE_ANALYTICS_INGEST_URL`**.
+
+### SEO (Schema.org)
+
+- **JSON-LD** injecté sur le site public : `Organization`, `LocalBusiness` / `HealthAndBeautyBusiness`, `WebSite`, `WebPage` par route, `BlogPosting` + fil d’Ariane sur les articles — implémentation dans **`src/lib/schema-org.ts`** et **`src/components/seo/`** (voir aussi **`docs/architecture.md`**).
+- URL canonique du site pour les graphes : **`VITE_SITE_URL`** (optionnel, `.env.example`) ou domaine défini dans l’admin.
 
 ### Contact
 
@@ -73,7 +79,7 @@ Les pages consomment ces données via **`useSiteData()`** (`src/hooks/use-admin.
 | `/recommandations` | Partenariat (alias `/partenariat` → redirection) |
 | `/a-propos`, `/contact` | Praticienne, contact |
 | `/admin/login` | Connexion |
-| `/admin/*` | Édition contenu (accueil, coordonnées, programmes, blog, témoignages, métriques, …) |
+| `/admin/*` | Coordonnées, recommandations, tarifs, programmes, blog, témoignages, métriques |
 
 ---
 
@@ -115,4 +121,7 @@ Fichiers présents pour le routage SPA (rechargement des URLs profondes) :
 
 ## Documentation interne
 
-Le fichier `docs/design-et-parcours-pages.md` décrit le parcours et les pages si besoin de contexte produit plus détaillé.
+| Document | Contenu |
+|----------|---------|
+| [`docs/architecture.md`](docs/architecture.md) | Stack, structure du dépôt, données, admin, SEO, routes, déploiement |
+| [`docs/ui-kit.md`](docs/ui-kit.md) | Design, tokens CSS, composants, effets, couleurs, accessibilité |

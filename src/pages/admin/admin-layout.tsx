@@ -7,12 +7,10 @@ import { OpenDyslexicToggle } from '../../components/layout/open-dyslexic-toggle
 
 const navItems: { to: string; label: string; end?: boolean }[] = [
   { to: '/admin', label: 'Vue d’ensemble', end: true },
-  { to: '/admin/accueil', label: 'Page d’accueil' },
   { to: '/admin/coordonnees', label: 'Coordonnées & site' },
-  { to: '/admin/a-propos', label: 'À propos' },
   { to: '/admin/recommandations', label: 'Recommandations' },
   { to: '/admin/tarifs', label: 'Tarifs' },
-  { to: '/admin/programmes', label: 'À distance' },
+  { to: '/admin/programmes', label: 'Programmes' },
   { to: '/admin/blog', label: 'Blog' },
   { to: '/admin/temoignages', label: 'Témoignages' },
   { to: '/admin/metriques', label: 'Métriques' },
@@ -33,7 +31,7 @@ export function AdminLayout() {
     const blob = new Blob([exportStateJson()], { type: 'application/json' })
     const a = document.createElement('a')
     a.href = URL.createObjectURL(blob)
-    a.download = `laplace-site-${new Date().toISOString().slice(0, 10)}.json`
+    a.download = `laplace-admin-${new Date().toISOString().slice(0, 10)}.json`
     a.click()
     URL.revokeObjectURL(a.href)
   }

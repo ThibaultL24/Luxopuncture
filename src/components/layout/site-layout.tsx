@@ -2,6 +2,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { FeatherTrailBackground } from "../feather-trail-background";
 import { FeatherCursor } from "../feather-cursor";
+import { SiteGlobalJsonLd } from "../seo/site-global-json-ld";
 import { BookingBar } from "./booking-bar";
 import { Footer } from "./footer";
 import { Navbar } from "./navbar";
@@ -18,6 +19,7 @@ export function SiteLayout() {
 
   return (
     <div className="relative isolate flex min-h-svh flex-col">
+      <SiteGlobalJsonLd />
       <FeatherTrailBackground />
       <FeatherCursor />
       <Navbar />

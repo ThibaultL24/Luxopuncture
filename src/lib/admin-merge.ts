@@ -172,8 +172,62 @@ export function mergeAdminState(defaults: AdminState, p: Partial<AdminState>): A
   }
 }
 
-/** Import JSON : accepte d’anciens exports (sans tarifsPage / homeCopy complets). */
+/** Ancienne sauvegarde « tout le site » (accueil, à propos, CTA…) — encore fusionnée si présente. */
+const LEGACY_FULL_SITE_KEYS = ['heroCopy', 'homeCopy', 'bookingCta', 'aboutPage'] as const
+
+/** Détecte un export / stockage legacy contenant des blocs retirés du périmètre persisté courant. */
+export function isLegacyFullAdminPersist(parsed: Record<string, unknown>): boolean {
+  return LEGACY_FULL_SITE_KEYS.some((k) => k in parsed && parsed[k] != null)
+}
+
+/** Données éditables persistées (localStorage + export JSON) — hors hero / accueil / à propos (code). */
+export function persistedAdminPayload(state: AdminState): {
+  publications: AdminState['publications']
+  testimonials: AdminState['testimonials']
+  testimonialVideoFiles: AdminState['testimonialVideoFiles']
+  reviewCaptureSlides: AdminState['reviewCaptureSlides']
+  contactInfo: AdminState['contactInfo']
+  site: AdminState['site']
+  tarifsPage: AdminState['tarifsPage']
+  services: AdminState['services']
+  partenariatPage: AdminState['partenariatPage']
+} {
+  return {
+    publications: state.publications,
+    testimonials: state.testimonials,
+    testimonialVideoFiles: state.testimonialVideoFiles,
+    reviewCaptureSlides: state.reviewCaptureSlides,
+    contactInfo: state.contactInfo,
+    site: state.site,
+    tarifsPage: state.tarifsPage,
+    services: state.services,
+    partenariatPage: state.partenariatPage,
+  }
+}
+
+function mergePersistedSlice(defaults: AdminState, p: Partial<AdminState>): AdminState {
+  return mergeAdminState(defaults, {
+    publications: p.publications,
+    testimonials: p.testimonials,
+    testimonialVideoFiles: p.testimonialVideoFiles,
+    reviewCaptureSlides: p.reviewCaptureSlides,
+    contactInfo: p.contactInfo,
+    site: p.site,
+    tarifsPage: p.tarifsPage,
+    services: p.services,
+    partenariatPage: p.partenariatPage,
+  })
+}
+
+/**
+ * Import JSON : blog, témoignages, coordonnées, site, tarifs, programmes, recommandations.
+ * Les exports très anciens (hero, home, booking, about) déclenchent encore une fusion complète.
+ */
 export function mergeImportedAdminState(parsed: Partial<AdminState>): AdminState {
   const defaults = getDefaultAdminState()
-  return mergeAdminState(defaults, parsed)
+  const raw = parsed as Record<string, unknown>
+  if (isLegacyFullAdminPersist(raw)) {
+    return mergeAdminState(defaults, parsed)
+  }
+  return mergePersistedSlice(defaults, parsed)
 }
